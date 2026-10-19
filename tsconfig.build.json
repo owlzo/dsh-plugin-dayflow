@@ -6,5 +6,10 @@
     "declaration": true,
     "declarationDir": "lib/types"
   },
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/client/**"
+  ]
 }

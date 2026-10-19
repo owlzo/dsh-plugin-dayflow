@@ -17,6 +17,8 @@ through Dayflow's own permission switch and write socket.
 
 - **14 tools**, named `dayflow_*`: 8 read tools and 6 editing tools.
 - **4 skills**: `dayflow`, `onboarding`, `standup`, and `weekly-review`.
+- **An optional Web panel**: the day's timeline in the DSH right Sidebar, opened
+  from a conversation-header button and drawn with the harness's own tokens.
 - **A system-prompt section** stating the rules that make the data readable:
   the 4 AM day boundary, `Idle` and `System` handling, analysis lag, and the
   untrusted-content boundary.
@@ -68,6 +70,26 @@ Add `"dsh-plugin-dayflow"` to `dsh.profile.bundles` in
 `npm run build` after source changes; HMR reloads the profile.
 
 To remove it, delete the symlink and the bundle entry.
+
+## Web panel
+
+The plugin can also draw the day inside the DSH Web GUI. The panel is optional in
+both senses: nothing appears until you open it, and a profile can switch its
+entry point off entirely.
+
+![The Dayflow panel in the dsh right Sidebar](docs/panel.png)
+
+- Open it from the **Dayflow** button in the conversation header.
+- It opens as a tab in the right Sidebar; closing the tab restores your layout.
+- The top shows the day, its tracked total, and a category bar in the user's own
+  colors; each row shows time, duration, title, category, apps, and summary.
+- `‹` and `›` move one day; `⟳` refreshes. `Today` and `Yesterday` are labelled,
+  and any other day shows its short date.
+- The panel reads `GET /api/dayflow/day?date=YYYY-MM-DD` through the harness's
+  authenticated `/api` bridge. It never touches the database itself.
+
+The header button exists only while a session is open, because that header is
+session-scoped. Set `panel: false` to remove both the button and the tab type.
 
 ## Tools
 
@@ -209,7 +231,7 @@ them empty in normal use.
 ```sh
 npm install
 npm run build       # TypeScript → lib/, with .d.ts files
-npm test            # 51 tests: boundaries, SQL, tools, bridge, composition
+npm test            # 67 tests: boundaries, SQL, tools, bridge, panel, bundle
 npm run typecheck   # type-check sources and tests together
 npm run smoke       # read this Mac's real Dayflow database (needs real data)
 ```
@@ -232,12 +254,23 @@ src/
   format.ts       model-facing text renderers
   skills.ts       SKILL.md loading and runtime registration
   prompt.ts       the guidance section
+  panel.ts        the two host Fetch routes behind the Web panel
+  panel-contract.ts  the wire payload shared by host and browser
   tools/read.ts   the eight read tools
   tools/write.ts  the six editing tools
+  client/         the browser half: tab body, header toggle, styles, copy
 skills/           SKILL.md per skill, shipped in the npm package
 tests/            node:test suite with a fixture database and a fake socket
 scripts/smoke.mjs real-data smoke test
 ```
+
+`lib/client.js` is not compiled by `tsc`: `scripts/build-client.mjs` bundles
+`src/client/` with esbuild and wraps the CommonJS body in the harness's
+`window.__ModuleLoader__.load({ id, factory })` registration, resolving `react`,
+`react/jsx-runtime`, and `@deepseek-ai/dsh-client-ui-primitives` against the
+browser shell's frozen platform table. `tests/client-bundle.test.ts` runs that
+bundle in a VM with stubbed platform modules, so the registration contract is
+tested without a browser.
 
 The fixture database in `tests/fixtures/database.ts` reproduces the app's
 schema and the cases that are easy to get wrong: a card after midnight, a
@@ -255,6 +288,8 @@ end.
 | `This Node.js (…) has no built-in SQLite` | Use Node 24+, or run Node 22.5–23.3 with `--experimental-sqlite`. |
 | Time looks missing | Dayflow analyzes recordings in batches; `dayflow_status` shows the backlog. |
 | Times are off by hours | The plugin uses the Mac's local timezone; check `dayflow_status`'s `time_zone`. |
+| No Dayflow button in the header | Open a session first; the header is session-scoped. After installing or rebuilding, restart `dsh web` so the client bundle is served. |
+| The panel says it cannot reach the server | The dsh process restarted or the session expired; reload the page. |
 
 ## License
 

@@ -22,5 +22,7 @@
         edits: true
         # Register the bundled Dayflow, onboarding, standup, and weekly-review skills.
         skills: true
+        # Expose the optional Web panel (header button + right-Sidebar tab).
+        panel: true
         # Maximum matches one dayflow_search call returns (1-200).
         searchLimit: 50

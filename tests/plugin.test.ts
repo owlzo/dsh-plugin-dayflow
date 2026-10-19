@@ -19,13 +19,14 @@ after(() => {
 });
 
 interface Capture {
+  readonly routes: string[];
   readonly tools: Map<string, { name: string; description: string }>;
   readonly skills: { name: string; description: string; content: string }[];
   readonly sections: { name: string; order: number; text: string | ((context: unknown) => string) }[];
 }
 
 function fakeContext(): { ctx: Context; capture: Capture } {
-  const capture: Capture = { tools: new Map(), skills: [], sections: [] };
+  const capture: Capture = { routes: [], tools: new Map(), skills: [], sections: [] };
   const ctx = {
     tools: {
       register(tool: { name: string; description: string }) {
@@ -38,6 +39,18 @@ function fakeContext(): { ctx: Context; capture: Capture } {
         capture.skills.push(skill);
         return () => {};
       },
+    },
+    inject(_deps: readonly string[], callback: (connected: unknown) => void) {
+      callback({
+        connection: {
+          fetch: {
+            register(route: { path: string }) {
+              capture.routes.push(route.path);
+              return async () => {};
+            },
+          },
+        },
+      });
     },
     systemPrompt: {
       section(section: { name: string; order: number; text: string | ((context: unknown) => string) }) {
@@ -70,6 +83,7 @@ test('apply registers eight reads, six edits, four skills, and one prompt sectio
     capture.skills.map((skill) => skill.name),
     ['dayflow', 'onboarding', 'standup', 'weekly-review'],
   );
+  assert.deepEqual([...capture.routes].sort(), ['/api/dayflow/day', '/api/dayflow/panel']);
   assert.equal(capture.sections.length, 1);
   assert.equal(capture.sections[0]?.name, 'tool:dayflow');
   const text = capture.sections[0]?.text;

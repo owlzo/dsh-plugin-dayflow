@@ -18,6 +18,8 @@ export interface DayflowConfig {
   edits?: boolean;
   /** Register the bundled Dayflow skills. */
   skills?: boolean;
+  /** Expose the optional Web panel: a header button and a right-Sidebar tab. */
+  panel?: boolean;
   /** Maximum matches a search returns. */
   searchLimit?: number;
 }
@@ -28,6 +30,7 @@ export interface ResolvedConfig {
   readonly agentSocket: string;
   readonly edits: boolean;
   readonly skills: boolean;
+  readonly panel: boolean;
   readonly searchLimit: number;
 }
 
@@ -46,6 +49,10 @@ export const Config = z.object({
     .default(true)
     .description('Register the editing tools. Dayflow own "Allow edits" switch still gates every write.'),
   skills: z.boolean().default(true).description('Register the bundled Dayflow, standup, and weekly-review skills.'),
+  panel: z
+    .boolean()
+    .default(true)
+    .description('Expose the optional Web panel: a timeline button in the conversation header and a right-Sidebar tab.'),
   searchLimit: z.number().default(50).description('Maximum number of search matches a single call returns (1-200).'),
 });
 
@@ -69,6 +76,7 @@ export function resolveConfig(config: DayflowConfig = {}): ResolvedConfig {
     agentSocket: config.agentSocket?.trim() ?? '',
     edits: config.edits ?? true,
     skills: config.skills ?? true,
+    panel: config.panel ?? true,
     searchLimit,
   };
 }

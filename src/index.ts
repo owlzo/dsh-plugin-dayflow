@@ -16,6 +16,7 @@ import type { Context } from '@deepseek-ai/cordis';
 import { Config, resolveConfig } from './config.js';
 import type { DayflowConfig } from './config.js';
 import { readPreferences } from './categories.js';
+import { registerPanelRoutes } from './panel.js';
 import { registerPrompt } from './prompt.js';
 import { registerSkills } from './skills.js';
 import type { ToolRuntime } from './tools/shared.js';
@@ -62,6 +63,10 @@ export function apply(ctx: Context, config: DayflowConfig = {}): void {
   }
   if (resolved.skills) {
     registerSkills(ctx, skillsDirectory());
+  }
+  if (resolved.panel) {
+    // Optional: only mounts where a Web connection service exists.
+    registerPanelRoutes(ctx, runtime);
   }
   registerPrompt(ctx);
 }

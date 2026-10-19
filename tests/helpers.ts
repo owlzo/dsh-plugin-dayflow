@@ -42,6 +42,7 @@ export function makeRuntime(
     agentSocket: '',
     edits: true,
     skills: true,
+    panel: true,
     searchLimit: 50,
     ...configOverrides,
   };
