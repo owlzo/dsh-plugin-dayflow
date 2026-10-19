@@ -84,7 +84,7 @@ The plugin can also draw the day inside the DSH Web GUI. The panel is optional i
 both senses: nothing appears until you open it, and a profile can switch its
 entry point off entirely.
 
-![The Dayflow panel in the dsh right Sidebar](docs/panel.png)
+![The Dayflow panel in the dsh right Sidebar](docs/panel.en.png)
 
 - Open it from the **Dayflow** button in the conversation header.
 - It opens as a tab in the right Sidebar; closing the tab restores your layout.

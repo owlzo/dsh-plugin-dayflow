@@ -78,7 +78,7 @@ ln -sfn "$PWD" ~/.dsh/profiles/web/node_modules/dsh-plugin-dayflow
 插件也可以把当天的时间线画在 dsh Web 里。这个面板在两层意义上都是可选的：
 不打开就不出现，profile 也可以把入口整个关掉。
 
-![dsh 右侧栏中的 Dayflow 面板](docs/panel.png)
+![dsh 右侧栏中的 Dayflow 面板](docs/panel.zh.png)
 
 - 从对话头部的 **Dayflow** 按钮打开。
 - 它以右侧栏标签页的形式出现；关掉标签页，布局就恢复原样。

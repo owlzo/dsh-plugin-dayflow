@@ -45,7 +45,7 @@ export const EN: Record<string, string> = {
   network: 'Could not reach the dsh server; check that it is still running.',
   retry: 'Retry',
   tracked: 'tracked',
-  pending: '{count} batches are still waiting for analysis; newer activity appears later.',
+  pending: 'Analysis is still catching up ({count} queued); newer activity appears here once it finishes.',
   guideTitle: 'Dayflow timeline',
   guideDescription: 'See what was recorded today and how the day split across categories.',
   previousDay: 'Previous day',
