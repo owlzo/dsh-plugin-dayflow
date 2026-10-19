@@ -1,9 +1,13 @@
 # dsh-plugin-dayflow
 
+[![CI](https://github.com/tailong-wu/dsh-plugin-dayflow/actions/workflows/ci.yml/badge.svg)](https://github.com/tailong-wu/dsh-plugin-dayflow/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%E2%89%A522.5-brightgreen.svg)](https://nodejs.org)
+
 English | [中文](README.zh.md)
 
 Ask your own work journal. This plugin gives [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
-(`dsh`) native tools and skills over [Dayflow](https://github.com/tailong-wu/Dayflow),
+(`dsh`) native tools and skills over [Dayflow](https://github.com/JerryZLiu/Dayflow),
 the open-source Mac app that turns screen activity into a private timeline of
 what you actually worked on.
 
@@ -12,6 +16,9 @@ what you actually worked on.
 The plugin reads Dayflow's local SQLite database directly, so it works while
 the Dayflow app is closed and nothing leaves the Mac. Edits are optional and go
 through Dayflow's own permission switch and write socket.
+
+> **Status:** early (`0.1.0`). The tools, skills, and panel work on macOS with
+> Dayflow installed; expect the surface to keep moving.
 
 ## What you get
 

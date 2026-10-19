@@ -1,15 +1,22 @@
 # dsh-plugin-dayflow
 
+[![CI](https://github.com/tailong-wu/dsh-plugin-dayflow/actions/workflows/ci.yml/badge.svg)](https://github.com/tailong-wu/dsh-plugin-dayflow/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%E2%89%A522.5-brightgreen.svg)](https://nodejs.org)
+
 [English](README.md) | 中文
 
 把你的工作日志交给 AI。这个插件为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（`dsh`）
-提供原生工具和技能，读取开源 Mac 应用 [Dayflow](https://github.com/tailong-wu/Dayflow)
+提供原生工具和技能，读取开源 Mac 应用 [Dayflow](https://github.com/JerryZLiu/Dayflow)
 记录的时间线——它是从屏幕活动自动生成、完全保存在本机的工作日志。
 
 > “我今天做了什么？” · “这周时间都去哪了？” · “帮我写今天的 standup。”
 
 插件直接读取 Dayflow 的本地 SQLite 数据库，所以 Dayflow 关着也能用，数据不会离开这台 Mac。
 编辑功能是可选的，走 Dayflow 自己的权限开关和写入 socket。
+
+> **状态：** 早期版本（`0.1.0`）。工具、技能和面板在装有 Dayflow 的 macOS 上可用，
+> 接口仍可能调整。
 
 ## 你会得到什么
 
