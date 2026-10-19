@@ -1,0 +1,66 @@
+# Contributing
+
+Thanks for taking a look. This plugin is a small, dependency-free bridge between
+DeepSeek Harness and Dayflow, so contributions stay easiest when they keep that
+shape.
+
+## Development setup
+
+```sh
+git clone https://github.com/tailong-wu/dsh-plugin-dayflow.git
+cd dsh-plugin-dayflow
+npm install
+npm test
+```
+
+`npm test` builds the plugin, compiles the tests, and runs them with
+`node:test`. No network access is required: the tests use a fixture database and
+a local Unix socket.
+
+`npm run smoke` reads this Mac's real Dayflow database and prints what the tools
+answer. It needs a real Dayflow install with at least a few minutes of recorded
+activity, so it is not part of CI.
+
+## Ground rules
+
+- **Reads stay read-only.** The database is opened with `readOnly: true` and
+  `PRAGMA query_only`; do not add a write path that bypasses that.
+- **Writes go through Dayflow.** Editing calls must go over `agent.sock` and
+  must respect the app's `agentEditsEnabled` switch. Do not write to SQLite or
+  to the preferences plist.
+- **Dates are Dayflow dates.** A day is 04:00–04:00 local time and a week is
+  Monday 04:00 to Monday 04:00. Use `src/day.ts` rather than ad-hoc date math.
+- **Model-facing text is data.** Any activity text rendered back to a model must
+  keep the untrusted-content framing.
+- **No runtime dependencies.** Node's standard library only (`node:sqlite`,
+  `node:net`, `node:child_process`, …). `@deepseek-ai/*` packages are peers
+  provided by the harness.
+
+## Adding a tool
+
+1. Add the definition in `src/tools/read.ts` or `src/tools/write.ts` with
+   `defineTool`. Keep the description short, state the day convention, and add
+   the untrusted-content notice when the tool returns screen-derived text.
+2. Return a stable JSON payload; add a renderer in `src/format.ts`.
+3. Add the payload type in `src/queries.ts` when the shape is new.
+4. Add tests: one for the happy path, one for the failure code.
+5. Update the tool table in `README.md` and `README.zh.md`.
+
+## Adding or editing a skill
+
+Skills live in `skills/<name>/SKILL.md` with `name` and `description`
+frontmatter. Tests enforce that every `dayflow_*` name a skill mentions is a
+registered tool, so rename tools and skills together.
+
+## Checks before a pull request
+
+```sh
+npm test
+npm run typecheck
+npm pack --dry-run   # confirms lib/, skills/, both READMEs, and LICENSE ship
+```
+
+## Commit messages
+
+Conventional Commits are appreciated (`feat:`, `fix:`, `docs:`, `test:`,
+`chore:`), because they make the changelog mechanical.

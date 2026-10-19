@@ -1,0 +1,26 @@
+# The dsh-plugin-dayflow bundle patch.
+#
+# A profile selects this bundle by name in `dsh.profile.bundles`; the entries
+# below are inserted over the composition built so far. Address the row by id
+# from your own `cordis.patch.yml` to change it:
+#
+#   - id: dayflow
+#     config:
+#       edits: false
+#
+# Row order carries no load semantics: activation follows service availability.
+- insert:
+    - id: dayflow
+      name: dsh-plugin-dayflow
+      config:
+        # Absolute path to chunks.sqlite. Empty uses the app's location.
+        databasePath: ''
+        # Path to the app's write socket. Empty uses agent.sock beside the database.
+        agentSocket: ''
+        # Register the editing tools. Dayflow's own "Allow edits" switch still
+        # gates every write, so this only decides whether the tools exist.
+        edits: true
+        # Register the bundled Dayflow, onboarding, standup, and weekly-review skills.
+        skills: true
+        # Maximum matches one dayflow_search call returns (1-200).
+        searchLimit: 50
