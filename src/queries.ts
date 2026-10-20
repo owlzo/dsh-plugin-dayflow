@@ -323,6 +323,127 @@ export function standupForDay(db: DatabaseSync, dayKey: string): StandupDocument
   };
 }
 
+/**
+ * Cards that *start* inside a range.
+ *
+ * Month views need each card assigned to exactly one day, so this groups by
+ * start time rather than overlap; it matches the per-day query above.
+ * @param db - an open database.
+ * @param from - inclusive start.
+ * @param to - exclusive end.
+ * @returns cards ordered by start time.
+ */
+export function activitiesStartingBetween(db: DatabaseSync, from: Date, to: Date): Activity[] {
+  const rows = queryRows(
+    db,
+    `SELECT ${CARD_COLUMNS} FROM timeline_cards
+      WHERE start_ts >= ? AND start_ts < ? AND is_deleted = 0
+      ORDER BY start_ts ASC`,
+    [epochSeconds(from), epochSeconds(to)],
+  );
+  return rows.map(mapActivity).filter((activity): activity is Activity => activity !== undefined);
+}
+
+/** Capture presence for one Dayflow day. */
+export interface DayCapture {
+  /** Screenshots recorded inside the day. */
+  readonly frames: number;
+  /** The last capture inside the day. */
+  readonly lastCaptureAt: Date;
+}
+
+/** SQL expression mapping a Unix timestamp to its Dayflow day (04:00 boundary). */
+const DAY_KEY_SQL = `strftime('%Y-%m-%d', %COLUMN%, 'unixepoch', 'localtime', '-4 hours')`;
+
+/**
+ * Which days inside a range hold screen captures, and when each last captured.
+ *
+ * A day with no captures has no data at all; a day with captures but no
+ * activities was simply quiet. The two must not read the same in the calendar.
+ * @param db - an open database.
+ * @param from - inclusive start.
+ * @param to - exclusive end.
+ * @returns captures keyed by `YYYY-MM-DD`.
+ */
+export function dayCaptures(db: DatabaseSync, from: Date, to: Date): Map<string, DayCapture> {
+  const rows = queryRows(
+    db,
+    `SELECT ${DAY_KEY_SQL.replace('%COLUMN%', 'captured_at')} AS day,
+            count(*) AS frames,
+            max(captured_at) AS last_captured_at
+       FROM screenshots
+      WHERE COALESCE(is_deleted, 0) = 0 AND captured_at >= ? AND captured_at < ?
+      GROUP BY day`,
+    [epochSeconds(from), epochSeconds(to)],
+  );
+  const captures = new Map<string, DayCapture>();
+  for (const row of rows) {
+    const day = asText(row.day);
+    const lastCaptureAt = asNumber(row.last_captured_at);
+    if (day === undefined || lastCaptureAt === undefined) continue;
+    captures.set(day, { frames: asNumber(row.frames) ?? 0, lastCaptureAt: new Date(lastCaptureAt * 1000) });
+  }
+  return captures;
+}
+
+/**
+ * Pending analysis batches per Dayflow day inside a range.
+ * @param db - an open database.
+ * @param from - inclusive start.
+ * @param to - exclusive end.
+ * @returns pending counts keyed by `YYYY-MM-DD`.
+ */
+export function dayPendingBatches(db: DatabaseSync, from: Date, to: Date): Map<string, number> {
+  const rows = queryRows(
+    db,
+    `SELECT ${DAY_KEY_SQL.replace('%COLUMN%', 'batch_start_ts')} AS day, count(*) AS pending
+       FROM analysis_batches
+      WHERE status IN ('pending', 'processing') AND batch_start_ts >= ? AND batch_start_ts < ?
+      GROUP BY day`,
+    [epochSeconds(from), epochSeconds(to)],
+  );
+  const pending = new Map<string, number>();
+  for (const row of rows) {
+    const day = asText(row.day);
+    const count = asNumber(row.pending);
+    if (day !== undefined && count !== undefined) pending.set(day, count);
+  }
+  return pending;
+}
+
+/**
+ * Pending analysis batches covering one day.
+ * @param db - an open database.
+ * @param window - the day.
+ * @returns the count of batches still waiting.
+ */
+export function pendingBatchesInWindow(db: DatabaseSync, window: DayWindow): number {
+  const rows = queryRows(
+    db,
+    `SELECT count(*) AS pending FROM analysis_batches
+      WHERE status IN ('pending', 'processing') AND batch_start_ts >= ? AND batch_start_ts < ?`,
+    [epochSeconds(window.start), epochSeconds(window.end)],
+  );
+  return asNumber(rows[0]?.pending) ?? 0;
+}
+
+/**
+ * The last capture inside one day.
+ * @param db - an open database.
+ * @param window - the day.
+ * @returns the instant, or `undefined` when the day has no captures.
+ */
+export function lastCaptureInWindow(db: DatabaseSync, window: DayWindow): Date | undefined {
+  const rows = queryRows(
+    db,
+    `SELECT max(captured_at) AS captured_at FROM screenshots
+      WHERE COALESCE(is_deleted, 0) = 0 AND captured_at >= ? AND captured_at < ?`,
+    [epochSeconds(window.start), epochSeconds(window.end)],
+  );
+  const seconds = asNumber(rows[0]?.captured_at);
+  return seconds === undefined ? undefined : new Date(seconds * 1000);
+}
+
 /** Recording freshness and analysis backlog. */
 export interface CaptureStatus {
   readonly lastCaptureAt: Date | undefined;

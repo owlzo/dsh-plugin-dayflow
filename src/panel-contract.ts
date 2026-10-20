@@ -44,6 +44,18 @@ export interface PanelDay {
   edits_enabled: boolean;
 }
 
+/** One month of days, for the calendar view. */
+export interface PanelMonth {
+  /** The month these days belong to, as `YYYY-MM`. */
+  month: string;
+  /** The Dayflow day containing now. */
+  today: string;
+  time_zone: string;
+  day_boundary_hour: number;
+  /** One entry per calendar day, in date order; each is a full {@link PanelDay}. */
+  days: PanelDay[];
+}
+
 /** Whether the panel's entry points are exposed. */
 export interface PanelConfig {
   enabled: boolean;
@@ -57,10 +69,62 @@ export interface PanelError {
 /** Exact Fetch route for one day's timeline. */
 export const PANEL_DAY_PATH = '/api/dayflow/day';
 
+/** Exact Fetch route for one month of days. */
+export const PANEL_MONTH_PATH = '/api/dayflow/month';
+
 /** Exact Fetch route for the panel's enablement. */
 export const PANEL_CONFIG_PATH = '/api/dayflow/panel';
 
 const DAY_KEY_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/;
+const MONTH_KEY_PATTERN = /^(\d{4})-(\d{2})$/;
+
+function pad2(value: number): string {
+  return String(value).padStart(2, '0');
+}
+
+/**
+ * Whether a string is a `YYYY-MM` month label.
+ * @param value - candidate label.
+ * @returns whether the month is real (month 01-12).
+ */
+export function isMonthKey(value: string): boolean {
+  const match = MONTH_KEY_PATTERN.exec(value);
+  if (match === null) return false;
+  const month = Number(match[2]);
+  return month >= 1 && month <= 12;
+}
+
+/** The month containing a `YYYY-MM-DD` day. */
+export function monthOfDay(dayKey: string): string {
+  return dayKey.slice(0, 7);
+}
+
+/**
+ * Every calendar day in a month, in order.
+ * @param month - `YYYY-MM`.
+ * @returns `YYYY-MM-DD` labels; empty when the month label is invalid.
+ */
+export function monthDayKeys(month: string): string[] {
+  if (!isMonthKey(month)) return [];
+  const [yearText, monthText] = month.split('-');
+  const year = Number(yearText);
+  const monthIndex = Number(monthText);
+  const daysInMonth = new Date(year, monthIndex, 0).getDate();
+  return Array.from({ length: daysInMonth }, (_, index) => `${month}-${pad2(index + 1)}`);
+}
+
+/**
+ * Shift a month label by whole months.
+ * @param month - `YYYY-MM`.
+ * @param delta - signed month count.
+ * @returns the shifted label, or the input when it is not a month.
+ */
+export function shiftMonthKey(month: string, delta: number): string {
+  if (!isMonthKey(month)) return month;
+  const [yearText, monthText] = month.split('-');
+  const date = new Date(Number(yearText), Number(monthText) - 1 + delta, 1, 12, 0, 0, 0);
+  return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}`;
+}
 
 /**
  * Shift a `YYYY-MM-DD` label by whole calendar days.

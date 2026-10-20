@@ -24,8 +24,9 @@ through Dayflow's own permission switch and write socket.
 
 - **14 tools**, named `dayflow_*`: 8 read tools and 6 editing tools.
 - **4 skills**: `dayflow`, `onboarding`, `standup`, and `weekly-review`.
-- **An optional Web panel**: the day's timeline in the DSH right Sidebar, opened
-  from a conversation-header button and drawn with the harness's own tokens.
+- **An optional Web panel**: a month calendar of segmented rings, with hover
+  cards and a per-day timeline, opened from a conversation-header button and
+  drawn with the harness's own tokens.
 - **A system-prompt section** stating the rules that make the data readable:
   the 4 AM day boundary, `Idle` and `System` handling, analysis lag, and the
   untrusted-content boundary.
@@ -80,23 +81,37 @@ To remove it, delete the symlink and the bundle entry.
 
 ## Web panel
 
-The plugin can also draw the day inside the DSH Web GUI. The panel is optional in
-both senses: nothing appears until you open it, and a profile can switch its
+The plugin can also draw the month inside the DSH Web GUI. The panel is optional
+in both senses: nothing appears until you open it, and a profile can switch its
 entry point off entirely.
 
-![The Dayflow panel in the dsh right Sidebar](docs/panel.en.png)
+![The Dayflow month calendar in the dsh right Sidebar](docs/panel.en.png)
 
-- Open it from the **Dayflow** button in the conversation header.
-- It opens as a tab in the right Sidebar; closing the tab restores your layout.
-- The top shows the day, its tracked total, and a category bar in the user's own
-  colors; each row shows time, duration, title, category, apps, and summary.
-- `‹` and `›` move one day; `⟳` refreshes. `Today` and `Yesterday` are labelled,
-  and any other day shows its short date.
-- The panel reads `GET /api/dayflow/day?date=YYYY-MM-DD` through the harness's
-  authenticated `/api` bridge. It never touches the database itself.
+- Open it from the **Dayflow** button in the conversation header. It collapses to
+  an icon when the header runs out of room.
+- Every day is one segmented ring: each arc is a category, sized by its share of
+  the day and drawn in the user's own colours. The centre shows the date and the
+  tracked time.
+- **A day's state is never faked.** A day with no captures draws only a faint
+  dotted track; a captured day with nothing to show draws a plain track; a day
+  whose analysis is still queued pulses amber; a recorded day draws its arcs.
+  Missing data is not zero activity.
+- Hovering a day shows its total, category split, and the two longest activities;
+  hovering one arc shows that category's name, duration, and share. The card
+  clamps to the viewport and flips above the anchor near the bottom edge.
+- Clicking a day opens it: totals, filter chips, and the timed activity list.
+  Clicking a chip filters the list; **Clear filter** restores it.
 
-The header button exists only while a session is open, because that header is
-session-scoped. Set `panel: false` to remove both the button and the tab type.
+![One day open in the panel](docs/day.en.png)
+
+- In the day view, `‹`/`›` step days, `⟳` refreshes, and the back arrow (or
+  Escape) returns to the calendar with that day still marked as selected.
+- On touch devices hover is replaced by tap: a tap opens the day, and the back
+  control sits in the day header.
+- The panel reads `GET /api/dayflow/month` and `GET /api/dayflow/day` through the
+  harness's authenticated `/api` bridge. It never touches the database itself.
+
+Set `panel: false` to remove both the header button and the tab type.
 
 ## Tools
 
@@ -238,7 +253,7 @@ them empty in normal use.
 ```sh
 npm install
 npm run build       # TypeScript → lib/, with .d.ts files
-npm test            # 67 tests: boundaries, SQL, tools, bridge, panel, bundle
+npm test            # 78 tests: boundaries, SQL, tools, bridge, panel, bundle
 npm run typecheck   # type-check sources and tests together
 npm run smoke       # read this Mac's real Dayflow database (needs real data)
 ```
@@ -261,11 +276,11 @@ src/
   format.ts       model-facing text renderers
   skills.ts       SKILL.md loading and runtime registration
   prompt.ts       the guidance section
-  panel.ts        the two host Fetch routes behind the Web panel
-  panel-contract.ts  the wire payload shared by host and browser
+  panel.ts        the three host Fetch routes behind the Web panel
+  panel-contract.ts  the wire payloads shared by host and browser
   tools/read.ts   the eight read tools
   tools/write.ts  the six editing tools
-  client/         the browser half: tab body, header toggle, styles, copy
+  client/         the browser half: month calendar, day detail, rings, styles
 skills/           SKILL.md per skill, shipped in the npm package
 tests/            node:test suite with a fixture database and a fake socket
 scripts/smoke.mjs real-data smoke test

@@ -1,12 +1,18 @@
 /**
- * Host half of the panel: the payload builder and the two exact Fetch routes.
+ * Host half of the panel: the day and month payload builders and the three
+ * exact Fetch routes.
  */
 import assert from 'node:assert/strict';
 import { after, test } from 'node:test';
 
-import { PANEL_CONFIG_PATH, PANEL_DAY_PATH, shiftDayKey } from '../src/panel-contract.js';
-import type { PanelConfig, PanelDay } from '../src/panel-contract.js';
-import { buildPanelDay, registerPanelRoutes } from '../src/panel.js';
+import {
+  PANEL_CONFIG_PATH,
+  PANEL_DAY_PATH,
+  PANEL_MONTH_PATH,
+  shiftDayKey,
+} from '../src/panel-contract.js';
+import type { PanelConfig, PanelDay, PanelMonth } from '../src/panel-contract.js';
+import { buildPanelDay, buildPanelMonth, registerPanelRoutes } from '../src/panel.js';
 import { createFixtureDatabase } from './fixtures/database.js';
 import { makeRuntime } from './helpers.js';
 
@@ -51,7 +57,7 @@ test('the panel payload matches the tools for a day', () => {
   assert.equal(payload.day_boundary_hour, 4);
   assert.equal(payload.cards.length, 7);
   assert.equal(payload.tracked_minutes, 138);
-  assert.equal(payload.pending_batches, 1);
+  assert.equal(payload.pending_batches, 0);
   assert.equal(payload.edits_enabled, false);
   assert.equal(payload.cards[0]?.title, 'Writing the DSH plugin');
   assert.deepEqual(
@@ -71,7 +77,7 @@ test('a category without a stored color falls back to the neutral token color', 
 
 test('the day route answers JSON and rejects an impossible date', async () => {
   const routes = fakeHost(makeRuntime(fixture.path));
-  assert.deepEqual([...routes.keys()].sort(), [PANEL_DAY_PATH, PANEL_CONFIG_PATH].sort());
+  assert.deepEqual([...routes.keys()].sort(), [PANEL_DAY_PATH, PANEL_MONTH_PATH, PANEL_CONFIG_PATH].sort());
 
   const day = routes.get(PANEL_DAY_PATH);
   assert.ok(day);
@@ -118,6 +124,102 @@ test('the config route reports the panel switch', async () => {
   assert.deepEqual((await (await disabledRoute.fetch(new Request('http://127.0.0.1'))).json()) as PanelConfig, {
     enabled: false,
   });
+});
+
+test('a month payload covers every calendar day and keeps the day states apart', () => {
+  const runtime = makeRuntime(fixture.path);
+  const payload = buildPanelMonth(runtime, '2026-10');
+
+  assert.equal(payload.month, '2026-10');
+  assert.equal(payload.days.length, 31);
+  assert.deepEqual(payload.days.map((day) => day.date), [
+    '2026-10-01',
+    '2026-10-02',
+    '2026-10-03',
+    '2026-10-04',
+    '2026-10-05',
+    '2026-10-06',
+    '2026-10-07',
+    '2026-10-08',
+    '2026-10-09',
+    '2026-10-10',
+    '2026-10-11',
+    '2026-10-12',
+    '2026-10-13',
+    '2026-10-14',
+    '2026-10-15',
+    '2026-10-16',
+    '2026-10-17',
+    '2026-10-18',
+    '2026-10-19',
+    '2026-10-20',
+    '2026-10-21',
+    '2026-10-22',
+    '2026-10-23',
+    '2026-10-24',
+    '2026-10-25',
+    '2026-10-26',
+    '2026-10-27',
+    '2026-10-28',
+    '2026-10-29',
+    '2026-10-30',
+    '2026-10-31',
+  ]);
+
+  const day = (key: string): PanelDay => {
+    const found = payload.days.find((entry) => entry.date === key);
+    assert.ok(found, `missing ${key}`);
+    return found;
+  };
+
+  // Recorded.
+  assert.equal(day('2026-10-19').tracked_minutes, 138);
+  assert.equal(day('2026-10-19').cards.length, 7);
+  assert.ok(day('2026-10-19').last_capture_at !== undefined);
+  assert.equal(day('2026-10-19').categories[0]?.color_hex, '#B984FF');
+
+  // Captured but quiet: no cards, yet not "no data".
+  assert.equal(day('2026-10-17').tracked_minutes, 0);
+  assert.equal(day('2026-10-17').cards.length, 0);
+  assert.ok(day('2026-10-17').last_capture_at !== undefined);
+
+  // No captures at all.
+  assert.equal(day('2026-10-18').last_capture_at, undefined);
+  assert.equal(day('2026-10-18').tracked_minutes, 0);
+
+  // A day whose batch is still queued.
+  assert.equal(day('2026-10-20').pending_batches, 1);
+  assert.ok(day('2026-10-20').last_capture_at !== undefined);
+
+  assert.equal(payload.today, day('2026-10-19').today);
+  assert.equal(typeof payload.time_zone, 'string');
+});
+
+test('the month route answers JSON and rejects a malformed month', async () => {
+  const routes = fakeHost(makeRuntime(fixture.path));
+  const month = routes.get(PANEL_MONTH_PATH);
+  assert.ok(month);
+  assert.deepEqual([...month.methods], ['GET']);
+  assert.equal(month.requestBody, 'buffered');
+
+  const ok = await month.fetch(new Request(`http://127.0.0.1${PANEL_MONTH_PATH}?month=2026-10`));
+  assert.equal(ok.status, 200);
+  const payload = (await ok.json()) as PanelMonth;
+  assert.equal(payload.month, '2026-10');
+  assert.equal(payload.days.length, 31);
+
+  const bad = await month.fetch(new Request(`http://127.0.0.1${PANEL_MONTH_PATH}?month=2026-13`));
+  assert.equal(bad.status, 400);
+  assert.match(((await bad.json()) as { error: string }).error, /YYYY-MM/);
+
+  const fallback = await month.fetch(new Request(`http://127.0.0.1${PANEL_MONTH_PATH}`));
+  assert.equal(fallback.status, 200);
+  assert.match(((await fallback.json()) as PanelMonth).month, /^\d{4}-\d{2}$/);
+});
+
+test('month payloads end on the real last day of the month', () => {
+  assert.equal(buildPanelMonth(makeRuntime(fixture.path), '2026-02').days.length, 28);
+  assert.equal(buildPanelMonth(makeRuntime(fixture.path), '2024-02').days.length, 29);
 });
 
 test('day keys shift across month and year boundaries', () => {

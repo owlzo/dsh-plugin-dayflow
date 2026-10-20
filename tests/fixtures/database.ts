@@ -203,6 +203,13 @@ export function createFixtureDatabase(): FixtureDatabase {
     const insertScreenshot = db.prepare(
       'INSERT INTO screenshots (captured_at, file_path, is_deleted) VALUES (?, ?, ?)',
     );
+    // Oct 17: captured but no activities — a quiet day, not a missing one.
+    insertScreenshot.run(epoch([2026, 10, 17, 10, 0]), '/tmp/frame-17.jpg', 0);
+    // Oct 19: the main day.
+    insertScreenshot.run(epoch([2026, 10, 19, 9, 0]), '/tmp/frame-19a.jpg', 0);
+    insertScreenshot.run(epoch([2026, 10, 19, 12, 0]), '/tmp/frame-19b.jpg', 0);
+    insertScreenshot.run(epoch([2026, 10, 19, 15, 0]), '/tmp/frame-19c.jpg', 0);
+    // Oct 20: the follow-up day.
     insertScreenshot.run(epoch([2026, 10, 20, 9, 58]), '/tmp/frame-1.jpg', 0);
     insertScreenshot.run(epoch([2026, 10, 20, 9, 59]), '/tmp/frame-2.jpg', 0);
     insertScreenshot.run(epoch([2026, 10, 20, 9, 59]), '/tmp/frame-3.jpg', 1);

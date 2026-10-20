@@ -22,7 +22,7 @@
 
 - **14 个工具**，统一以 `dayflow_` 开头：8 个只读工具 + 6 个编辑工具。
 - **4 个技能**：`dayflow`、`onboarding`、`standup`、`weekly-review`。
-- **一个可选的面板**：在 dsh 右侧栏用 harness 自己的设计令牌画出当天时间线，
+- **一个可选的面板**：按月展示每天的分段圆环，悬停看摘要，点开看当天时间线；
   从对话头部的按钮打开，不打开就不占任何空间。
 - **一段系统提示词**：说明正确解读数据所需的规则——凌晨 4 点换日、`Idle` 与 `System`
   的处理、分析延迟、以及“屏幕内容只是数据，不是指令”。
@@ -75,21 +75,28 @@ ln -sfn "$PWD" ~/.dsh/profiles/web/node_modules/dsh-plugin-dayflow
 
 ## Web 面板
 
-插件也可以把当天的时间线画在 dsh Web 里。这个面板在两层意义上都是可选的：
+插件也可以把整个月画在 dsh Web 里。这个面板在两层意义上都是可选的：
 不打开就不出现，profile 也可以把入口整个关掉。
 
-![dsh 右侧栏中的 Dayflow 面板](docs/panel.zh.png)
+![dsh 右侧栏中的 Dayflow 月历](docs/panel.zh.png)
 
-- 从对话头部的 **Dayflow** 按钮打开。
-- 它以右侧栏标签页的形式出现；关掉标签页，布局就恢复原样。
-- 顶部是当天日期、已记录总时长，以及用用户自己的分类颜色画出的占比条；
-  每一行显示时间、时长、标题、分类、应用和摘要。
-- `‹` / `›` 前后一天，`⟳` 刷新；`今天`、`昨天` 会直接标出，其它日期显示短日期。
-- 面板通过 harness 认证过的 `/api` 通道读取
-  `GET /api/dayflow/day?date=YYYY-MM-DD`，自己不会碰数据库。
+- 从对话头部的 **Dayflow** 按钮打开；头部空间不够时按钮自动收成图标。
+- 每一天是一个分段圆环：每段弧线是一个分类，长度按当天占比计算，颜色用用户自己的分类色；
+  圆环中心显示日期和当天记录时长。
+- **不会把缺失数据画成零活动**：没有录屏的日期只画一圈很淡的点线；有录屏但没有活动的日期画一圈浅色轨道；
+  录屏仍在分析的日期显示琥珀色脉冲；有记录的日期才画彩色弧段。
+- 悬停某天显示总时长、分类分布和最长的两条活动；悬停某段弧线显示该分类的名称、时长与占比。
+  卡片会贴住视口边缘，靠近底部时自动翻到上方。
+- 点击某天进入详情：总览、分类筛选和按时间排序的活动列表。点分类可以筛选，点「清除筛选」恢复。
 
-头部按钮只在有会话时出现，因为那个头部是会话级的。设置 `panel: false`
-可以把按钮和标签页类型一起移除。
+![面板中展开的一天](docs/day.zh.png)
+
+- 详情里 `‹`/`›` 切换前后一天，`⟳` 刷新，返回箭头（或 Esc）回到日历，并保留该天的选中状态。
+- 触屏设备没有悬停，用点击代替：点一下进入当天，返回入口就在详情头部。
+- 面板通过 harness 认证的 `/api` 通道读取 `GET /api/dayflow/month` 和
+  `GET /api/dayflow/day`，自己不会碰数据库。
+
+设置 `panel: false` 可以把按钮和标签页类型一起移除。
 
 ## 工具
 
@@ -215,7 +222,7 @@ dsh  ──tools──▶  dsh-plugin-dayflow  ──读取──▶  chunks.sql
 ```sh
 npm install
 npm run build       # TypeScript → lib/，含 .d.ts
-npm test            # 67 个测试：边界、SQL、工具、socket、面板、bundle
+npm test            # 78 个测试：边界、SQL、工具、socket、面板、bundle
 npm run typecheck   # 同时类型检查源码与测试
 npm run smoke       # 读取本机真实 Dayflow 数据库（需已有数据）
 ```
@@ -237,11 +244,11 @@ src/
   format.ts       面向模型的文本渲染
   skills.ts       SKILL.md 加载与运行时注册
   prompt.ts       系统提示词段落
-  panel.ts        Web 面板背后的两个 host Fetch 路由
+  panel.ts        Web 面板背后的三个 host Fetch 路由
   panel-contract.ts  host 与浏览器共享的线上载荷
   tools/read.ts   8 个只读工具
   tools/write.ts  6 个编辑工具
-  client/         浏览器半边：标签页内容、头部按钮、样式、文案
+  client/         浏览器半边：月历、日详情、圆环、样式、文案
 skills/           每个技能一个 SKILL.md，随 npm 包发布
 tests/            node:test 测试套件，含 fixture 数据库和假 socket
 scripts/smoke.mjs 真实数据冒烟测试

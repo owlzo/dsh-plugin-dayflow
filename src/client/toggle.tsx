@@ -43,8 +43,15 @@ function TimelineGlyph(): ReactNode {
 export function DayflowToggle({ openPanel, t }: ToggleProps): ReactNode {
   return (
     <Tooltip label={t('open')} side="bottom">
-      <Button variant="ghost" size="sm" className="dfp-header-button" icon={<TimelineGlyph />} onClick={openPanel}>
-        {t('button')}
+      <Button
+        variant="ghost"
+        size="sm"
+        className="dfp-header-button"
+        icon={<TimelineGlyph />}
+        aria-label={t('open')}
+        onClick={openPanel}
+      >
+        <span className="dfp-toggle-label">{t('button')}</span>
       </Button>
     </Tooltip>
   );

@@ -9,10 +9,15 @@ import { openDatabase } from '../src/db.js';
 import {
   activitiesForDay,
   activitiesInRange,
+  activitiesStartingBetween,
   activityById,
   activityPayload,
   captureStatus,
   categoryTotals,
+  dayCaptures,
+  dayPendingBatches,
+  lastCaptureInWindow,
+  pendingBatchesInWindow,
   searchActivities,
   standupForDay,
   timelinePayload,
@@ -152,4 +157,40 @@ test('the weekly payload separates tracked from focus time', () => {
     payload.categories.map((total) => total.name),
     ['Work', 'Personal', 'Idle', 'Distraction'],
   );
+});
+
+test('a month range assigns every card to the day it starts on', () => {
+  const from = new Date(2026, 9, 1, 4, 0);
+  const to = new Date(2026, 10, 1, 4, 0);
+  const activities = activitiesStartingBetween(db, from, to);
+  assert.equal(activities.length, 8, 'seven cards on Oct 19 plus the Oct 20 card; the deleted card is skipped');
+  assert.equal(activities[0]?.title, 'Writing the DSH plugin');
+  assert.equal(activities[activities.length - 1]?.title, 'Another day');
+});
+
+test('capture presence and backlog are reported per Dayflow day', () => {
+  const from = new Date(2026, 9, 1, 4, 0);
+  const to = new Date(2026, 10, 1, 4, 0);
+  const captures = dayCaptures(db, from, to);
+  assert.deepEqual([...captures.keys()].sort(), ['2026-10-17', '2026-10-19', '2026-10-20']);
+  assert.equal(captures.get('2026-10-17')?.frames, 1);
+  assert.equal(captures.get('2026-10-19')?.frames, 3);
+  assert.equal(captures.get('2026-10-19')?.lastCaptureAt.getHours(), 15);
+
+  const pending = dayPendingBatches(db, from, to);
+  assert.deepEqual([...pending.entries()], [['2026-10-20', 1]]);
+
+  const day19 = dayWindowForKey('2026-10-19');
+  assert.ok(day19);
+  assert.equal(pendingBatchesInWindow(db, day19), 0);
+  assert.equal(lastCaptureInWindow(db, day19)?.getHours(), 15);
+
+  const day20 = dayWindowForKey('2026-10-20');
+  assert.ok(day20);
+  assert.equal(pendingBatchesInWindow(db, day20), 1);
+  assert.equal(lastCaptureInWindow(db, day20)?.getMinutes(), 59);
+
+  const quiet = dayWindowForKey('2026-10-18');
+  assert.ok(quiet);
+  assert.equal(lastCaptureInWindow(db, quiet), undefined);
 });

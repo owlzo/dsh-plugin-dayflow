@@ -59,9 +59,10 @@ registered tool, so rename tools and skills together.
 ## Working on the Web panel
 
 The panel is a page-type tab in the right Sidebar plus a conversation-header
-button. It reads the day from `GET /api/dayflow/day` and its enablement from
-`GET /api/dayflow/panel`; both routes are registered through the connection
-service and inherit the `/api` trust fence and session cookie.
+button. The calendar reads `GET /api/dayflow/month`, a day reads
+`GET /api/dayflow/day`, and enablement comes from `GET /api/dayflow/panel`; all
+three routes are registered through the connection service and inherit the `/api`
+trust fence and session cookie.
 
 - `src/client/` is bundled by `scripts/build-client.mjs` into `lib/client.js` in
   the harness's lazy-CJS `window.__ModuleLoader__.load({ id, factory })` format.
@@ -70,6 +71,10 @@ service and inherit the `/api` trust fence and session cookie.
 - The slot runtime calls a registration's `inject` as a **function** returning
   props, not as an object. The VM test in `tests/client-bundle.test.ts` catches
   that class of mistake; keep it passing.
+- Keep the four day states distinct: `recorded`, `empty` (captured, nothing to
+  show), `pending` (analysis queued), and `no-data` (no captures). `dayState()`
+  in `src/client/state.ts` is the single place that decides, from
+  `tracked_minutes`, `pending_batches`, and `last_capture_at`.
 - Style only with the harness tokens (`--dsw-alias-*`, `--dsw-radius-*`,
   `--dsh-scrollbar-*`) so the panel follows the theme, and prefer the primitives
   (`Button`, `Tooltip`, `StateDot`) over hand-rolled controls.

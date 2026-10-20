@@ -8,9 +8,9 @@
  * @module dsh-plugin-dayflow/client
  */
 
-import { fetchDay, fetchPanelConfig } from './data.js';
+import { fetchDay, fetchMonth, fetchPanelConfig } from './data.js';
 import { EN, NAMESPACE, ZH } from './locale.js';
-import { DayflowPanel } from './panel.js';
+import { DayflowPanel } from './app.js';
 import { installStyles } from './styles.js';
 import { DayflowToggle } from './toggle.js';
 
@@ -77,6 +77,7 @@ export function registerPanelUi(ctx: ClientContext): void {
             locale: NAMESPACE,
             inject: () => ({
               loadDay: (date?: string, signal?: AbortSignal) => fetchDay(date, signal),
+              loadMonth: (month?: string, signal?: AbortSignal) => fetchMonth(month, signal),
             }),
           },
           DayflowPanel,

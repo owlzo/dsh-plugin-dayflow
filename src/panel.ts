@@ -13,15 +13,32 @@ import type { Context } from '@deepseek-ai/cordis';
 import type {} from '@deepseek-ai/dsh-client-connection';
 
 import { withDatabase } from './db.js';
-import { formatDayKey, timeZoneName } from './day.js';
-import { isDayflowError } from './errors.js';
-import { PANEL_CONFIG_PATH, PANEL_DAY_PATH } from './panel-contract.js';
-import type { PanelCard, PanelCategory, PanelConfig, PanelDay, PanelError } from './panel-contract.js';
+import { dayWindowContaining, formatDayKey, timeZoneName } from './day.js';
+import { DayflowError, isDayflowError } from './errors.js';
+import {
+  PANEL_CONFIG_PATH,
+  PANEL_DAY_PATH,
+  PANEL_MONTH_PATH,
+  isMonthKey,
+  monthDayKeys,
+} from './panel-contract.js';
+import type {
+  PanelCard,
+  PanelCategory,
+  PanelConfig,
+  PanelDay,
+  PanelError,
+  PanelMonth,
+} from './panel-contract.js';
 import {
   activitiesForDay,
+  activitiesStartingBetween,
   activityPayload,
-  captureStatus,
   categoryTotals,
+  dayCaptures,
+  dayPendingBatches,
+  lastCaptureInWindow,
+  pendingBatchesInWindow,
 } from './queries.js';
 import type { ToolRuntime } from './tools/shared.js';
 import { dayArgument } from './tools/shared.js';
@@ -66,6 +83,49 @@ function failureResponse(error: unknown): Response {
 }
 
 /**
+ * Project one day's cards, backlog, and capture freshness into a payload.
+ * @param dayKey - the Dayflow day.
+ * @param activities - that day's cards, already ordered.
+ * @param pendingBatches - batches inside the day still being analyzed.
+ * @param lastCaptureAt - the day's last screen capture, when it has one.
+ * @param colors - category name to the user's color.
+ * @param editsEnabled - the app's edit switch.
+ * @param today - the Dayflow day containing now.
+ * @returns the stable day payload.
+ */
+function dayPayload(
+  dayKey: string,
+  activities: ReturnType<typeof activitiesForDay>,
+  pendingBatches: number,
+  lastCaptureAt: Date | undefined,
+  colors: ReadonlyMap<string, string>,
+  editsEnabled: boolean,
+  today: string,
+): PanelDay {
+  const { totals, tracked } = categoryTotals(activities);
+  const categories: PanelCategory[] = totals.map((total) => ({
+    name: total.name,
+    minutes: total.minutes,
+    share: total.share,
+    color_hex: colors.get(total.name) ?? '#A0AEC0',
+  }));
+
+  const payload: PanelDay = {
+    date: dayKey,
+    today,
+    time_zone: timeZoneName(),
+    day_boundary_hour: 4,
+    cards: activities.map((activity) => activityPayload(activity, false) as PanelCard),
+    tracked_minutes: tracked,
+    categories,
+    pending_batches: pendingBatches,
+    edits_enabled: editsEnabled,
+  };
+  if (lastCaptureAt !== undefined) payload.last_capture_at = lastCaptureAt.toISOString();
+  return payload;
+}
+
+/**
  * Build one day's panel payload.
  * @param runtime - the plugin runtime.
  * @param date - an optional `YYYY-MM-DD`; omitted means the current Dayflow day.
@@ -76,34 +136,78 @@ export function buildPanelDay(runtime: ToolRuntime, date?: string): PanelDay {
   const preferences = runtime.preferences();
   const colors = new Map(preferences.categories.map((category) => [category.name, category.colorHex]));
 
-  const { activities, status } = withDatabase(runtime.config.databasePath, (db) => ({
+  const { activities, pending, lastCapture } = withDatabase(runtime.config.databasePath, (db) => ({
     activities: activitiesForDay(db, window),
-    status: captureStatus(db),
-  }));
-  const { totals, tracked } = categoryTotals(activities);
-
-  const categories: PanelCategory[] = totals.map((total) => ({
-    name: total.name,
-    minutes: total.minutes,
-    share: total.share,
-    color_hex: colors.get(total.name) ?? '#A0AEC0',
+    pending: pendingBatchesInWindow(db, window),
+    lastCapture: lastCaptureInWindow(db, window),
   }));
 
-  const payload: PanelDay = {
-    date: window.dayKey,
-    today: formatDayKey(new Date()),
+  return dayPayload(
+    window.dayKey,
+    activities,
+    pending,
+    lastCapture,
+    colors,
+    preferences.editsEnabled,
+    formatDayKey(new Date()),
+  );
+}
+
+/**
+ * Build one month of panel payloads for the calendar.
+ *
+ * Every calendar day is present so the grid can tell a quiet, recorded day from
+ * a day with no captures at all; each day reuses the single-day payload shape.
+ * @param runtime - the plugin runtime.
+ * @param month - an optional `YYYY-MM`; omitted means the current month.
+ * @returns the month payload.
+ */
+export function buildPanelMonth(runtime: ToolRuntime, month?: string): PanelMonth {
+  const target = month?.trim() === undefined || month?.trim() === '' ? formatDayKey(new Date()).slice(0, 7) : month.trim();
+  if (!isMonthKey(target)) {
+    throw new DayflowError(`"${target}" is not a month. Use YYYY-MM, for example 2026-03.`, 'invalid_input');
+  }
+
+  const dayKeys = monthDayKeys(target);
+  const firstWindow = dayArgument(dayKeys[0]);
+  const lastWindow = dayArgument(dayKeys[dayKeys.length - 1]);
+  const preferences = runtime.preferences();
+  const colors = new Map(preferences.categories.map((category) => [category.name, category.colorHex]));
+
+  const { activities, captures, pending } = withDatabase(runtime.config.databasePath, (db) => ({
+    activities: activitiesStartingBetween(db, firstWindow.start, lastWindow.end),
+    captures: dayCaptures(db, firstWindow.start, lastWindow.end),
+    pending: dayPendingBatches(db, firstWindow.start, lastWindow.end),
+  }));
+
+  const byDay = new Map<string, typeof activities>();
+  for (const activity of activities) {
+    const key = dayWindowContaining(activity.start).dayKey;
+    const bucket = byDay.get(key);
+    if (bucket === undefined) byDay.set(key, [activity]);
+    else bucket.push(activity);
+  }
+
+  const today = formatDayKey(new Date());
+  const days = dayKeys.map((key) =>
+    dayPayload(
+      key,
+      byDay.get(key) ?? [],
+      pending.get(key) ?? 0,
+      captures.get(key)?.lastCaptureAt,
+      colors,
+      preferences.editsEnabled,
+      today,
+    ),
+  );
+
+  return {
+    month: target,
+    today,
     time_zone: timeZoneName(),
     day_boundary_hour: 4,
-    cards: activities.map((activity) => activityPayload(activity, false) as PanelCard),
-    tracked_minutes: tracked,
-    categories,
-    pending_batches: status.pendingBatches,
-    edits_enabled: preferences.editsEnabled,
+    days,
   };
-  if (status.lastCaptureAt !== undefined) {
-    payload.last_capture_at = status.lastCaptureAt.toISOString();
-  }
-  return payload;
 }
 
 /**
@@ -122,6 +226,19 @@ export function registerPanelRoutes(ctx: Context, runtime: ToolRuntime): void {
         try {
           const date = new URL(request.url).searchParams.get('date') ?? undefined;
           return jsonResponse(buildPanelDay(runtime, date));
+        } catch (error) {
+          return failureResponse(error);
+        }
+      },
+    });
+    connection.fetch.register({
+      path: PANEL_MONTH_PATH,
+      methods: ['GET'],
+      requestBody: 'buffered',
+      fetch: async (request) => {
+        try {
+          const month = new URL(request.url).searchParams.get('month') ?? undefined;
+          return jsonResponse(buildPanelMonth(runtime, month));
         } catch (error) {
           return failureResponse(error);
         }

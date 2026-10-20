@@ -77,6 +77,8 @@ function loadBundle(fetchImpl: (input: string, init?: RequestInit) => Promise<Re
           jsx: (type: unknown, props: unknown) => ({ type, props }),
           jsxs: (type: unknown, props: unknown) => ({ type, props }),
         };
+      case 'react-dom':
+        return { createPortal: (children: unknown) => children };
       case '@deepseek-ai/dsh-client-ui-primitives':
         return { Button: () => null, Tooltip: () => null, StateDot: () => null };
       default:
@@ -189,10 +191,15 @@ test('an enabled panel registers its tab, its body, and its header toggle', asyn
   assert.ok(body);
   assert.equal(body.spec.key, 'dsh-plugin-dayflow');
   assert.equal(body.spec.locale, 'dayflowPanel');
-  const bodyInject = (body.spec.inject as () => { loadDay: (date?: string) => Promise<unknown> })();
-  const loadDay = bodyInject.loadDay;
-  await loadDay('2026-10-19');
+  const bodyInject = (body.spec.inject as () => {
+    loadDay: (date?: string) => Promise<unknown>;
+    loadMonth: (month?: string) => Promise<unknown>;
+  })();
+  assert.equal(typeof bodyInject.loadMonth, 'function');
+  await bodyInject.loadDay('2026-10-19');
+  await bodyInject.loadMonth('2026-10');
   assert.ok(requests.some((url) => url === '/api/dayflow/day?date=2026-10-19'));
+  assert.ok(requests.some((url) => url === '/api/dayflow/month?month=2026-10'));
 
   const toggle = calls.slots.find((entry) => entry.spec.name === 'conversation.session.header.actions');
   assert.ok(toggle);
