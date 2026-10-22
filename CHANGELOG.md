@@ -4,6 +4,32 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-10-22
+
+### Added
+
+- Desktop App compatibility metadata: `dsh.compatibility.dshReleases` declares
+  `0.2.0-rc.2` and `0.2.1-rc.2` compatible, and `dsh.client.inject` names the
+  client packages whose services the panel's slots come from.
+- Peer declarations for `@deepseek-ai/dsh-client-connection`,
+  `@deepseek-ai/dsh-client-ui-primitives`, `@deepseek-ai/dsh-client-locale`,
+  `@deepseek-ai/dsh-client-ui-conversation`,
+  `@deepseek-ai/dsh-client-ui-sidebar-right`, `react`, and `react-dom`, so the
+  manifest's requirements match what the two halves actually import.
+
+### Changed
+
+- The development cohort moves to DSH `0.2.1-rc.2` (`cordis` 4.0.5,
+  `schemastery` 3.18.5), and the panel type-checks against the real
+  `@deepseek-ai/dsh-client-ui-primitives` types instead of a local shim.
+
+### Notes
+
+- Verified on both `0.2.0-rc.2` and `0.2.1-rc.2`: the tool-definition surface,
+  the skill registry, the system-prompt sections, and the exact Fetch-route
+  signature are unchanged across that corridor, and the client platform table
+  still exposes React, React DOM, and the UI primitives.
+
 ## [0.2.0] - 2026-10-20
 
 ### Changed
@@ -62,5 +88,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   panel payload and routes, panel formatting, and the built client bundle's
   registration contract (67 tests).
 
+[0.2.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.2.1
 [0.2.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.2.0
 [0.1.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.1.0
