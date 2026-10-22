@@ -55,6 +55,24 @@ dsh plugin --profile web add dsh-plugin-dayflow
 把昨天的记录整理成 standup。
 ```
 
+### Desktop App
+
+桌面 App 使用自己的 `desktop` profile，装在 CLI 的 `web` profile 里对它无效。
+要装进 App 请按下面做，然后重启 App：
+
+```sh
+mkdir -p ~/.dsh/profiles/desktop/node_modules
+ln -sfn "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-plugin-dayflow
+```
+
+再在 `~/.dsh/profiles/desktop/package.json` 的 `dependencies` 里加
+`"dsh-plugin-dayflow": "link:<路径>"`，在 `dsh.profile.bundles` 里加
+`"dsh-plugin-dayflow"`，退出并重开 App。包发布到 registry 之后，也可以直接用
+App 的插件页安装。
+
+支持的 DSH 版本：`0.2.0-rc.2` 与 `0.2.1-rc.2`（写在
+`dsh.compatibility.dshReleases` 里）。
+
 ### 从源码安装
 
 ```sh

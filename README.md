@@ -60,6 +60,25 @@ Where did my time go this week?
 Turn yesterday into a standup.
 ```
 
+### Desktop App
+
+The Desktop App runs its own `desktop` profile, so an install aimed at the
+CLI's `web` profile does not reach it. Install into the app's profile instead
+and restart the app:
+
+```sh
+mkdir -p ~/.dsh/profiles/desktop/node_modules
+ln -sfn "$PWD" ~/.dsh/profiles/desktop/node_modules/dsh-plugin-dayflow
+```
+
+Then add `"dsh-plugin-dayflow": "link:<path>"` to `dependencies` and
+`"dsh-plugin-dayflow"` to `dsh.profile.bundles` in
+`~/.dsh/profiles/desktop/package.json`, and quit and reopen the app. Once the
+package is on a registry, the app's own Plugins page can install it instead.
+
+Supported DSH releases: `0.2.0-rc.2` and `0.2.1-rc.2` (declared in
+`dsh.compatibility.dshReleases`).
+
 ### Install from a checkout
 
 ```sh
