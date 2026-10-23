@@ -9,17 +9,22 @@ import {
   dayLabel,
   formatClock,
   formatDuration,
+  formatHour,
   formatShare,
+  layoutDayCards,
   leadingBlanks,
   longDate,
   monthKeyOf,
   monthLabel,
   monthOfDay,
   panelLanguage,
+  shiftWeekKey,
   shortDate,
   todayKey,
+  weekRangeLabel,
   weekdayLabels,
 } from '../src/client/format.js';
+import type { PanelCard } from '../src/panel-contract.js';
 import { EN, ZH } from '../src/client/locale.js';
 
 const en = (key: string): string => EN[key] ?? key;
@@ -102,4 +107,53 @@ test('local day and month keys are stable', () => {
   assert.match(todayKey(), /^\d{4}-\d{2}-\d{2}$/);
   assert.match(monthKeyOf(new Date(2026, 9, 19, 12)), /^2026-10$/);
   assert.equal(monthOfDay('2026-10-19'), '2026-10');
+});
+
+function card(recordId: number, startHour: number, endHour: number, category = 'Work'): PanelCard {
+  return {
+    record_id: recordId,
+    start: `2026-10-19T${String(startHour).padStart(2, '0')}:00:00+08:00`,
+    end: `2026-10-19T${String(endHour).padStart(2, '0')}:00:00+08:00`,
+    duration_minutes: (endHour - startHour) * 60,
+    title: `Card ${recordId}`,
+    summary: '',
+    category,
+  };
+}
+
+test('the week axis labels hours per language', () => {
+  assert.equal(formatHour(9), '9 AM');
+  assert.equal(formatHour(0), '12 AM');
+  assert.equal(formatHour(12), '12 PM');
+  assert.equal(formatHour(13), '1 PM');
+  assert.equal(formatHour(9, 'zh-CN'), '09:00');
+  assert.equal(formatHour(25), '1 AM');
+});
+
+test('cards pack into the fewest non-overlapping lanes', () => {
+  const placed = layoutDayCards([card(1, 9, 10), card(2, 9, 10), card(3, 10, 11), card(4, 12, 13)]);
+  assert.deepEqual(placed.map((entry) => entry.card.record_id), [1, 2, 3, 4]);
+  assert.deepEqual(placed.map((entry) => entry.lane), [0, 1, 0, 0]);
+  assert.equal(placed[0]?.lanes, 2);
+  assert.equal(placed[2]?.topMinutes, 600);
+  assert.equal(placed[2]?.heightMinutes, 60);
+});
+
+test('a card keeps a minimum height and clamps to the day', () => {
+  const [short] = layoutDayCards([card(1, 9, 9)]);
+  assert.ok(short);
+  assert.equal(short.heightMinutes, 18);
+  const [late] = layoutDayCards([{ ...card(1, 23, 23), end: '2026-10-20T02:00:00+08:00' }]);
+  assert.ok(late);
+  assert.equal(late.heightMinutes, 60, '23:00 to midnight is one hour, not three');
+});
+
+test('week anchors shift by whole weeks', () => {
+  assert.equal(shiftWeekKey('2026-10-19', 1), '2026-10-26');
+  assert.equal(shiftWeekKey('2026-10-19', -1), '2026-10-12');
+});
+
+test('the week range label follows the language', () => {
+  assert.equal(weekRangeLabel('2026-10-19', '2026-10-25', en), 'Oct 19 – Oct 25, 2026');
+  assert.equal(weekRangeLabel('2026-10-19', '2026-10-25', zh), '2026年10月19日 – 10月25日');
 });

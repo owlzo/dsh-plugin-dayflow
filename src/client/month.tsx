@@ -68,6 +68,11 @@ export interface MonthViewProps {
   onPick: (date: string) => void;
   onRefresh: () => void;
   onRetry: () => void;
+  /** The month/week switch, rendered beside the navigation. */
+  toolbar?: ReactNode;
+  /** Identity the view-switch tabs point at. */
+  id?: string;
+  role?: 'tabpanel';
 }
 
 function stateText(state: RingState, t: Translate): string {
@@ -194,7 +199,7 @@ function legendOf(data: PanelMonth | undefined): { name: string; color_hex: stri
  * @returns the month view.
  */
 export function MonthView(props: MonthViewProps): ReactNode {
-  const { data, phase, error, t, month, today, selected, onPrevMonth, onNextMonth, onToday, onPick, onRefresh, onRetry } =
+  const { data, phase, error, t, month, today, selected, onPrevMonth, onNextMonth, onToday, onPick, onRefresh, onRetry, toolbar } =
     props;
   const [hover, setHover] = useState<HoverState | undefined>(undefined);
   const canHover = useMemo(
@@ -208,7 +213,7 @@ export function MonthView(props: MonthViewProps): ReactNode {
   const hoveredDay = hover === undefined ? undefined : data?.days.find((day) => day.date === hover.date);
 
   return (
-    <div className="dfp-view">
+    <div className="dfp-view" id={props.id} role={props.role}>
       <div className="dfp-month-head">
         {iconButton(CHEVRON_LEFT, t('prevMonth'), onPrevMonth)}
         <div className="dfp-month-heading">
@@ -219,6 +224,7 @@ export function MonthView(props: MonthViewProps): ReactNode {
         </div>
         {iconButton(CHEVRON_RIGHT, t('nextMonth'), onNextMonth)}
         <span className="dfp-spacer" />
+        {toolbar}
         <button type="button" className="dfp-today-button" onClick={onToday}>
           {t('today')}
         </button>

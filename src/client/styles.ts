@@ -368,6 +368,211 @@ export const PANEL_CSS = `
   }
 }
 
+/* ── View switch ─────────────────────────────────────────────────────── */
+
+.dfp-view-switch {
+  display: inline-flex;
+  flex: none;
+  margin-right: 4px;
+}
+
+/* ── Week swim lanes ─────────────────────────────────────────────────── */
+
+.dfp-week {
+  overflow: hidden;
+}
+
+.dfp-week-legend {
+  border-top: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.dfp-week-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dsh-scrollbar-thumb, transparent) transparent;
+}
+
+.dfp-week-grid,
+.dfp-week-headrow {
+  display: grid;
+  grid-template-columns: 44px repeat(7, minmax(0, 1fr));
+  position: relative;
+  min-width: 560px;
+}
+
+/* The first hour label is centered on the grid's top edge, so the grid needs
+ * headroom or the sticky head row paints over it. Margin, not padding: absolute
+ * children place against the padding box, so padding would not move them. */
+.dfp-week-grid {
+  margin-top: 9px;
+}
+
+.dfp-week-headrow {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--dsw-alias-bg-layer-1);
+  border-bottom: 1px solid var(--dsw-alias-border-l2);
+}
+
+.dfp-week-corner {
+  display: block;
+}
+
+.dfp-week-axis {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.dfp-week-hour {
+  position: absolute;
+  right: 8px;
+  transform: translateY(-50%);
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--dsw-alias-label-tertiary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.dfp-week-col {
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-left: 1px solid var(--dsw-alias-border-l1, var(--dsw-alias-border-l2));
+}
+
+.dfp-week-col.is-today {
+  background: color-mix(in srgb, var(--dsw-alias-state-business-primary) 5%, transparent);
+}
+
+.dfp-week-colhead {
+  padding: 5px 2px 6px;
+  text-align: center;
+  min-width: 0;
+  border-left: 1px solid var(--dsw-alias-border-l1, var(--dsw-alias-border-l2));
+}
+
+.dfp-week-colhead.is-today {
+  background: var(--dsw-alias-bg-layer-3);
+}
+
+.dfp-wk-head {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.dfp-wk-weekday {
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.dfp-wk-date {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--dsw-alias-label-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.dfp-wk-date em {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--dsw-alias-state-business-primary);
+  color: var(--dsw-alias-label-primary-foreground);
+  font-style: normal;
+  font-weight: 600;
+}
+
+
+.dfp-week-colhead.is-selected,
+.dfp-week-col.is-selected .dfp-week-lanes {
+  box-shadow: inset 0 0 0 1.5px var(--dsw-alias-border-l4);
+}
+
+.dfp-week-lanes {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.dfp-week-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--dsw-alias-border-l1, var(--dsw-alias-border-l2));
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.dfp-week-card {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-height: 18px;
+  padding: 2px 5px;
+  border: 0;
+  border-left: 2.5px solid var(--dsw-alias-border-l3);
+  border-radius: var(--dsw-radius-sm);
+  color: var(--dsw-alias-label-primary);
+  text-align: left;
+  overflow: hidden;
+  cursor: pointer;
+  transition: filter 120ms ease;
+}
+
+.dfp-week-card:hover {
+  filter: brightness(0.97) saturate(1.15);
+}
+
+.dfp-week-card:focus-visible {
+  outline: var(--dsw-focus-ring-width, 2px) solid var(--dsw-focus-ring-color);
+  outline-offset: -1px;
+}
+
+.dfp-week-card-title {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dfp-week-card-summary {
+  font-size: 10px;
+  line-height: 13px;
+  color: var(--dsw-alias-label-secondary);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.dfp-week-empty {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--dsw-alias-label-tertiary);
+  opacity: 0.7;
+}
+
 /* ── Legend ──────────────────────────────────────────────────────────── */
 
 .dfp-legend {

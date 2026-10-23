@@ -4,6 +4,7 @@
  */
 
 import { shiftDayKey } from '../panel-contract.js';
+import type { PanelCard } from '../panel-contract.js';
 
 /** Translation function bound to the panel namespace. */
 export type Translate = (key: string, params?: Record<string, string | number>) => string;
@@ -48,6 +49,20 @@ export function formatClock(iso: string, language = 'en-US'): string {
   return `${twelve}:${pad(date.getMinutes())} ${suffix}`;
 }
 
+/**
+ * An hour label for the week axis: `9 AM` in English, `09:00` in Chinese.
+ * @param hour - 0-24 local hour.
+ * @param language - the panel language.
+ * @returns the label.
+ */
+export function formatHour(hour: number, language = 'en-US'): string {
+  const safe = ((hour % 24) + 24) % 24;
+  if (language.startsWith('zh')) return `${pad(safe)}:00`;
+  if (safe === 0) return '12 AM';
+  if (safe === 12) return '12 PM';
+  return safe < 12 ? `${safe} AM` : `${safe - 12} PM`;
+}
+
 /** `45%`, from a 0-1 share. */
 export function formatShare(share: number): string {
   return `${Math.round(Math.max(0, Math.min(1, share)) * 100)}%`;
@@ -87,6 +102,16 @@ export function monthKeyOf(date: Date): string {
 /** The month containing a day key. */
 export function monthOfDay(dayKey: string): string {
   return dayKey.slice(0, 7);
+}
+
+/**
+ * Shift a week anchor by whole weeks.
+ * @param dayKey - any day inside the current week.
+ * @param weeks - signed week count.
+ * @returns the shifted day key.
+ */
+export function shiftWeekKey(dayKey: string, weeks: number): string {
+  return shiftDayKey(dayKey, weeks * 7);
 }
 
 /**
@@ -148,4 +173,85 @@ export function leadingBlanks(month: string): number {
   if (match === null) return 0;
   const weekday = new Date(Number(match[1]), Number(match[2]) - 1, 1, 12).getDay();
   return (weekday + 6) % 7;
+}
+
+/** One card placed inside a day's swim-lane column. */
+export interface PositionedCard {
+  readonly card: PanelCard;
+  /** Minutes from local midnight to the card's start. */
+  readonly topMinutes: number;
+  /** Visible height in minutes, clamped to the day. */
+  readonly heightMinutes: number;
+  /** Zero-based lane index inside the column. */
+  readonly lane: number;
+  /** Total lanes the column needed; cards share the width evenly. */
+  readonly lanes: number;
+}
+
+/**
+ * Place a day's cards into overlapping-free lanes.
+ *
+ * Cards keep chronological order; a card joins the first lane whose last card
+ * already ended, otherwise a new lane starts. The column's width is divided by
+ * the lane count, so a busy day shrinks every card evenly.
+ * @param cards - the day's cards, any order.
+ * @returns positioned cards in start order.
+ */
+export function layoutDayCards(cards: readonly PanelCard[]): PositionedCard[] {
+  const timed = cards
+    .map((card) => {
+      const start = new Date(card.start);
+      const end = new Date(card.end);
+      const topMinutes = start.getHours() * 60 + start.getMinutes();
+      const rawHeight = (end.getTime() - start.getTime()) / 60_000;
+      const heightMinutes = Math.max(18, Math.min(rawHeight, 1440 - topMinutes));
+      return { card, start: start.getTime(), end: Math.max(end.getTime(), start.getTime()), topMinutes, heightMinutes };
+    })
+    .sort((left, right) => left.start - right.start);
+
+  // A lane is free once its last card has ended, so the packed value is the
+  // card's end, not its start.
+  const laneEnds: number[] = [];
+  const placed = timed.map((entry) => {
+    let lane = laneEnds.findIndex((endAt) => endAt <= entry.start);
+    if (lane === -1) {
+      lane = laneEnds.length;
+      laneEnds.push(entry.end);
+    } else {
+      laneEnds[lane] = entry.end;
+    }
+    return { ...entry, lane };
+  });
+
+  const lanes = Math.max(1, laneEnds.length);
+  return placed.map((entry) => ({
+    card: entry.card,
+    topMinutes: entry.topMinutes,
+    heightMinutes: entry.heightMinutes,
+    lane: entry.lane,
+    lanes,
+  }));
+}
+
+/**
+ * The week header's range label.
+ * @param start - `YYYY-MM-DD` of the Monday.
+ * @param end - `YYYY-MM-DD` of the Sunday.
+ * @param t - the bound translator.
+ * @returns `10月19日 – 10月25日` in Chinese, `Oct 19 – Oct 25` in English.
+ */
+export function weekRangeLabel(start: string, end: string, t: Translate): string {
+  const parse = (key: string): Date | undefined => {
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(key);
+    return match === null ? undefined : new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12);
+  };
+  const startDate = parse(start);
+  const endDate = parse(end);
+  if (startDate === undefined || endDate === undefined) return `${start} – ${end}`;
+  const format = formatter(t, { month: 'short', day: 'numeric' });
+  const zh = panelLanguage(t) === 'zh-CN';
+  const label = zh
+    ? `${startDate.getMonth() + 1}月${startDate.getDate()}日 – ${endDate.getMonth() + 1}月${endDate.getDate()}日`
+    : `${format.format(startDate)} – ${format.format(endDate)}`;
+  return zh ? `${startDate.getFullYear()}年${label}` : `${label}, ${startDate.getFullYear()}`;
 }

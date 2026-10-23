@@ -56,6 +56,20 @@ export interface PanelMonth {
   days: PanelDay[];
 }
 
+/** One Monday-to-Monday week of days, for the swim-lane view. */
+export interface PanelWeek {
+  /** Day-flow day key of the week's Monday. */
+  week_start: string;
+  /** Day-flow day key of the week's Sunday. */
+  week_end: string;
+  /** The Dayflow day containing now. */
+  today: string;
+  time_zone: string;
+  day_boundary_hour: number;
+  /** Seven consecutive days, Monday first; each is a full {@link PanelDay}. */
+  days: PanelDay[];
+}
+
 /** Whether the panel's entry points are exposed. */
 export interface PanelConfig {
   enabled: boolean;
@@ -71,6 +85,9 @@ export const PANEL_DAY_PATH = '/api/dayflow/day';
 
 /** Exact Fetch route for one month of days. */
 export const PANEL_MONTH_PATH = '/api/dayflow/month';
+
+/** Exact Fetch route for one Monday-anchored week of days. */
+export const PANEL_WEEK_PATH = '/api/dayflow/week';
 
 /** Exact Fetch route for the panel's enablement. */
 export const PANEL_CONFIG_PATH = '/api/dayflow/panel';

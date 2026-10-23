@@ -6,8 +6,8 @@
  * @module dsh-plugin-dayflow/client/data
  */
 
-import { PANEL_CONFIG_PATH, PANEL_DAY_PATH, PANEL_MONTH_PATH } from '../panel-contract.js';
-import type { PanelConfig, PanelDay, PanelError, PanelMonth } from '../panel-contract.js';
+import { PANEL_CONFIG_PATH, PANEL_DAY_PATH, PANEL_MONTH_PATH, PANEL_WEEK_PATH } from '../panel-contract.js';
+import type { PanelConfig, PanelDay, PanelError, PanelMonth, PanelWeek } from '../panel-contract.js';
 
 async function readError(response: Response): Promise<string> {
   try {
@@ -66,4 +66,21 @@ export async function fetchMonth(month?: string, signal?: AbortSignal): Promise<
   });
   if (!response.ok) throw new Error(await readError(response));
   return (await response.json()) as PanelMonth;
+}
+
+/**
+ * Read one Monday-anchored week of days.
+ * @param date - any day inside the week, or `undefined` for the current week.
+ * @param signal - caller cancellation.
+ * @returns the week payload.
+ */
+export async function fetchWeek(date?: string, signal?: AbortSignal): Promise<PanelWeek> {
+  const query = date === undefined || date === '' ? '' : `?date=${encodeURIComponent(date)}`;
+  const response = await fetch(`${PANEL_WEEK_PATH}${query}`, {
+    credentials: 'same-origin',
+    headers: { accept: 'application/json' },
+    ...(signal === undefined ? {} : { signal }),
+  });
+  if (!response.ok) throw new Error(await readError(response));
+  return (await response.json()) as PanelWeek;
 }

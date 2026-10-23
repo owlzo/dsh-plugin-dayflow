@@ -1,21 +1,28 @@
 /**
- * The panel body: a month calendar that drills into one day.
+ * The panel body: a month calendar or a week swim-lane, each drilling into one
+ * day.
  *
- * The calendar is the entry surface; picking a day swaps the body for the day
- * view without leaving the sidebar tab, and Escape (or the back arrow) returns.
+ * The two views share one selection: picking a day opens the detail from either
+ * surface, and returning keeps the day marked in whichever view the user came
+ * from. Escape closes the detail.
  * @module dsh-plugin-dayflow/client/app
  */
 
 import { useCallback, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
+import { SegmentedControl } from '@deepseek-ai/dsh-client-ui-primitives';
 
 import { shiftDayKey, shiftMonthKey } from '../panel-contract.js';
-import type { PanelDay, PanelMonth } from '../panel-contract.js';
+import type { PanelDay, PanelMonth, PanelWeek } from '../panel-contract.js';
 import { DayView } from './day.js';
-import { monthKeyOf, monthOfDay, todayKey } from './format.js';
+import { monthOfDay, monthKeyOf, shiftWeekKey, todayKey } from './format.js';
 import type { Translate } from './format.js';
 import { MonthView } from './month.js';
 import type { Phase } from './types.js';
+import { WeekView } from './week.js';
+
+/** The two entry surfaces. */
+type PanelView = 'month' | 'week';
 
 /** Props the slot runtime injects into the panel body. */
 export interface PanelProps {
@@ -23,6 +30,8 @@ export interface PanelProps {
   loadDay: (date?: string, signal?: AbortSignal) => Promise<PanelDay>;
   /** Reads one month of days; `undefined` means the current month. */
   loadMonth: (month?: string, signal?: AbortSignal) => Promise<PanelMonth>;
+  /** Reads one week of days; `undefined` means the current week. */
+  loadWeek: (date?: string, signal?: AbortSignal) => Promise<PanelWeek>;
   /** Namespace-bound translation. */
   t: Translate;
 }
@@ -44,14 +53,21 @@ function humanize(message: string, t: Translate): string {
 /**
  * Render the panel.
  * @param props - the injected readers and translator.
- * @returns the month calendar or one day.
+ * @returns the calendar, the week, or one day.
  */
-export function DayflowPanel({ loadDay, loadMonth, t }: PanelProps): ReactNode {
+export function DayflowPanel({ loadDay, loadMonth, loadWeek, t }: PanelProps): ReactNode {
+  const [view, setView] = useState<PanelView>('month');
   const [month, setMonth] = useState(() => monthKeyOf(new Date()));
   const [monthData, setMonthData] = useState<PanelMonth | undefined>(undefined);
   const [monthPhase, setMonthPhase] = useState<Phase>('loading');
   const [monthError, setMonthError] = useState('');
   const [monthNonce, setMonthNonce] = useState(0);
+
+  const [weekAnchor, setWeekAnchor] = useState<string | undefined>(undefined);
+  const [weekData, setWeekData] = useState<PanelWeek | undefined>(undefined);
+  const [weekPhase, setWeekPhase] = useState<Phase>('loading');
+  const [weekError, setWeekError] = useState('');
+  const [weekNonce, setWeekNonce] = useState(0);
 
   const [selected, setSelected] = useState<string | undefined>(undefined);
   const [dayOpen, setDayOpen] = useState(false);
@@ -61,6 +77,7 @@ export function DayflowPanel({ loadDay, loadMonth, t }: PanelProps): ReactNode {
   const [dayNonce, setDayNonce] = useState(0);
 
   useEffect(() => {
+    if (view !== 'month') return;
     const controller = new AbortController();
     setMonthPhase('loading');
     setMonthError('');
@@ -79,14 +96,39 @@ export function DayflowPanel({ loadDay, loadMonth, t }: PanelProps): ReactNode {
     return () => {
       controller.abort();
     };
-  }, [month, monthNonce, loadMonth]);
+  }, [view, month, monthNonce, loadMonth]);
+
+  useEffect(() => {
+    if (view !== 'week') return;
+    const controller = new AbortController();
+    setWeekPhase('loading');
+    setWeekError('');
+    loadWeek(weekAnchor, controller.signal).then(
+      (data) => {
+        if (controller.signal.aborted) return;
+        setWeekData(data);
+        setWeekPhase('ready');
+      },
+      (cause: unknown) => {
+        if (controller.signal.aborted) return;
+        setWeekError(rawMessage(cause));
+        setWeekPhase('error');
+      },
+    );
+    return () => {
+      controller.abort();
+    };
+  }, [view, weekAnchor, weekNonce, loadWeek]);
 
   useEffect(() => {
     if (!dayOpen || selected === undefined) return;
     const controller = new AbortController();
-    const seeded = monthData?.days.find((entry) => entry.date === selected);
-    setDayData((current) => (current?.date === selected ? current : seeded));
-    setDayPhase(seeded === undefined ? 'loading' : 'ready');
+    const seed =
+      (view === 'month' ? monthData?.days.find((entry) => entry.date === selected) : undefined) ??
+      weekData?.days.find((entry) => entry.date === selected) ??
+      (dayData?.date === selected ? dayData : undefined);
+    setDayData((current) => (current?.date === selected ? current : seed));
+    setDayPhase(seed === undefined ? 'loading' : 'ready');
     setDayError('');
     loadDay(selected, controller.signal).then(
       (data) => {
@@ -97,13 +139,14 @@ export function DayflowPanel({ loadDay, loadMonth, t }: PanelProps): ReactNode {
       (cause: unknown) => {
         if (controller.signal.aborted) return;
         setDayError(rawMessage(cause));
-        setDayPhase(seeded === undefined ? 'error' : 'ready');
+        setDayPhase(seed === undefined ? 'error' : 'ready');
       },
     );
     return () => {
       controller.abort();
     };
-  }, [dayOpen, selected, dayNonce, loadDay]);
+    // dayData is read for its date only; listing it would re-fire on every load.
+  }, [dayOpen, selected, dayNonce, loadDay, view, monthData, weekData]);
 
   useEffect(() => {
     if (!dayOpen) return;
@@ -116,73 +159,127 @@ export function DayflowPanel({ loadDay, loadMonth, t }: PanelProps): ReactNode {
     };
   }, [dayOpen]);
 
-  const pick = useCallback(
-    (date: string) => {
-      setSelected(date);
-      setDayOpen(true);
-      setDayData(undefined);
-      setDayPhase('loading');
+  const pick = useCallback((date: string) => {
+    setSelected(date);
+    setDayOpen(true);
+    setDayData(undefined);
+    setDayPhase('loading');
+    if (view === 'month') {
       const target = monthOfDay(date);
       if (target !== month) setMonth(target);
-    },
-    [month],
-  );
+    }
+  }, [view, month]);
 
   const goToday = (): void => {
-    const target = monthKeyOf(new Date());
     setDayOpen(false);
     setSelected(undefined);
+    const target = monthKeyOf(new Date());
     if (target === month) setMonthNonce((value) => value + 1);
     else setMonth(target);
   };
 
-  const refresh = (): void => {
-    if (dayOpen && selected !== undefined) {
-      setDayNonce((value) => value + 1);
-      setMonthNonce((value) => value + 1);
-      return;
-    }
-    setMonthNonce((value) => value + 1);
+  const goThisWeek = (): void => {
+    setDayOpen(false);
+    setSelected(undefined);
+    setWeekAnchor(undefined);
+    setWeekNonce((value) => value + 1);
   };
 
-  const body =
-    dayOpen && selected !== undefined ? (
-      <DayView
-        day={dayData}
-        phase={dayPhase}
-        error={dayError === '' ? '' : humanize(dayError, t)}
-        t={t}
-        onBack={() => setDayOpen(false)}
-        onPrev={() => pick(shiftDayKey(selected, -1))}
-        onNext={() => pick(shiftDayKey(selected, 1))}
-        onRefresh={refresh}
-        onRetry={() => setDayNonce((value) => value + 1)}
-      />
-    ) : (
-      <MonthView
-      data={monthData}
-      phase={monthPhase}
-      error={humanize(monthError, t)}
-      t={t}
-      month={monthData?.month ?? month}
-      today={monthData?.today ?? todayKey()}
-      selected={selected}
-      onPrevMonth={() => {
-        setDayOpen(false);
-        setSelected(undefined);
-        setMonth(shiftMonthKey(monthData?.month ?? month, -1));
-      }}
-      onNextMonth={() => {
-        setDayOpen(false);
-        setSelected(undefined);
-        setMonth(shiftMonthKey(monthData?.month ?? month, 1));
-      }}
-      onToday={goToday}
-      onPick={pick}
-      onRefresh={refresh}
-      onRetry={() => setMonthNonce((value) => value + 1)}
-      />
-    );
+  const refresh = (): void => {
+    if (dayOpen && selected !== undefined) setDayNonce((value) => value + 1);
+    if (view === 'month') setMonthNonce((value) => value + 1);
+    else setWeekNonce((value) => value + 1);
+  };
 
-  return <div className="dfp-root">{body}</div>;
+  const switchView = (next: PanelView): void => {
+    setView(next);
+    setDayOpen(false);
+    // Keep the selected day visible in the view being switched to.
+    if (selected !== undefined && next === 'month') setMonth(monthOfDay(selected));
+    if (selected !== undefined && next === 'week') setWeekAnchor(selected);
+  };
+
+  if (dayOpen && selected !== undefined) {
+    return (
+      <div className="dfp-root">
+        <DayView
+          day={dayData}
+          phase={dayPhase}
+          error={dayError === '' ? '' : humanize(dayError, t)}
+          t={t}
+          onBack={() => setDayOpen(false)}
+          onPrev={() => pick(shiftDayKey(selected, -1))}
+          onNext={() => pick(shiftDayKey(selected, 1))}
+          onRefresh={refresh}
+          onRetry={() => setDayNonce((value) => value + 1)}
+        />
+      </div>
+    );
+  }
+
+  const toolbar = (
+    <div className="dfp-view-switch" role="group" aria-label={t('viewLabel')}>
+      <SegmentedControl<PanelView>
+        id="dayflow-view"
+        label={t('viewLabel')}
+        value={view}
+        options={[
+          { value: 'month', label: t('viewMonth') },
+          { value: 'week', label: t('viewWeek') },
+        ]}
+        onChange={switchView}
+      />
+    </div>
+  );
+  // The control's tabs name `<id>-<value>-panel`; give the shown view that id.
+  const panelProps = { id: `dayflow-view-${view}-panel`, role: 'tabpanel' as const };
+
+  return (
+    <div className="dfp-root">
+      {view === 'week' ? (
+        <WeekView
+          {...panelProps}
+          data={weekData}
+          phase={weekPhase}
+          error={humanize(weekError, t)}
+          t={t}
+          today={weekData?.today ?? todayKey()}
+          selected={selected}
+          toolbar={toolbar}
+          onPrevWeek={() => setWeekAnchor((current) => shiftWeekKey(current ?? weekData?.week_start ?? todayKey(), -1))}
+          onNextWeek={() => setWeekAnchor((current) => shiftWeekKey(current ?? weekData?.week_start ?? todayKey(), 1))}
+          onThisWeek={goThisWeek}
+          onPick={pick}
+          onRefresh={refresh}
+          onRetry={() => setWeekNonce((value) => value + 1)}
+        />
+      ) : (
+        <MonthView
+          {...panelProps}
+          data={monthData}
+          phase={monthPhase}
+          error={humanize(monthError, t)}
+          t={t}
+          month={monthData?.month ?? month}
+          today={monthData?.today ?? todayKey()}
+          selected={selected}
+          toolbar={toolbar}
+          onPrevMonth={() => {
+            setDayOpen(false);
+            setSelected(undefined);
+            setMonth(shiftMonthKey(monthData?.month ?? month, -1));
+          }}
+          onNextMonth={() => {
+            setDayOpen(false);
+            setSelected(undefined);
+            setMonth(shiftMonthKey(monthData?.month ?? month, 1));
+          }}
+          onToday={goToday}
+          onPick={pick}
+          onRefresh={refresh}
+          onRetry={() => setMonthNonce((value) => value + 1)}
+        />
+      )}
+    </div>
+  );
 }

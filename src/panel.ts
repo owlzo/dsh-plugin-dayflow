@@ -13,12 +13,13 @@ import type { Context } from '@deepseek-ai/cordis';
 import type {} from '@deepseek-ai/dsh-client-connection';
 
 import { withDatabase } from './db.js';
-import { dayWindowContaining, formatDayKey, timeZoneName } from './day.js';
+import { dayWindowContaining, formatDayKey, timeZoneName, weekWindowContaining } from './day.js';
 import { DayflowError, isDayflowError } from './errors.js';
 import {
   PANEL_CONFIG_PATH,
   PANEL_DAY_PATH,
   PANEL_MONTH_PATH,
+  PANEL_WEEK_PATH,
   isMonthKey,
   monthDayKeys,
 } from './panel-contract.js';
@@ -29,6 +30,7 @@ import type {
   PanelDay,
   PanelError,
   PanelMonth,
+  PanelWeek,
 } from './panel-contract.js';
 import {
   activitiesForDay,
@@ -211,6 +213,59 @@ export function buildPanelMonth(runtime: ToolRuntime, month?: string): PanelMont
 }
 
 /**
+ * Build one Monday-anchored week of panel payloads for the swim-lane view.
+ * @param runtime - the plugin runtime.
+ * @param date - any day inside the wanted week; omitted means the current week.
+ * @returns seven consecutive days, Monday first.
+ */
+export function buildPanelWeek(runtime: ToolRuntime, date?: string): PanelWeek {
+  const anchor = date === undefined || date.trim() === '' ? new Date() : dayArgument(date).start;
+  const week = weekWindowContaining(anchor);
+  const preferences = runtime.preferences();
+  const colors = new Map(preferences.categories.map((category) => [category.name, category.colorHex]));
+
+  const { activities, captures, pending } = withDatabase(runtime.config.databasePath, (db) => ({
+    activities: activitiesStartingBetween(db, week.start, week.end),
+    captures: dayCaptures(db, week.start, week.end),
+    pending: dayPendingBatches(db, week.start, week.end),
+  }));
+
+  const byDay = new Map<string, typeof activities>();
+  for (const activity of activities) {
+    const key = dayWindowContaining(activity.start).dayKey;
+    const bucket = byDay.get(key);
+    if (bucket === undefined) byDay.set(key, [activity]);
+    else bucket.push(activity);
+  }
+
+  const today = formatDayKey(new Date());
+  const days: PanelDay[] = [];
+  for (let offset = 0; offset < 7; offset += 1) {
+    const window = dayWindowContaining(new Date(week.start.getTime() + offset * 86_400_000));
+    days.push(
+      dayPayload(
+        window.dayKey,
+        byDay.get(window.dayKey) ?? [],
+        pending.get(window.dayKey) ?? 0,
+        captures.get(window.dayKey)?.lastCaptureAt,
+        colors,
+        preferences.editsEnabled,
+        today,
+      ),
+    );
+  }
+
+  return {
+    week_start: days[0]?.date ?? '',
+    week_end: days[6]?.date ?? '',
+    today,
+    time_zone: timeZoneName(),
+    day_boundary_hour: 4,
+    days,
+  };
+}
+
+/**
  * Register the panel's routes when a web connection exists.
  * @param ctx - the plugin context.
  * @param runtime - the plugin runtime.
@@ -239,6 +294,19 @@ export function registerPanelRoutes(ctx: Context, runtime: ToolRuntime): void {
         try {
           const month = new URL(request.url).searchParams.get('month') ?? undefined;
           return jsonResponse(buildPanelMonth(runtime, month));
+        } catch (error) {
+          return failureResponse(error);
+        }
+      },
+    });
+    connection.fetch.register({
+      path: PANEL_WEEK_PATH,
+      methods: ['GET'],
+      requestBody: 'buffered',
+      fetch: async (request) => {
+        try {
+          const date = new URL(request.url).searchParams.get('date') ?? undefined;
+          return jsonResponse(buildPanelWeek(runtime, date));
         } catch (error) {
           return failureResponse(error);
         }

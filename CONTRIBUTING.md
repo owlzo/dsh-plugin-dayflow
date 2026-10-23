@@ -59,10 +59,10 @@ registered tool, so rename tools and skills together.
 ## Working on the Web panel
 
 The panel is a page-type tab in the right Sidebar plus a conversation-header
-button. The calendar reads `GET /api/dayflow/month`, a day reads
-`GET /api/dayflow/day`, and enablement comes from `GET /api/dayflow/panel`; all
-three routes are registered through the connection service and inherit the `/api`
-trust fence and session cookie.
+button. The calendar reads `GET /api/dayflow/month`, the swim lanes read
+`GET /api/dayflow/week`, a day reads `GET /api/dayflow/day`, and enablement comes
+from `GET /api/dayflow/panel`; all four routes are registered through the
+connection service and inherit the `/api` trust fence and session cookie.
 
 - `src/client/` is bundled by `scripts/build-client.mjs` into `lib/client.js` in
   the harness's lazy-CJS `window.__ModuleLoader__.load({ id, factory })` format.
@@ -75,6 +75,9 @@ trust fence and session cookie.
   show), `pending` (analysis queued), and `no-data` (no captures). `dayState()`
   in `src/client/state.ts` is the single place that decides, from
   `tracked_minutes`, `pending_batches`, and `last_capture_at`.
+- Week-lane geometry lives in pure helpers in `src/client/format.ts`
+  (`layoutDayCards`, `formatHour`, `weekRangeLabel`), not in the component, so
+  overlap packing and axis labels stay unit-tested.
 - Style only with the harness tokens (`--dsw-alias-*`, `--dsw-radius-*`,
   `--dsh-scrollbar-*`) so the panel follows the theme, and prefer the primitives
   (`Button`, `Tooltip`, `StateDot`) over hand-rolled controls.

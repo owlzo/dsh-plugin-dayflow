@@ -4,6 +4,30 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-10-23
+
+### Added
+
+- A **Week** view beside the calendar: seven day columns over one hour axis, with
+  each activity drawn as a card placed at its time and tinted by its category
+  colour, matching Dayflow's own weekly timeline.
+- `GET /api/dayflow/week?date=YYYY-MM-DD`, returning seven consecutive
+  `PanelDay` payloads anchored on Monday, so the week view needs no client-side
+  merging across month boundaries.
+- Packed lanes for overlapping cards, a minimum card height so short blocks stay
+  readable, a data-driven hour axis with `−`/`+` zoom, a sticky header row, a
+  tinted today column with a date badge, an inline category legend, and a weekly
+  tracked total.
+- Hover cards on week cards (day, time range, duration, apps, summary) and
+  click-through to the day detail.
+- A **Month / Week** segmented switch in the panel header; switching keeps the
+  selected day marked in both views.
+
+### Changed
+
+- The panel body now owns the view state, so the day detail returns to whichever
+  view opened it.
+
 ## [0.2.1] - 2026-10-22
 
 ### Added
@@ -88,6 +112,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   panel payload and routes, panel formatting, and the built client bundle's
   registration contract (67 tests).
 
+[0.3.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.0
 [0.2.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.2.1
 [0.2.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.2.0
 [0.1.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.1.0

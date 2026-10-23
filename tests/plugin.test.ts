@@ -83,7 +83,7 @@ test('apply registers eight reads, six edits, four skills, and one prompt sectio
     capture.skills.map((skill) => skill.name),
     ['dayflow', 'onboarding', 'standup', 'weekly-review'],
   );
-  assert.deepEqual([...capture.routes].sort(), ['/api/dayflow/day', '/api/dayflow/month', '/api/dayflow/panel']);
+  assert.deepEqual([...capture.routes].sort(), ['/api/dayflow/day', '/api/dayflow/month', '/api/dayflow/panel', '/api/dayflow/week']);
   assert.equal(capture.sections.length, 1);
   assert.equal(capture.sections[0]?.name, 'tool:dayflow');
   const text = capture.sections[0]?.text;

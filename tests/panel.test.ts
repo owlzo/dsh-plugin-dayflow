@@ -9,10 +9,11 @@ import {
   PANEL_CONFIG_PATH,
   PANEL_DAY_PATH,
   PANEL_MONTH_PATH,
+  PANEL_WEEK_PATH,
   shiftDayKey,
 } from '../src/panel-contract.js';
-import type { PanelConfig, PanelDay, PanelMonth } from '../src/panel-contract.js';
-import { buildPanelDay, buildPanelMonth, registerPanelRoutes } from '../src/panel.js';
+import type { PanelConfig, PanelDay, PanelMonth, PanelWeek } from '../src/panel-contract.js';
+import { buildPanelDay, buildPanelMonth, buildPanelWeek, registerPanelRoutes } from '../src/panel.js';
 import { createFixtureDatabase } from './fixtures/database.js';
 import { makeRuntime } from './helpers.js';
 
@@ -77,7 +78,7 @@ test('a category without a stored color falls back to the neutral token color', 
 
 test('the day route answers JSON and rejects an impossible date', async () => {
   const routes = fakeHost(makeRuntime(fixture.path));
-  assert.deepEqual([...routes.keys()].sort(), [PANEL_DAY_PATH, PANEL_MONTH_PATH, PANEL_CONFIG_PATH].sort());
+  assert.deepEqual([...routes.keys()].sort(), [PANEL_DAY_PATH, PANEL_MONTH_PATH, PANEL_WEEK_PATH, PANEL_CONFIG_PATH].sort());
 
   const day = routes.get(PANEL_DAY_PATH);
   assert.ok(day);
@@ -220,6 +221,59 @@ test('the month route answers JSON and rejects a malformed month', async () => {
 test('month payloads end on the real last day of the month', () => {
   assert.equal(buildPanelMonth(makeRuntime(fixture.path), '2026-02').days.length, 28);
   assert.equal(buildPanelMonth(makeRuntime(fixture.path), '2024-02').days.length, 29);
+});
+
+test('a week payload holds seven Monday-first days with the same shapes as the month', () => {
+  const runtime = makeRuntime(fixture.path);
+  const payload = buildPanelWeek(runtime, '2026-10-21');
+
+  assert.equal(payload.days.length, 7);
+  assert.equal(payload.week_start, '2026-10-19');
+  assert.equal(payload.week_end, '2026-10-25');
+  assert.deepEqual(payload.days.map((day) => day.date), [
+    '2026-10-19',
+    '2026-10-20',
+    '2026-10-21',
+    '2026-10-22',
+    '2026-10-23',
+    '2026-10-24',
+    '2026-10-25',
+  ]);
+
+  const monday = payload.days[0];
+  assert.ok(monday);
+  assert.equal(monday.tracked_minutes, 138);
+  assert.equal(monday.cards.length, 7);
+  assert.equal(monday.categories[0]?.color_hex, '#B984FF');
+
+  // The quiet-but-captured day stays distinct from the no-capture days.
+  const quiet = payload.days.find((day) => day.date === '2026-10-19');
+  assert.ok(quiet);
+  assert.ok(quiet.last_capture_at !== undefined);
+  const empty = payload.days.find((day) => day.date === '2026-10-21');
+  assert.ok(empty);
+  assert.equal(empty.last_capture_at, undefined);
+  assert.equal(empty.tracked_minutes, 0);
+});
+
+test('the week route answers JSON, defaults to this week, and rejects bad dates', async () => {
+  const routes = fakeHost(makeRuntime(fixture.path));
+  const week = routes.get(PANEL_WEEK_PATH);
+  assert.ok(week);
+  assert.deepEqual([...week.methods], ['GET']);
+
+  const ok = await week.fetch(new Request(`http://127.0.0.1${PANEL_WEEK_PATH}?date=2026-10-21`));
+  assert.equal(ok.status, 200);
+  const payload = (await ok.json()) as PanelWeek;
+  assert.equal(payload.days.length, 7);
+  assert.equal(payload.week_start, '2026-10-19');
+
+  const current = await week.fetch(new Request(`http://127.0.0.1${PANEL_WEEK_PATH}`));
+  assert.equal(current.status, 200);
+  assert.equal(((await current.json()) as PanelWeek).days.length, 7);
+
+  const bad = await week.fetch(new Request(`http://127.0.0.1${PANEL_WEEK_PATH}?date=not-a-day`));
+  assert.equal(bad.status, 400);
 });
 
 test('day keys shift across month and year boundaries', () => {

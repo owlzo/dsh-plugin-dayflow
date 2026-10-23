@@ -194,12 +194,16 @@ test('an enabled panel registers its tab, its body, and its header toggle', asyn
   const bodyInject = (body.spec.inject as () => {
     loadDay: (date?: string) => Promise<unknown>;
     loadMonth: (month?: string) => Promise<unknown>;
+    loadWeek: (date?: string) => Promise<unknown>;
   })();
   assert.equal(typeof bodyInject.loadMonth, 'function');
+  assert.equal(typeof bodyInject.loadWeek, 'function');
   await bodyInject.loadDay('2026-10-19');
   await bodyInject.loadMonth('2026-10');
+  await bodyInject.loadWeek('2026-10-19');
   assert.ok(requests.some((url) => url === '/api/dayflow/day?date=2026-10-19'));
   assert.ok(requests.some((url) => url === '/api/dayflow/month?month=2026-10'));
+  assert.ok(requests.some((url) => url === '/api/dayflow/week?date=2026-10-19'));
 
   const toggle = calls.slots.find((entry) => entry.spec.name === 'conversation.session.header.actions');
   assert.ok(toggle);

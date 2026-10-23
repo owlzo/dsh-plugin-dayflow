@@ -100,9 +100,9 @@ To remove it, delete the symlink and the bundle entry.
 
 ## Web panel
 
-The plugin can also draw the month inside the DSH Web GUI. The panel is optional
-in both senses: nothing appears until you open it, and a profile can switch its
-entry point off entirely.
+The plugin can also draw the month and the week inside the DSH Web GUI. The panel
+is optional in both senses: nothing appears until you open it, and a profile can
+switch its entry point off entirely.
 
 ![The Dayflow month calendar in the dsh right Sidebar](docs/panel.en.png)
 
@@ -121,14 +121,38 @@ entry point off entirely.
 - Clicking a day opens it: totals, filter chips, and the timed activity list.
   Clicking a chip filters the list; **Clear filter** restores it.
 
+### Week swim lanes
+
+A **Month / Week** switch in the header swaps the calendar for Dayflow's own
+weekly timeline: seven day columns over one hour axis, each activity drawn as a
+card placed at its time and tinted with its category colour.
+
+![The Dayflow week swim lanes](docs/week.en.png)
+
+- The axis follows the data: it starts an hour before the week's first activity
+  and ends an hour after its last, so a workday fills the pane instead of a
+  4 AM-to-midnight strip. `−`/`+` zoom the axis.
+- Overlapping cards share the column in packed lanes instead of covering each
+  other, and a card keeps a minimum height so a five-minute block stays legible.
+- Today's column is tinted, its date sits in a filled badge, and the header row
+  stays pinned while the week scrolls.
+- Hovering a card shows its day, time range, duration, apps, and summary;
+  clicking it opens that day's detail. `‹`/`›` step weeks and **This week**
+  returns to the current one.
+- The week header totals the tracked time, and the category legend above the
+  grid names every colour in use.
+
 ![One day open in the panel](docs/day.en.png)
 
 - In the day view, `‹`/`›` step days, `⟳` refreshes, and the back arrow (or
   Escape) returns to the calendar with that day still marked as selected.
 - On touch devices hover is replaced by tap: a tap opens the day, and the back
   control sits in the day header.
-- The panel reads `GET /api/dayflow/month` and `GET /api/dayflow/day` through the
-  harness's authenticated `/api` bridge. It never touches the database itself.
+- The panel reads `GET /api/dayflow/month`, `GET /api/dayflow/week`, and
+  `GET /api/dayflow/day` through the harness's authenticated `/api` bridge. It
+  never touches the database itself.
+- Switching views keeps the selected day, so a day picked in the calendar stays
+  marked when you move to the week and back.
 
 Set `panel: false` to remove both the header button and the tab type.
 
