@@ -13,7 +13,7 @@ import type { Context } from '@deepseek-ai/cordis';
 import type {} from '@deepseek-ai/dsh-client-connection';
 
 import { withDatabase } from './db.js';
-import { dayWindowContaining, formatDayKey, timeZoneName, weekWindowContaining } from './day.js';
+import { dayWindowContaining, dayWindowForKey, formatDayKey, timeZoneName, weekWindowContaining } from './day.js';
 import { DayflowError, isDayflowError } from './errors.js';
 import {
   PANEL_CONFIG_PATH,
@@ -22,6 +22,7 @@ import {
   PANEL_WEEK_PATH,
   isMonthKey,
   monthDayKeys,
+  shiftDayKey,
 } from './panel-contract.js';
 import type {
   PanelCard,
@@ -239,9 +240,13 @@ export function buildPanelWeek(runtime: ToolRuntime, date?: string): PanelWeek {
   }
 
   const today = formatDayKey(new Date());
+  const mondayKey = formatDayKey(week.start);
   const days: PanelDay[] = [];
   for (let offset = 0; offset < 7; offset += 1) {
-    const window = dayWindowContaining(new Date(week.start.getTime() + offset * 86_400_000));
+    // Step by calendar day, not by 86_400_000 ms: a daylight-saving boundary
+    // would otherwise land the window on the wrong date (or the wrong 4 AM).
+    const window = dayWindowForKey(shiftDayKey(mondayKey, offset));
+    if (window === undefined) continue;
     days.push(
       dayPayload(
         window.dayKey,

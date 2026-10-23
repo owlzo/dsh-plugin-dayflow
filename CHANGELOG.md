@@ -4,6 +4,19 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2026-10-23
+
+### Fixed
+
+- The week view stepped through its seven days by adding 86,400,000 ms per day,
+  which lands on the wrong date across a daylight-saving boundary (for example
+  Berlin's late-October change returned a six-day week). It now steps by
+  calendar day and resolves each day with the 4 AM window, so DST weeks keep
+  seven days.
+- The week-layout tests built cards from fixed `+08:00` offsets, so they failed
+  on a UTC runner. They now build local dates, and the suite passes in UTC,
+  Berlin, New York, Kolkata, Auckland, and Lord Howe.
+
 ## [0.3.0] - 2026-10-23
 
 ### Added
@@ -112,6 +125,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   panel payload and routes, panel formatting, and the built client bundle's
   registration contract (67 tests).
 
+[0.3.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.1
 [0.3.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.0
 [0.2.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.2.1
 [0.2.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.2.0

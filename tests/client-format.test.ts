@@ -109,12 +109,21 @@ test('local day and month keys are stable', () => {
   assert.equal(monthOfDay('2026-10-19'), '2026-10');
 });
 
+/**
+ * A card on the local 2026-10-19 at the given local hours.
+ *
+ * Built from local `Date`s rather than a fixed `+08:00` offset: the layout reads
+ * local hours, and a CI runner in UTC must see the same clock positions as a
+ * developer in Asia/Shanghai.
+ */
 function card(recordId: number, startHour: number, endHour: number, category = 'Work'): PanelCard {
+  const start = new Date(2026, 9, 19, startHour, 0, 0, 0);
+  const end = new Date(2026, 9, 19, endHour, 0, 0, 0);
   return {
     record_id: recordId,
-    start: `2026-10-19T${String(startHour).padStart(2, '0')}:00:00+08:00`,
-    end: `2026-10-19T${String(endHour).padStart(2, '0')}:00:00+08:00`,
-    duration_minutes: (endHour - startHour) * 60,
+    start: start.toISOString(),
+    end: end.toISOString(),
+    duration_minutes: Math.round((end.getTime() - start.getTime()) / 60_000),
     title: `Card ${recordId}`,
     summary: '',
     category,
@@ -143,7 +152,11 @@ test('a card keeps a minimum height and clamps to the day', () => {
   const [short] = layoutDayCards([card(1, 9, 9)]);
   assert.ok(short);
   assert.equal(short.heightMinutes, 18);
-  const [late] = layoutDayCards([{ ...card(1, 23, 23), end: '2026-10-20T02:00:00+08:00' }]);
+  const lateStart = new Date(2026, 9, 19, 23, 0, 0, 0);
+  const lateEnd = new Date(2026, 9, 20, 2, 0, 0, 0);
+  const [late] = layoutDayCards([
+    { ...card(1, 23, 23), start: lateStart.toISOString(), end: lateEnd.toISOString() },
+  ]);
   assert.ok(late);
   assert.equal(late.heightMinutes, 60, '23:00 to midnight is one hour, not three');
 });
