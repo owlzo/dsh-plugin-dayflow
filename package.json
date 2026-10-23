@@ -1,6 +1,6 @@
 {
   "name": "dsh-plugin-dayflow",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Your Dayflow work journal as DeepSeek Harness tools, skills, and an optional Web panel: ask what you worked on, where the week went, and draft standups from the timeline the Dayflow Mac app recorded locally.",
   "keywords": [
     "dsh",

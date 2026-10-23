@@ -89,6 +89,9 @@ export const PANEL_MONTH_PATH = '/api/dayflow/month';
 /** Exact Fetch route for one Monday-anchored week of days. */
 export const PANEL_WEEK_PATH = '/api/dayflow/week';
 
+/** Exact Fetch route for one site's favicon. */
+export const PANEL_ICON_PATH = '/api/dayflow/icon';
+
 /** Exact Fetch route for the panel's enablement. */
 export const PANEL_CONFIG_PATH = '/api/dayflow/panel';
 

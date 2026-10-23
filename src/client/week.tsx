@@ -14,6 +14,7 @@ import type { ReactNode } from 'react';
 import type { PanelDay, PanelWeek } from '../panel-contract.js';
 import { dayLabel, formatClock, formatDuration, formatHour, layoutDayCards, panelLanguage, weekRangeLabel } from './format.js';
 import type { Translate } from './format.js';
+import { AppBadge } from './app-badge.js';
 import { HoverCard } from './hover-card.js';
 import type { Phase } from './types.js';
 
@@ -239,7 +240,7 @@ export function WeekView(props: WeekViewProps): ReactNode {
                       <button
                         key={card.record_id}
                         type="button"
-                        className="dfp-week-card"
+                        className={`dfp-week-card${heightMinutes / minutesPerPixel > 30 ? ' is-tall' : ''}`}
                         style={{
                           top: (topMinutes - startHour * 60) / minutesPerPixel,
                           height: heightMinutes / minutesPerPixel,
@@ -256,7 +257,17 @@ export function WeekView(props: WeekViewProps): ReactNode {
                         }
                         onMouseLeave={canHover ? () => setHover(undefined) : undefined}
                       >
-                        <span className="dfp-week-card-title">{card.title === '' ? t('untitled') : card.title}</span>
+                        <span className="dfp-week-card-head">
+                          {card.apps !== undefined && card.apps[0] !== undefined && (
+                            <AppBadge
+                              domain={card.apps[0]}
+                              color={colors.get(card.category) ?? 'var(--dsw-alias-border-l3)'}
+                              size={11}
+                              className="dfp-week-card-badge"
+                            />
+                          )}
+                          <span className="dfp-week-card-title">{card.title === '' ? t('untitled') : card.title}</span>
+                        </span>
                         {heightMinutes / minutesPerPixel > 44 && card.summary !== '' && (
                           <span className="dfp-week-card-summary">{card.summary}</span>
                         )}

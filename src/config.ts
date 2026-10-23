@@ -3,10 +3,14 @@
  * @module dsh-plugin-dayflow/config
  */
 
+import { homedir } from 'node:os';
+import { join } from 'node:path';
+
 import z from '@deepseek-ai/schemastery';
 
 import { resolveDatabasePath } from './db.js';
 import { DayflowError } from './errors.js';
+import { iconDirectory } from './icons.js';
 
 /** Configuration accepted from the profile's YAML (all fields optional). */
 export interface DayflowConfig {
@@ -20,6 +24,8 @@ export interface DayflowConfig {
   skills?: boolean;
   /** Expose the optional Web panel: a header button and a right-Sidebar tab. */
   panel?: boolean;
+  /** Fetch and show site favicons on the panel's activity cards. */
+  icons?: boolean;
   /** Maximum matches a search returns. */
   searchLimit?: number;
 }
@@ -31,6 +37,8 @@ export interface ResolvedConfig {
   readonly edits: boolean;
   readonly skills: boolean;
   readonly panel: boolean;
+  readonly icons: boolean;
+  readonly iconDirectory: string;
   readonly searchLimit: number;
 }
 
@@ -53,6 +61,12 @@ export const Config = z.object({
     .boolean()
     .default(true)
     .description('Expose the optional Web panel: a timeline button in the conversation header and a right-Sidebar tab.'),
+  icons: z
+    .boolean()
+    .default(true)
+    .description(
+      'Show each site icon on the panel cards. Turning this off makes no outbound request; it also refuses already cached icons.',
+    ),
   searchLimit: z.number().default(50).description('Maximum number of search matches a single call returns (1-200).'),
 });
 
@@ -77,6 +91,18 @@ export function resolveConfig(config: DayflowConfig = {}): ResolvedConfig {
     edits: config.edits ?? true,
     skills: config.skills ?? true,
     panel: config.panel ?? true,
+    icons: config.icons ?? true,
+    iconDirectory: iconDirectory(dshHome()),
     searchLimit,
   };
+}
+
+/**
+ * The harness home that owns caches; `DSH_HOME` wins over the default.
+ * @returns the home directory.
+ */
+export function dshHome(): string {
+  const configured = process.env.DSH_HOME?.trim();
+  if (configured !== undefined && configured !== '') return configured;
+  return join(homedir(), '.dsh');
 }

@@ -4,6 +4,26 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-10-23
+
+### Added
+
+- Site icons on the panel: every week card and day-detail row now shows the
+  favicon of the app or site it was recorded from, falling back to a lettered
+  tile in the category colour.
+- `GET /api/dayflow/icon?domain=…`, which fetches one `favicon.ico` per domain on
+  first use, caches it under `$DSH_HOME/dayflow-icons`, and serves it with a
+  week-long cache header. This is the plugin's only outbound request: no
+  cookies, no referrer, loopback and bare-IP names refused, 4 s timeout, and
+  256 KB cap.
+- An `icons` configuration switch (default `true`); `false` makes no request and
+  also ignores already-cached icons.
+
+### Changed
+
+- Week cards keep their title readable next to the badge: the title is the only
+  child that may shrink, so a long host name never squeezes it to one character.
+
 ## [0.3.1] - 2026-10-23
 
 ### Fixed
@@ -125,6 +145,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   panel payload and routes, panel formatting, and the built client bundle's
   registration contract (67 tests).
 
+[0.4.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.4.0
 [0.3.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.1
 [0.3.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.0
 [0.2.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.2.1

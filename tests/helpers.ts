@@ -8,6 +8,9 @@ import type { ToolDefinition, ToolRunContext } from '@deepseek-ai/dsh-tools';
 
 import { DEFAULT_CATEGORIES } from '../src/categories.js';
 import type { DayflowCategory } from '../src/categories.js';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
 import type { ResolvedConfig } from '../src/config.js';
 import type { ToolRuntime } from '../src/tools/shared.js';
 
@@ -43,6 +46,8 @@ export function makeRuntime(
     edits: true,
     skills: true,
     panel: true,
+    icons: false,
+    iconDirectory: join(tmpdir(), 'dsh-dayflow-icons-test'),
     searchLimit: 50,
     ...configOverrides,
   };

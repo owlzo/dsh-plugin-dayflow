@@ -13,11 +13,13 @@ import type { Context } from '@deepseek-ai/cordis';
 import type {} from '@deepseek-ai/dsh-client-connection';
 
 import { withDatabase } from './db.js';
+import { IconStore } from './icons.js';
 import { dayWindowContaining, dayWindowForKey, formatDayKey, timeZoneName, weekWindowContaining } from './day.js';
 import { DayflowError, isDayflowError } from './errors.js';
 import {
   PANEL_CONFIG_PATH,
   PANEL_DAY_PATH,
+  PANEL_ICON_PATH,
   PANEL_MONTH_PATH,
   PANEL_WEEK_PATH,
   isMonthKey,
@@ -276,8 +278,30 @@ export function buildPanelWeek(runtime: ToolRuntime, date?: string): PanelWeek {
  * @param runtime - the plugin runtime.
  */
 export function registerPanelRoutes(ctx: Context, runtime: ToolRuntime): void {
+  const icons = new IconStore(runtime.config.iconDirectory, runtime.config.icons);
   ctx.inject(['connection'], (connected) => {
     const connection = (connected as unknown as { connection: { fetch: FetchRouteRegistry } }).connection;
+    connection.fetch.register({
+      path: PANEL_ICON_PATH,
+      methods: ['GET'],
+      requestBody: 'buffered',
+      fetch: async (request) => {
+        const domain = new URL(request.url).searchParams.get('domain') ?? '';
+        const icon = await icons.get(domain);
+        if (icon === undefined) return new Response('not found', { status: 404 });
+        return new Response(new Blob([icon.bytes], { type: icon.mediaType }), {
+          status: 200,
+          headers: {
+            'content-type': icon.mediaType,
+            'content-length': String(icon.bytes.byteLength),
+            // A favicon rarely changes; a week of caching keeps the panel quiet.
+            'cache-control': 'public, max-age=604800, immutable',
+            'x-content-type-options': 'nosniff',
+            'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+          },
+        });
+      },
+    });
     connection.fetch.register({
       path: PANEL_DAY_PATH,
       methods: ['GET'],

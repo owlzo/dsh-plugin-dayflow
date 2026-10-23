@@ -10,6 +10,7 @@ import type { PanelDay } from '../panel-contract.js';
 import { formatClock, formatDuration, formatShare, longDate, panelLanguage } from './format.js';
 import type { Translate } from './format.js';
 import type { RingState } from './ring.js';
+import { AppBadge } from './app-badge.js';
 import { dayState } from './state.js';
 import type { Phase } from './types.js';
 
@@ -187,6 +188,14 @@ export function DayView(props: DayViewProps): ReactNode {
                   <div className="dfp-event-body">
                     <span className="dfp-event-title">{card.title === '' ? t('untitled') : card.title}</span>
                     <span className="dfp-event-meta">
+                      {card.apps !== undefined && card.apps[0] !== undefined && (
+                        <AppBadge
+                          domain={card.apps[0]}
+                          color={colors.get(card.category) ?? 'var(--dsw-alias-label-tertiary)'}
+                          size={15}
+                          className="dfp-event-badge"
+                        />
+                      )}
                       <span className="dfp-dot" style={{ background: colors.get(card.category) ?? 'var(--dsw-alias-label-tertiary)' }} />
                       {card.category === '' ? t('uncategorized') : card.category}
                       {card.subcategory !== undefined && card.subcategory !== '' && ` · ${card.subcategory}`}

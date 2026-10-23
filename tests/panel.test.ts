@@ -8,6 +8,7 @@ import { after, test } from 'node:test';
 import {
   PANEL_CONFIG_PATH,
   PANEL_DAY_PATH,
+  PANEL_ICON_PATH,
   PANEL_MONTH_PATH,
   PANEL_WEEK_PATH,
   shiftDayKey,
@@ -78,7 +79,7 @@ test('a category without a stored color falls back to the neutral token color', 
 
 test('the day route answers JSON and rejects an impossible date', async () => {
   const routes = fakeHost(makeRuntime(fixture.path));
-  assert.deepEqual([...routes.keys()].sort(), [PANEL_DAY_PATH, PANEL_MONTH_PATH, PANEL_WEEK_PATH, PANEL_CONFIG_PATH].sort());
+  assert.deepEqual([...routes.keys()].sort(), [PANEL_DAY_PATH, PANEL_MONTH_PATH, PANEL_WEEK_PATH, PANEL_ICON_PATH, PANEL_CONFIG_PATH].sort());
 
   const day = routes.get(PANEL_DAY_PATH);
   assert.ok(day);

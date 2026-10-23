@@ -523,7 +523,7 @@ export const PANEL_CSS = `
   flex-direction: column;
   gap: 1px;
   min-height: 18px;
-  padding: 2px 5px;
+  padding: 2px 4px;
   border: 0;
   border-left: 2.5px solid var(--dsw-alias-border-l3);
   border-radius: var(--dsw-radius-sm);
@@ -550,6 +550,7 @@ export const PANEL_CSS = `
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-width: 0;
 }
 
 .dfp-week-card-summary {
@@ -571,6 +572,56 @@ export const PANEL_CSS = `
   font-size: 10px;
   color: var(--dsw-alias-label-tertiary);
   opacity: 0.7;
+}
+
+/* ── Site badges ─────────────────────────────────────────────────────── */
+
+.dfp-badge {
+  display: inline-block;
+  flex: none;
+  object-fit: contain;
+  background: var(--dsw-alias-bg-layer-3);
+  vertical-align: -2px;
+}
+
+.dfp-badge-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dsw-alias-label-primary-foreground);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.dfp-week-card-head {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* The title is the only child allowed to shrink, so a badge never squeezes it
+ * into an ellipsis of one character. */
+.dfp-week-card-head .dfp-week-card-title {
+  flex: 1;
+  min-width: 0;
+}
+
+/* A card tall enough for two lines says more than an ellipsis does. */
+.dfp-week-card.is-tall .dfp-week-card-title {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.dfp-week-card-badge {
+  border-radius: 3px;
+}
+
+.dfp-event-badge {
+  border-radius: 4px;
 }
 
 /* ── Legend ──────────────────────────────────────────────────────────── */

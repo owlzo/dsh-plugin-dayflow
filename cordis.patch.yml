@@ -24,5 +24,7 @@
         skills: true
         # Expose the optional Web panel (header button + right-Sidebar tab).
         panel: true
+        # Fetch site favicons for the panel cards; false makes no outbound request.
+        icons: true
         # Maximum matches one dayflow_search call returns (1-200).
         searchLimit: 50

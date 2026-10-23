@@ -121,6 +121,7 @@ ln -sfn "$PWD" ~/.dsh/profiles/web/node_modules/dsh-plugin-dayflow
 - 悬停卡片显示所属日期、时间范围、时长、应用与摘要；点击进入当天详情。
   `‹`/`›` 前后翻周，**本周** 回到当前周。
 - 周头部显示本周追踪总时长，网格上方的分类图例说明每种颜色。
+- 每张卡片显示它来自的站点/应用图标；站点没有 favicon 时回退成分类色的首字母方块。
 
 ![面板中展开的一天](docs/day.zh.png)
 
@@ -128,6 +129,9 @@ ln -sfn "$PWD" ~/.dsh/profiles/web/node_modules/dsh-plugin-dayflow
 - 触屏设备没有悬停，用点击代替：点一下进入当天，返回入口就在详情头部。
 - 面板通过 harness 认证的 `/api` 通道读取 `GET /api/dayflow/month`、
   `GET /api/dayflow/week` 和 `GET /api/dayflow/day`，自己不会碰数据库。
+- 图标来自 `GET /api/dayflow/icon?domain=…`：每个域名首次使用时抓一次
+  `favicon.ico`，缓存在 `$DSH_HOME/dayflow-icons`。这是插件唯一的对外请求，
+  不发送 cookie 也不带 referrer，拒绝 loopback 与裸 IP；设 `icons: false` 可完全关闭。
 - 切换视图会保留选中的日期：在月历里点过的某天，切到周视图再切回来仍然是选中态。
 
 设置 `panel: false` 可以把按钮和标签页类型一起移除。
@@ -237,6 +241,8 @@ dsh  ──tools──▶  dsh-plugin-dayflow  ──读取──▶  chunks.sql
     agentSocket: ''    # 默认：与数据库同目录的 agent.sock
     edits: true        # 是否注册 6 个编辑工具
     skills: true       # 是否注册 4 个技能
+    panel: true        # 是否显示可选的 Web 面板与头部按钮
+    icons: true        # 面板卡片上的站点图标（插件唯一的对外请求）
     searchLimit: 50    # 单次 dayflow_search 的最大结果数（1–200）
 ```
 

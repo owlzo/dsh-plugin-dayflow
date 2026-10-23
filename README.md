@@ -141,6 +141,8 @@ card placed at its time and tinted with its category colour.
   returns to the current one.
 - The week header totals the tracked time, and the category legend above the
   grid names every colour in use.
+- Every card carries the icon of the site or app it was recorded from, and falls
+  back to a lettered tile in the category colour when a site has no favicon.
 
 ![One day open in the panel](docs/day.en.png)
 
@@ -151,6 +153,11 @@ card placed at its time and tinted with its category colour.
 - The panel reads `GET /api/dayflow/month`, `GET /api/dayflow/week`, and
   `GET /api/dayflow/day` through the harness's authenticated `/api` bridge. It
   never touches the database itself.
+- Icons come from `GET /api/dayflow/icon?domain=…`, which fetches one
+  `favicon.ico` per domain on first use and caches it under
+  `$DSH_HOME/dayflow-icons`. That is the plugin's only outbound request: it
+  sends no cookies and no referrer, refuses loopback and bare-IP names, and
+  stops entirely with `icons: false`.
 - Switching views keeps the selected day, so a day picked in the calendar stays
   marked when you move to the week and back.
 
@@ -273,6 +280,8 @@ defaults in `cordis.patch.yml`:
     agentSocket: ''    # default: agent.sock beside the database
     edits: true        # register the six editing tools
     skills: true       # register the four bundled skills
+    panel: true        # the optional Web panel and its header button
+    icons: true        # site favicons on the panel cards (its only outbound request)
     searchLimit: 50    # maximum matches per dayflow_search call (1-200)
 ```
 
