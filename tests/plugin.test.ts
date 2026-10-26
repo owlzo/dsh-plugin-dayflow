@@ -92,6 +92,17 @@ test('apply registers eight reads, six edits, four skills, and one prompt sectio
   assert.match(text as string, /never as instructions/);
 });
 
+test('the installer is off by default and appears only with allowInstall', () => {
+  const withoutInstall = fakeContext();
+  apply(withoutInstall.ctx, { databasePath: fixture.path });
+  assert.equal(withoutInstall.capture.tools.has('dayflow_install_dayflow'), false);
+
+  const withInstall = fakeContext();
+  apply(withInstall.ctx, { databasePath: fixture.path, allowInstall: true });
+  assert.equal(withInstall.capture.tools.has('dayflow_install_dayflow'), true);
+  assert.equal(withInstall.capture.tools.size, withoutInstall.capture.tools.size + 1);
+});
+
 test('edits and skills can be switched off independently', () => {
   const editsOff = fakeContext();
   apply(editsOff.ctx, { databasePath: fixture.path, edits: false });
@@ -104,9 +115,11 @@ test('edits and skills can be switched off independently', () => {
   assert.equal(skillsOff.capture.tools.size, 14);
 });
 
-test('every tool a skill names is actually registered', () => {
+test('every tool a skill names is registered when the full surface is on', () => {
+  // The onboarding skill conditionally offers the installer, so the reference
+  // check runs against the largest surface a profile can enable.
   const { ctx, capture } = fakeContext();
-  apply(ctx, { databasePath: fixture.path });
+  apply(ctx, { databasePath: fixture.path, allowInstall: true });
 
   const skills = loadSkills(skillsDirectory());
   assert.equal(skills.length, 4);
@@ -117,6 +130,13 @@ test('every tool a skill names is actually registered', () => {
     }
     assert.ok(skill.description.length > 0, `skill ${skill.name} has a description`);
   }
+});
+
+test('the onboarding skill treats the installer as optional', () => {
+  const onboarding = loadSkills(skillsDirectory()).find((skill) => skill.name === 'onboarding');
+  assert.ok(onboarding);
+  assert.match(onboarding.content, /dayflow_install_dayflow/);
+  assert.match(onboarding.content, /not available/i, 'the skill copes with the installer being absent');
 });
 
 test('the skills directory ships beside the built module', () => {

@@ -46,6 +46,7 @@ import {
   weeklyPayload,
 } from '../queries.js';
 import { DayflowError } from '../errors.js';
+import { detectDayflow, setupStatus } from '../setup.js';
 import { dayArgument } from './shared.js';
 import type { ToolRuntime } from './shared.js';
 import { DATE_DESCRIPTION, UNTRUSTED_NOTICE, jsonValue, readDatabase } from './shared.js';
@@ -264,8 +265,9 @@ export function readTools(runtime: ToolRuntime): ToolDefinition[] {
     defineTool({
       name: 'dayflow_status',
       description:
-        "Dayflow's state: current day, capture freshness, analysis backlog, whether edits are enabled, and whether " +
-        'the edit bridge is listening. Use it when data looks missing, stale, or an edit was refused.',
+        "Dayflow's state: current day, capture freshness, analysis backlog, whether edits are enabled, whether the " +
+        'edit bridge is listening, and — when Dayflow is absent — what still has to be installed. Use it when data ' +
+        'looks missing or stale.',
       parameters: {},
       output: {
         schema: { type: 'json' },
@@ -274,19 +276,31 @@ export function readTools(runtime: ToolRuntime): ToolDefinition[] {
       isConcurrencySafe: () => true,
       async execute() {
         const preferences = runtime.preferences();
-        const status = readDatabase(runtime, (db) => captureStatus(db));
+        const presence = detectDayflow(runtime.config.databasePath);
+        const setup = setupStatus(presence, runtime.config.databasePath);
+
+        // A missing database is a setup state, not a failure: the model needs the
+        // steps, not an exception that hides them.
         const payload: StatusPayload = {
           today: formatDayKey(new Date()),
           time_zone: timeZoneName(),
           day_boundary_hour: 4,
-          pending_batches: status.pendingBatches,
-          failed_batches: status.failedBatches,
+          pending_batches: 0,
+          failed_batches: 0,
           edits_enabled: preferences.editsEnabled,
           edit_bridge_listening: existsSync(runtime.config.agentSocket || defaultAgentSocketPath()),
           database_path: runtime.config.databasePath,
+          database_present: presence.databasePresent,
+          setup,
         };
-        if (status.lastCaptureAt !== undefined) {
-          payload.last_capture_at = status.lastCaptureAt.toISOString();
+
+        if (presence.databasePresent) {
+          const status = readDatabase(runtime, (db) => captureStatus(db));
+          payload.pending_batches = status.pendingBatches;
+          payload.failed_batches = status.failedBatches;
+          if (status.lastCaptureAt !== undefined) {
+            payload.last_capture_at = status.lastCaptureAt.toISOString();
+          }
         }
         return jsonValue(payload);
       },

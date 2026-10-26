@@ -26,6 +26,11 @@ export interface DayflowConfig {
   panel?: boolean;
   /** Fetch and show site favicons on the panel's activity cards. */
   icons?: boolean;
+  /**
+   * Register the tool that installs Dayflow itself. Off by default: it changes
+   * the user's machine, so it must be an explicit deployment choice.
+   */
+  allowInstall?: boolean;
   /** Maximum matches a search returns. */
   searchLimit?: number;
 }
@@ -38,6 +43,7 @@ export interface ResolvedConfig {
   readonly skills: boolean;
   readonly panel: boolean;
   readonly icons: boolean;
+  readonly allowInstall: boolean;
   readonly iconDirectory: string;
   readonly searchLimit: number;
 }
@@ -61,6 +67,12 @@ export const Config = z.object({
     .boolean()
     .default(true)
     .description('Expose the optional Web panel: a timeline button in the conversation header and a right-Sidebar tab.'),
+  allowInstall: z
+    .boolean()
+    .default(false)
+    .description(
+      'Register the Dayflow installer tool. It changes the machine, so it stays off unless the profile opts in.',
+    ),
   icons: z
     .boolean()
     .default(true)
@@ -92,6 +104,7 @@ export function resolveConfig(config: DayflowConfig = {}): ResolvedConfig {
     skills: config.skills ?? true,
     panel: config.panel ?? true,
     icons: config.icons ?? true,
+    allowInstall: config.allowInstall ?? false,
     iconDirectory: iconDirectory(dshHome()),
     searchLimit,
   };

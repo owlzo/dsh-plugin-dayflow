@@ -34,7 +34,7 @@
 | 要求 | 说明 |
 | --- | --- |
 | macOS | Dayflow 是 Mac 应用，数据在 `~/Library/Application Support/Dayflow`。 |
-| 已安装并正在记录的 [Dayflow](https://dayflow.so) | 授予屏幕录制权限，并在应用里选择 AI 提供方（本地或云端）。 |
+| 已安装并正在记录的 [Dayflow](https://dayflow.so) | 插件会检测缺失并逐步引导；开启 `allowInstall` 后，经你同意可以由 agent 执行 `brew install --cask dayflow`。 |
 | Node.js ≥ 22.5 | Node 22.5–23.3 需要 `--experimental-sqlite`；Node 24 自带。 |
 | `dsh` ≥ 0.2.0-rc.2 | 插件声明的 peer 范围是 harness 0.2 系列。 |
 | `PATH` 中有 `pnpm` | 只有 `dsh plugin add` 需要；用软链接做本地开发安装则不需要。 |
@@ -135,6 +135,18 @@ ln -sfn "$PWD" ~/.dsh/profiles/web/node_modules/dsh-plugin-dayflow
 - 切换视图会保留选中的日期：在月历里点过的某天，切到周视图再切回来仍然是选中态。
 
 设置 `panel: false` 可以把按钮和标签页类型一起移除。
+
+### 安装 Dayflow
+
+`dayflow_status` 在 Dayflow 尚未安装时也能正常返回：`setup.ready`、
+`setup.missing`、`setup.install_command`、`database_present` 说明还差什么，
+`onboarding` 技能会按顺序带用户完成这些步骤。
+
+安装需要两层同意：只有 profile 设了 `allowInstall: true`，工具
+`dayflow_install_dayflow` 才会注册；调用时还必须由用户明确同意并传
+`confirm: true`。它执行的命令固定为 `brew install --cask dayflow`（不经 shell、
+不接受任意参数），不会自动打开 App，屏幕录制授权、AI 提供方选择和最初的数据
+都留给用户完成。没有 Homebrew 时只给出下载页面，不会替用户安装 Homebrew。
 
 ## 工具
 
@@ -243,6 +255,7 @@ dsh  ──tools──▶  dsh-plugin-dayflow  ──读取──▶  chunks.sql
     skills: true       # 是否注册 4 个技能
     panel: true        # 是否显示可选的 Web 面板与头部按钮
     icons: true        # 面板卡片上的站点图标（插件唯一的对外请求）
+    allowInstall: false  # 是否注册 dayflow_install_dayflow（会改动本机）
     searchLimit: 50    # 单次 dayflow_search 的最大结果数（1–200）
 ```
 

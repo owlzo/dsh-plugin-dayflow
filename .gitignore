@@ -4,3 +4,8 @@ lib/
 *.tsbuildinfo
 .DS_Store
 *.log
+
+# Experiment and demo artifacts, never part of the plugin
+out/
+scripts/demo/
+docs/demo.*.gif

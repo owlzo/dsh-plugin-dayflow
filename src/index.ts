@@ -21,6 +21,7 @@ import { registerPrompt } from './prompt.js';
 import { registerSkills } from './skills.js';
 import type { ToolRuntime } from './tools/shared.js';
 import { readTools } from './tools/read.js';
+import { setupTools } from './tools/setup.js';
 import { writeTools } from './tools/write.js';
 
 /** Cordis plugin name, used in loader diagnostics and log lines. */
@@ -60,6 +61,10 @@ export function apply(ctx: Context, config: DayflowConfig = {}): void {
   for (const tool of readTools(runtime)) ctx.tools.register(tool);
   if (resolved.edits) {
     for (const tool of writeTools(runtime)) ctx.tools.register(tool);
+  }
+  if (resolved.allowInstall) {
+    // Off by default: installing changes the machine.
+    for (const tool of setupTools(runtime)) ctx.tools.register(tool);
   }
   if (resolved.skills) {
     registerSkills(ctx, skillsDirectory());

@@ -47,6 +47,7 @@ export function makeRuntime(
     skills: true,
     panel: true,
     icons: false,
+    allowInstall: false,
     iconDirectory: join(tmpdir(), 'dsh-dayflow-icons-test'),
     searchLimit: 50,
     ...configOverrides,

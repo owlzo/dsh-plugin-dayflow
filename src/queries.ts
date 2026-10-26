@@ -10,6 +10,8 @@
 
 import type { DatabaseSync } from 'node:sqlite';
 
+import type { SetupStatus } from './setup.js';
+
 import type { DayWindow } from './day.js';
 import { epochSeconds, formatIso, timeZoneName } from './day.js';
 import { queryRows } from './db.js';
@@ -105,6 +107,10 @@ export interface StatusPayload {
   /** Whether Dayflow's edit bridge is listening; writes need it. */
   edit_bridge_listening: boolean;
   database_path: string;
+  /** Whether the database exists; when false the counters above are zeros. */
+  database_present: boolean;
+  /** What still has to happen before the plugin can read a timeline. */
+  setup?: SetupStatus;
 }
 
 /** The subset of `timeline_cards.metadata` these reads understand. */

@@ -4,6 +4,28 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-10-26
+
+### Added
+
+- Setup detection: `dayflow_status` now answers on a machine where Dayflow is
+  not installed, returning `setup.ready`, an ordered `setup.missing` list
+  (install → open → screen recording → provider → first recording),
+  `setup.install_command`, `setup.download_url`, `homebrew_installed`, and
+  `database_present`. A missing database is a setup state, not a tool failure.
+- `dayflow_install_dayflow`, registered only with `allowInstall: true`,
+  installs Dayflow through `brew install --cask dayflow` after an explicit
+  `confirm: true`. It runs one fixed command without a shell, never opens the
+  app, and reports the Homebrew output tail on failure.
+- The `onboarding` skill now walks the user through those steps and treats the
+  installer as optional, so a profile without `allowInstall` gets the command or
+  the download page instead.
+
+### Changed
+
+- `dayflow_status` gained `database_present`; the capture counters read zero when
+  there is nothing to read instead of failing the call.
+
 ## [0.4.0] - 2026-10-23
 
 ### Added
@@ -145,6 +167,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   panel payload and routes, panel formatting, and the built client bundle's
   registration contract (67 tests).
 
+[0.5.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.5.0
 [0.4.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.4.0
 [0.3.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.1
 [0.3.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.0

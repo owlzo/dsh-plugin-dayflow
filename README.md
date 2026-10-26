@@ -38,7 +38,7 @@ through Dayflow's own permission switch and write socket.
 | Requirement | Notes |
 | --- | --- |
 | macOS | Dayflow is a Mac app; its data lives in `~/Library/Application Support/Dayflow`. |
-| [Dayflow](https://dayflow.so) installed and recording | Grant screen-recording permission and pick an AI provider (local or cloud) in the app. |
+| [Dayflow](https://dayflow.so) installed and recording | The plugin detects a missing install and walks you through it; with `allowInstall`, the agent can run `brew install --cask dayflow` for you after you agree. |
 | Node.js ≥ 22.5 | Node 22.5–23.3 need `--experimental-sqlite`; Node 24 has it built in. |
 | `dsh` ≥ 0.2.0-rc.2 | The plugin peers on the 0.2 line of the harness. |
 | `pnpm` on `PATH` | Only for `dsh plugin add`; a linked development install does not need it. |
@@ -163,6 +163,21 @@ card placed at its time and tinted with its category colour.
 
 Set `panel: false` to remove both the header button and the tab type.
 
+### Setting Dayflow up
+
+`dayflow_status` works even before Dayflow exists: `setup.ready`,
+`setup.missing`, `setup.install_command`, and `database_present` describe what is
+left to do, and the `onboarding` skill walks the user through those steps in
+order.
+
+Installing is opt-in twice over. The tool `dayflow_install_dayflow` only exists
+when the profile sets `allowInstall: true`, and it still requires an explicit
+`confirm: true` from a call the user agreed to. It runs exactly
+`brew install --cask dayflow` (no shell, no free-form arguments), never opens the
+app, and leaves screen recording, the provider choice, and the first recordings
+to the user. Without Homebrew it returns the download page instead of installing
+Homebrew.
+
 ## Tools
 
 Every tool returns structured JSON and renders the same data as compact text.
@@ -282,6 +297,7 @@ defaults in `cordis.patch.yml`:
     skills: true       # register the four bundled skills
     panel: true        # the optional Web panel and its header button
     icons: true        # site favicons on the panel cards (its only outbound request)
+    allowInstall: false  # register dayflow_install_dayflow (it changes this Mac)
     searchLimit: 50    # maximum matches per dayflow_search call (1-200)
 ```
 

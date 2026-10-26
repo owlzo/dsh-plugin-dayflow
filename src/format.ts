@@ -166,6 +166,22 @@ export function renderSearch(payload: SearchPayload): string {
  */
 export function renderStatus(payload: StatusPayload, now: Date = new Date()): string {
   const lines: string[] = [];
+
+  // A machine without Dayflow gets the setup path first; the counters below
+  // would all read zero and say nothing useful.
+  if (payload.setup !== undefined && !payload.setup.ready) {
+    lines.push('Dayflow · not set up on this Mac yet');
+    for (const step of payload.setup.missing) {
+      lines.push(`- ${step.title}: ${step.detail}`);
+    }
+    lines.push(
+      payload.setup.homebrew_installed
+        ? `Install: ${payload.setup.install_command}`
+        : `Download: ${payload.setup.download_url}`,
+    );
+    return lines.join('\n');
+  }
+
   if (payload.last_capture_at === undefined) {
     lines.push('Dayflow · no captures recorded yet');
   } else {
