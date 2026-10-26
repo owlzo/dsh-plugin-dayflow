@@ -4,6 +4,18 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-10-26
+
+### Fixed
+
+- `dayflow_status` read the host's real install state, so its tests depended on
+  whether the runner had Dayflow: CI (no app, no Homebrew) rendered the setup
+  path and failed an assertion written for a recording machine. The probe is now
+  injected through the tool runtime, the tests describe the machine they need,
+  and a new case covers the uninstalled path.
+- Experiment and demo artifacts (`out/`, `scripts/demo/`, demo GIFs) are ignored,
+  so a release commit cannot sweep hundreds of megabytes into the repository.
+
 ## [0.5.0] - 2026-10-26
 
 ### Added
@@ -167,6 +179,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   panel payload and routes, panel formatting, and the built client bundle's
   registration contract (67 tests).
 
+[0.5.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.5.1
 [0.5.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.5.0
 [0.4.0]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.4.0
 [0.3.1]: https://github.com/tailong-wu/dsh-plugin-dayflow/releases/tag/v0.3.1

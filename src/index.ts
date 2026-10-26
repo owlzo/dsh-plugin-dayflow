@@ -18,6 +18,7 @@ import type { DayflowConfig } from './config.js';
 import { readPreferences } from './categories.js';
 import { registerPanelRoutes } from './panel.js';
 import { registerPrompt } from './prompt.js';
+import { detectDayflow } from './setup.js';
 import { registerSkills } from './skills.js';
 import type { ToolRuntime } from './tools/shared.js';
 import { readTools } from './tools/read.js';
@@ -56,7 +57,11 @@ export function skillsDirectory(): string {
  */
 export function apply(ctx: Context, config: DayflowConfig = {}): void {
   const resolved = resolveConfig(config);
-  const runtime: ToolRuntime = { config: resolved, preferences: () => readPreferences() };
+  const runtime: ToolRuntime = {
+    config: resolved,
+    preferences: () => readPreferences(),
+    presence: () => detectDayflow(resolved.databasePath),
+  };
 
   for (const tool of readTools(runtime)) ctx.tools.register(tool);
   if (resolved.edits) {

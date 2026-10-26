@@ -13,12 +13,18 @@ import { resolveDayWindow } from '../day.js';
 import { DayflowError } from '../errors.js';
 
 import type { DayflowPreferences } from '../categories.js';
+import type { DayflowPresence } from '../setup.js';
 
 /** Everything a tool needs from the plugin instance. */
 export interface ToolRuntime {
   readonly config: ResolvedConfig;
   /** Reads the app's preferences; injectable so tests need no macOS defaults. */
   readonly preferences: () => DayflowPreferences;
+  /**
+   * Probes this Mac for Dayflow. Injectable so a test can describe a machine
+   * with or without the app instead of inheriting the runner's state.
+   */
+  readonly presence: () => DayflowPresence;
 }
 
 /**

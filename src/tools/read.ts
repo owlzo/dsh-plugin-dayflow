@@ -46,7 +46,7 @@ import {
   weeklyPayload,
 } from '../queries.js';
 import { DayflowError } from '../errors.js';
-import { detectDayflow, setupStatus } from '../setup.js';
+import { setupStatus } from '../setup.js';
 import { dayArgument } from './shared.js';
 import type { ToolRuntime } from './shared.js';
 import { DATE_DESCRIPTION, UNTRUSTED_NOTICE, jsonValue, readDatabase } from './shared.js';
@@ -276,7 +276,7 @@ export function readTools(runtime: ToolRuntime): ToolDefinition[] {
       isConcurrencySafe: () => true,
       async execute() {
         const preferences = runtime.preferences();
-        const presence = detectDayflow(runtime.config.databasePath);
+        const presence = runtime.presence();
         const setup = setupStatus(presence, runtime.config.databasePath);
 
         // A missing database is a setup state, not a failure: the model needs the

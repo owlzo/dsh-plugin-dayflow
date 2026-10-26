@@ -152,6 +152,31 @@ test('dayflow_status reports freshness, backlog, and capability flags', async ()
   assert.match(text, /Edits: disabled/);
 });
 
+test('dayflow_status guides setup on a machine without Dayflow', async () => {
+  const uninstalled = makeRuntime('/nonexistent/dayflow/chunks.sqlite', {
+    presence: {
+      appInstalled: false,
+      running: false,
+      cliInstalled: false,
+      homebrewInstalled: true,
+      caskInstalled: false,
+      databasePresent: false,
+    },
+  });
+  const uninstalledTools = toolMap(readTools(uninstalled));
+  const { value, text } = await runAndRender(uninstalledTools, 'dayflow_status');
+  const payload = value as StatusPayload;
+
+  assert.equal(payload.database_present, false);
+  assert.equal(payload.setup?.ready, false);
+  assert.deepEqual(
+    payload.setup?.missing.map((step) => step.id),
+    ['install-app', 'record'],
+  );
+  assert.match(text, /not set up/);
+  assert.match(text, /brew install --cask dayflow/);
+});
+
 test('a missing database is reported as no_data', async () => {
   const emptyRuntime = makeRuntime('/nonexistent/dayflow/chunks.sqlite');
   const emptyTools = toolMap(readTools(emptyRuntime));

@@ -12,6 +12,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import type { ResolvedConfig } from '../src/config.js';
+import type { DayflowPresence } from '../src/setup.js';
 import type { ToolRuntime } from '../src/tools/shared.js';
 
 /** The slice of a tool definition these tests drive directly. */
@@ -37,9 +38,13 @@ export function executionContext(): ToolRunContext {
  */
 export function makeRuntime(
   databasePath: string,
-  overrides: Partial<ResolvedConfig> & { categories?: readonly DayflowCategory[]; editsEnabled?: boolean } = {},
+  overrides: Partial<ResolvedConfig> & {
+    categories?: readonly DayflowCategory[];
+    editsEnabled?: boolean;
+    presence?: DayflowPresence;
+  } = {},
 ): ToolRuntime {
-  const { categories = DEFAULT_CATEGORIES, editsEnabled = false, ...configOverrides } = overrides;
+  const { categories = DEFAULT_CATEGORIES, editsEnabled = false, presence, ...configOverrides } = overrides;
   const config: ResolvedConfig = {
     databasePath,
     agentSocket: '',
@@ -52,7 +57,21 @@ export function makeRuntime(
     searchLimit: 50,
     ...configOverrides,
   };
-  return { config, preferences: () => ({ categories, editsEnabled }) };
+  return {
+    config,
+    preferences: () => ({ categories, editsEnabled }),
+    // A fixture database exists, so the default probe describes a ready Mac;
+    // tests that need an uninstalled machine pass their own presence.
+    presence: () =>
+      presence ?? {
+        appInstalled: true,
+        running: true,
+        cliInstalled: true,
+        homebrewInstalled: true,
+        caskInstalled: true,
+        databasePresent: true,
+      },
+  };
 }
 
 /**
