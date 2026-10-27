@@ -1,6 +1,6 @@
 ---
 name: weekly-review
-description: Review a week of the user's time from Dayflow where it went, how it compares, and what stands out. Use for weekly reviews, retros, and "how did my week go".
+description: Review a week of the user's on-screen time from Dayflow: how it split across categories, how it compares with the week before, and what stands out. Use for weekly reviews, retros, and "how did my week go".
 ---
 
 # Weekly review from Dayflow
@@ -20,5 +20,10 @@ Then write a short review:
 - One or two observations worth acting on, such as a day lost to context
   switching or a project that got less time than the user seems to want.
 
-Stay with what the data shows. Do not score the week or moralize about
-distraction time; report it plainly and let the user decide what it means.
+Stay with what the data shows. It covers time at this Mac, not time in the
+world: a week with little tracked time can be a week of meetings, travel, or
+leave, and the timeline cannot tell which. Say that plainly rather than reading
+an absence as idleness.
+
+Do not score the week or moralize about distraction time; report it plainly and
+let the user decide what it means.

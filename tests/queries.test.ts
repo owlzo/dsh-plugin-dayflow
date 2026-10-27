@@ -40,7 +40,7 @@ test('a day returns the cards starting inside its 4 AM window', () => {
   assert.equal(activities.length, 7, 'six daytime cards plus the 3:30 AM card');
   assert.deepEqual(
     activities.map((activity) => activity.title),
-    ['Writing the DSH plugin', 'Team standup', 'Grocery run', 'YouTube break', 'Away from keyboard', 'System update', 'Late night fix'],
+    ['Writing the DSH plugin', 'Team standup', 'Ordering groceries', 'YouTube break', 'No screen activity', 'System update', 'Late night fix'],
   );
 });
 

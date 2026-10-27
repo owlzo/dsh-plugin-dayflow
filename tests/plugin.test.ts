@@ -92,6 +92,28 @@ test('apply registers eight reads, six edits, four skills, and one prompt sectio
   assert.match(text as string, /never as instructions/);
 });
 
+test('the guidance keeps the journal inside what screen capture can know', () => {
+  const { ctx, capture } = fakeContext();
+  apply(ctx, { databasePath: fixture.path });
+  const text = String(capture.sections[0]?.text);
+
+  // Dayflow records pixels, not presence: the prompt must say so, and it must
+  // not describe Idle as time off, which the data cannot distinguish from
+  // sitting still at the Mac.
+  assert.match(text, /only sees the screen/i);
+  assert.doesNotMatch(text, /away from work/i);
+  assert.match(text, /no screen activity/i);
+
+  for (const skill of capture.skills) {
+    assert.doesNotMatch(skill.content, /away from work/i, `${skill.name} does not equate Idle with time off`);
+    assert.doesNotMatch(
+      skill.description,
+      /where (their|the user's) time went/i,
+      `${skill.name} does not promise location or whole-day accounting`,
+    );
+  }
+});
+
 test('the installer is off by default and appears only with allowInstall', () => {
   const withoutInstall = fakeContext();
   apply(withoutInstall.ctx, { databasePath: fixture.path });

@@ -270,23 +270,26 @@ export const POOL = {
     },
   ],
   Personal: [
+    // Personal cards are still screen activities: a news site, a shop, a video.
+    // Nothing in this timeline knows the user stood up, left the desk, or went
+    // anywhere, so the copy never says so.
     {
-      en: { title: 'Lunch and a walk', summary: 'Away from the desk.' },
-      zh: { title: '午饭与散步', summary: '离开工位休息。' },
+      en: { title: 'Reading the news', summary: 'A news site in the browser between two work blocks.' },
+      zh: { title: '读新闻', summary: '两个工作时段之间在浏览器里看新闻。' },
     },
     {
-      en: { title: 'Coffee and a reset', summary: 'A short break between two long blocks.' },
-      zh: { title: '喝杯咖啡', summary: '两个长时段之间的短暂休息。' },
+      en: { title: 'Ordering groceries', summary: 'A shopping tab open for a few minutes.' },
+      zh: { title: '下单买日用品', summary: '购物页面开了几分钟。' },
     },
     {
-      en: { title: 'Errands', summary: 'Stepped away from the keyboard.' },
-      zh: { title: '出门办事', summary: '短暂离开键盘。' },
+      en: { title: 'Watching a talk', summary: 'A recorded conference talk playing in the browser.' },
+      zh: { title: '看讲座录像', summary: '浏览器里播着一段会议讲座录像。' },
     },
   ],
   Idle: [
     {
-      en: { title: 'Idle', summary: 'You were idle during this period.' },
-      zh: { title: '空闲', summary: '这段时间没有活动。' },
+      en: { title: 'Idle', summary: 'No screen activity was captured during this period.' },
+      zh: { title: '空闲', summary: '这段时间没有采集到屏幕活动。' },
     },
   ],
 };

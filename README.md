@@ -9,15 +9,28 @@ English | [中文](README.zh.md)
 Ask your own work journal. This plugin gives [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
 (`dsh`) native tools and skills over [Dayflow](https://github.com/JerryZLiu/Dayflow),
 the open-source Mac app that turns screen activity into a private timeline of
-what you actually worked on.
+what was on your screen and for how long.
 
-> "What did I work on today?" · "Where did the week go?" · "Write my standup."
+> "What did I work on today?" · "Where did my screen time go this week?" · "Write my standup."
 
 ![The Dayflow panel in the dsh Web GUI: a month calendar of segmented rings, the week's swim lanes with a hover card, and one day in full](docs/demo.en.gif)
 
 The plugin reads Dayflow's local SQLite database directly, so it works while
 the Dayflow app is closed and nothing leaves the Mac. Edits are optional and go
 through Dayflow's own permission switch and write socket.
+
+### What the journal can and cannot tell you
+
+Dayflow watches the screen: the app or site in front, what was on it, and how
+long it stayed. That is the whole dataset.
+
+It does not know where you were, whether you were at the desk, who you were
+with, or what happened while the Mac was idle or closed. There is no location,
+calendar, or presence data here, and the agent is told to say so rather than
+guess. A quiet stretch is recorded as `Idle`, which means *no screen activity
+was captured* — not necessarily a break, a meeting, or time off. A day with no
+cards can equally be a day of meetings, a day away, or a day whose recordings
+are still being analyzed.
 
 > **Status:** early (`0.1.0`). The tools, skills, and panel work on macOS with
 > Dayflow installed; expect the surface to keep moving.
@@ -58,7 +71,7 @@ tools appear in the next session. Then ask:
 
 ```text
 What did I get done today?
-Where did my time go this week?
+Where did my screen time go this week?
 Turn yesterday into a standup.
 ```
 
@@ -283,7 +296,8 @@ dsh  ──tools──▶  dsh-plugin-dayflow  ──read──▶  chunks.sqlit
   week is Monday 4 AM to Monday 4 AM, so late-night work lands on the day it
   belongs to.
 - **Totals** leave out the `System` category; `focus_minutes` additionally
-  leaves out `Idle`.
+  leaves out `Idle`. Every total is a total of recorded screen time, not of the
+  user's day.
 
 ### Differences from Dayflow's own CLI and MCP server
 

@@ -2679,11 +2679,11 @@
   "26": {
    "en": {
     "title": "Idle",
-    "summary": "You were idle during this period."
+    "summary": "No screen activity was captured during this period."
    },
    "zh": {
     "title": "空闲",
-    "summary": "这段时间没有活动。"
+    "summary": "这段时间没有采集到屏幕活动。"
    }
   },
   "27": {
@@ -2829,11 +2829,11 @@
   "78": {
    "en": {
     "title": "Idle",
-    "summary": "You were idle during this period."
+    "summary": "No screen activity was captured during this period."
    },
    "zh": {
     "title": "空闲",
-    "summary": "这段时间没有活动。"
+    "summary": "这段时间没有采集到屏幕活动。"
    }
   },
   "82": {

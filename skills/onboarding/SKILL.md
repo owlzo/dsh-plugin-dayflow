@@ -40,7 +40,9 @@ Stop after the failed or pending step. Do not summarise a day that has no data.
 
 Then call `dayflow_timeline` with no date and give the user a three or four line
 summary of their day so far, so they see it working. Tell them what they can ask
-for next: where their time went, a standup, or a weekly review.
+for next: how their on-screen time split up, a standup, or a weekly review. Mention
+once that the timeline only covers screen activity, so time away from the Mac
+does not appear in it.
 
 If `edits_enabled` is false, mention once that this plugin can only read the
 timeline until they turn on edits in Dayflow under Settings, AI Tools. If they

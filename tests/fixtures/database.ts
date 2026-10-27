@@ -122,9 +122,11 @@ const CARDS: readonly CardSeed[] = [
     },
   },
   { start: [2026, 10, 19, 10, 0], end: [2026, 10, 19, 10, 30], title: 'Team standup', summary: 'Daily sync', category: 'Work' },
-  { start: [2026, 10, 19, 11, 0], end: [2026, 10, 19, 11, 30], title: 'Grocery run', summary: 'Bought lunch', category: 'Personal' },
+  // Personal time is still a screen activity: the fixture never claims the user
+  // went anywhere, because nothing in this data could support that.
+  { start: [2026, 10, 19, 11, 0], end: [2026, 10, 19, 11, 30], title: 'Ordering groceries', summary: 'A shopping tab', category: 'Personal' },
   { start: [2026, 10, 19, 12, 0], end: [2026, 10, 19, 12, 15], title: 'YouTube break', summary: 'Watched a video', category: 'Distraction' },
-  { start: [2026, 10, 19, 13, 0], end: [2026, 10, 19, 13, 20], title: 'Away from keyboard', summary: 'No activity', category: 'Idle' },
+  { start: [2026, 10, 19, 13, 0], end: [2026, 10, 19, 13, 20], title: 'No screen activity', summary: 'Nothing was captured', category: 'Idle' },
   { start: [2026, 10, 19, 14, 0], end: [2026, 10, 19, 14, 5], title: 'System update', summary: 'Background work', category: 'System' },
   {
     start: [2026, 10, 19, 15, 0],

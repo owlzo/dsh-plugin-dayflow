@@ -27,6 +27,35 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   from the same fixture, so the README's stills and its GIF show one consistent
   week instead of three unrelated ones.
 
+### Fixed
+
+- The plugin no longer implies the journal knows about the world off-screen.
+  Dayflow records screen activity, so it cannot say where the user was, whether
+  they were at the desk, who they were with, or what happened while the Mac was
+  idle or closed. Several places read as if it could:
+  - the system-prompt section said to "treat Idle as time away from work", which
+    turns a stretch of no captured pixels into a claim about what the user did;
+    it now defines Idle as no screen activity and forbids naming an activity for
+    it, and states up front that the timeline covers the screen only
+  - the `dayflow` skill promised answers about "where their time went" and now
+    says what to do when a question is about the physical world: say the
+    timeline cannot answer it and offer what was on screen
+  - the `weekly-review` skill now warns that a week of low tracked time can be a
+    week of meetings, travel, or leave
+  - the READMEs claimed a timeline of "what you actually worked on" and asked
+    "where did the week go"; both now say screen time, with a section on what the
+    journal can and cannot tell you
+  - the panel's "No data" and "Recorded, no activity" states now say what they
+    actually mean (no capture, or captured with nothing to show) instead of
+    reading as "nothing happened"
+- The test fixture and the demo copy pool no longer contain cards that only a
+  location sensor could produce ("Grocery run", "Away from the keyboard",
+  "Lunch and a walk"); personal time is represented as what it is, screen
+  activity such as a shopping tab or a news site.
+- The `dayflow_timeline`, `dayflow_activity`, and `dayflow_breakdown`
+  descriptions state that they return recorded screen time rather than the
+  user's whole day.
+
 ## [0.5.1] - 2026-10-26
 
 ### Fixed

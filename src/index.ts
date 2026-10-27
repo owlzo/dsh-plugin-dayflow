@@ -5,6 +5,10 @@
  * activities. This plugin exposes that timeline natively: eight read tools,
  * six gated editing tools, and Dayflow's four skills, all backed by the app's
  * own local SQLite database and write socket.
+ *
+ * The timeline covers screen activity only. It has no location, calendar, or
+ * presence data, so a quiet stretch means nothing was captured rather than
+ * nothing happened; the prompt and the skills tell the model to say so.
  * @module dsh-plugin-dayflow
  */
 

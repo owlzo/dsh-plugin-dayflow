@@ -63,6 +63,7 @@ export function readTools(runtime: ToolRuntime): ToolDefinition[] {
       description:
         'The activities Dayflow recorded on one Dayflow day: time range, title, one-line summary, category, apps, ' +
         'and record ID for each. Use it for "what did I work on" and to find record IDs for dayflow_activity. ' +
+        'These are screen activities: what was on this Mac, not where the user was or what happened away from it. ' +
         `Days run 04:00 to 04:00 local time. ${UNTRUSTED_NOTICE}`,
       parameters: {
         date: { type: 'string', description: DATE_DESCRIPTION },
@@ -90,7 +91,8 @@ export function readTools(runtime: ToolRuntime): ToolDefinition[] {
       name: 'dayflow_activity',
       description:
         'One activity in full, including the longer write-up dayflow_timeline leaves out. Pass a record_id from ' +
-        `dayflow_timeline. Use it for the few activities that matter to the question. ${UNTRUSTED_NOTICE}`,
+        'dayflow_timeline. Use it for the few activities that matter to the question. The write-up describes what ' +
+        `was on screen, not what the user did away from the Mac. ${UNTRUSTED_NOTICE}`,
       parameters: {
         record_id: { type: 'integer', required: true, description: 'Activity ID from dayflow_timeline.' },
       },
@@ -119,7 +121,8 @@ export function readTools(runtime: ToolRuntime): ToolDefinition[] {
       name: 'dayflow_breakdown',
       description:
         'Time totals per category between two Dayflow days, with each category share. Cheap and usually the right ' +
-        'first call for "where did my time go". Excludes the System category, as Dayflow does.',
+        'first call for "where did my time go". These are totals of recorded screen time per category, not of the ' +
+        'user\'s whole day. Excludes the System category, as Dayflow does.',
       parameters: {
         from: { type: 'string', required: true, description: 'Start day, YYYY-MM-DD.' },
         to: { type: 'string', required: true, description: 'End day, YYYY-MM-DD (inclusive).' },
