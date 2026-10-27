@@ -1,0 +1,3400 @@
+{
+ "note": "Timings, durations, categories, and capture times are real; every title and summary is fictional (see fixture-text.mjs), and project-specific sites are mapped to neutral hosts (NEUTRAL_HOSTS in capture.mjs).",
+ "week_start": "2026-10-19",
+ "week_end": "2026-10-25",
+ "month": {
+  "month": "2026-10",
+  "today": "2026-10-25",
+  "time_zone": "Asia/Shanghai",
+  "day_boundary_hour": 4,
+  "days": [
+   {
+    "date": "2026-10-01",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-02",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-03",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-04",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-05",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-06",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-07",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-08",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-09",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-10",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-11",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-12",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-13",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-14",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-15",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-16",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-17",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-18",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-19",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 3,
+      "start": "2026-10-19T11:52:00+08:00",
+      "end": "2026-10-19T12:15:00+08:00",
+      "duration_minutes": 23,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "subcategory": "Setup",
+      "apps": [
+       "dayflow.so"
+      ]
+     },
+     {
+      "record_id": 8,
+      "start": "2026-10-19T12:40:00+08:00",
+      "end": "2026-10-19T13:10:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "notes.example.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 15,
+      "start": "2026-10-19T13:10:00+08:00",
+      "end": "2026-10-19T13:56:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "notes.example.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 19,
+      "start": "2026-10-19T13:56:00+08:00",
+      "end": "2026-10-19T14:37:00+08:00",
+      "duration_minutes": 41,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 21,
+      "start": "2026-10-19T14:38:00+08:00",
+      "end": "2026-10-19T15:08:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 22,
+      "start": "2026-10-19T15:08:00+08:00",
+      "end": "2026-10-19T15:23:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 26,
+      "start": "2026-10-19T16:46:00+08:00",
+      "end": "2026-10-19T17:01:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Idle"
+     },
+     {
+      "record_id": 27,
+      "start": "2026-10-19T17:01:00+08:00",
+      "end": "2026-10-19T17:16:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 28,
+      "start": "2026-10-19T17:16:00+08:00",
+      "end": "2026-10-19T17:31:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 33,
+      "start": "2026-10-19T19:39:00+08:00",
+      "end": "2026-10-19T20:09:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "shell.example.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 36,
+      "start": "2026-10-19T20:10:00+08:00",
+      "end": "2026-10-19T20:55:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 37,
+      "start": "2026-10-19T20:55:00+08:00",
+      "end": "2026-10-19T21:10:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "github.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 320,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 305,
+      "share": 0.953125,
+      "color_hex": "#6A7EFF"
+     },
+     {
+      "name": "Idle",
+      "minutes": 15,
+      "share": 0.046875,
+      "color_hex": "#A0AEC0"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-19T13:11:46.000Z"
+   },
+   {
+    "date": "2026-10-20",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 40,
+      "start": "2026-10-20T10:27:00+08:00",
+      "end": "2026-10-20T11:09:00+08:00",
+      "duration_minutes": 42,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 44,
+      "start": "2026-10-20T12:36:00+08:00",
+      "end": "2026-10-20T12:46:00+08:00",
+      "duration_minutes": 10,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "127.0.0.1",
+       "doubao.com"
+      ]
+     },
+     {
+      "record_id": 51,
+      "start": "2026-10-20T12:59:00+08:00",
+      "end": "2026-10-20T13:44:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 55,
+      "start": "2026-10-20T13:44:00+08:00",
+      "end": "2026-10-20T14:24:00+08:00",
+      "duration_minutes": 40,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "papers.example.org",
+       "docs.example.com"
+      ]
+     },
+     {
+      "record_id": 60,
+      "start": "2026-10-20T14:28:00+08:00",
+      "end": "2026-10-20T15:13:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 61,
+      "start": "2026-10-20T15:13:00+08:00",
+      "end": "2026-10-20T15:36:00+08:00",
+      "duration_minutes": 23,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "chatgpt.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 205,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 205,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-20T07:36:08.000Z"
+   },
+   {
+    "date": "2026-10-21",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 67,
+      "start": "2026-10-21T10:31:00+08:00",
+      "end": "2026-10-21T11:16:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 69,
+      "start": "2026-10-21T11:16:00+08:00",
+      "end": "2026-10-21T11:46:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 70,
+      "start": "2026-10-21T11:47:00+08:00",
+      "end": "2026-10-21T12:02:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "papers.example.org",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 78,
+      "start": "2026-10-21T12:02:00+08:00",
+      "end": "2026-10-21T13:17:00+08:00",
+      "duration_minutes": 75,
+      "title": "",
+      "summary": "",
+      "category": "Idle"
+     },
+     {
+      "record_id": 82,
+      "start": "2026-10-21T13:18:00+08:00",
+      "end": "2026-10-21T13:48:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.io",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 85,
+      "start": "2026-10-21T13:48:00+08:00",
+      "end": "2026-10-21T14:03:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 88,
+      "start": "2026-10-21T14:03:00+08:00",
+      "end": "2026-10-21T14:18:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 91,
+      "start": "2026-10-21T14:18:00+08:00",
+      "end": "2026-10-21T14:33:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "aliyun.com"
+      ]
+     },
+     {
+      "record_id": 95,
+      "start": "2026-10-21T14:33:00+08:00",
+      "end": "2026-10-21T15:03:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "build.example.com"
+      ]
+     },
+     {
+      "record_id": 99,
+      "start": "2026-10-21T15:04:00+08:00",
+      "end": "2026-10-21T15:34:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "overleaf.com"
+      ]
+     },
+     {
+      "record_id": 101,
+      "start": "2026-10-21T15:34:00+08:00",
+      "end": "2026-10-21T16:04:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 102,
+      "start": "2026-10-21T16:04:00+08:00",
+      "end": "2026-10-21T16:19:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 104,
+      "start": "2026-10-21T17:13:00+08:00",
+      "end": "2026-10-21T17:28:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "mail.example.com",
+       "blog.example.com"
+      ]
+     },
+     {
+      "record_id": 107,
+      "start": "2026-10-21T17:43:00+08:00",
+      "end": "2026-10-21T18:28:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 110,
+      "start": "2026-10-21T19:49:00+08:00",
+      "end": "2026-10-21T20:33:00+08:00",
+      "duration_minutes": 44,
+      "title": "",
+      "summary": "",
+      "category": "Communication",
+      "apps": [
+       "meeting.tencent.com",
+       "chat.example.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 449,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 330,
+      "share": 0.734966592427617,
+      "color_hex": "#6A7EFF"
+     },
+     {
+      "name": "Idle",
+      "minutes": 75,
+      "share": 0.16703786191536749,
+      "color_hex": "#A0AEC0"
+     },
+     {
+      "name": "Communication",
+      "minutes": 44,
+      "share": 0.09799554565701558,
+      "color_hex": "#FFAE8C"
+     }
+    ],
+    "pending_batches": 1,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-21T12:33:41.000Z"
+   },
+   {
+    "date": "2026-10-22",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 112,
+      "start": "2026-10-22T10:40:00+08:00",
+      "end": "2026-10-22T10:55:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feed.example.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 119,
+      "start": "2026-10-22T11:11:00+08:00",
+      "end": "2026-10-22T11:41:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "codesandbox.io",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 120,
+      "start": "2026-10-22T11:41:00+08:00",
+      "end": "2026-10-22T12:18:00+08:00",
+      "duration_minutes": 37,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "news.example.com",
+       "chat.deepseek.com"
+      ]
+     },
+     {
+      "record_id": 127,
+      "start": "2026-10-22T13:39:00+08:00",
+      "end": "2026-10-22T13:54:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 128,
+      "start": "2026-10-22T13:54:00+08:00",
+      "end": "2026-10-22T14:09:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 131,
+      "start": "2026-10-22T14:09:00+08:00",
+      "end": "2026-10-22T14:24:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 134,
+      "start": "2026-10-22T14:24:00+08:00",
+      "end": "2026-10-22T14:36:00+08:00",
+      "duration_minutes": 12,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 139,
+      "start": "2026-10-22T14:43:00+08:00",
+      "end": "2026-10-22T15:29:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 144,
+      "start": "2026-10-22T15:29:00+08:00",
+      "end": "2026-10-22T16:14:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 147,
+      "start": "2026-10-22T16:14:00+08:00",
+      "end": "2026-10-22T16:21:00+08:00",
+      "duration_minutes": 7,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 152,
+      "start": "2026-10-22T16:34:00+08:00",
+      "end": "2026-10-22T17:17:00+08:00",
+      "duration_minutes": 43,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 156,
+      "start": "2026-10-22T17:22:00+08:00",
+      "end": "2026-10-22T17:52:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 157,
+      "start": "2026-10-22T17:52:00+08:00",
+      "end": "2026-10-22T18:07:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "design.example.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 158,
+      "start": "2026-10-22T18:07:00+08:00",
+      "end": "2026-10-22T18:22:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 164,
+      "start": "2026-10-22T19:49:00+08:00",
+      "end": "2026-10-22T20:35:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 167,
+      "start": "2026-10-22T20:35:00+08:00",
+      "end": "2026-10-22T21:20:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 168,
+      "start": "2026-10-22T21:20:00+08:00",
+      "end": "2026-10-22T21:35:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "huggingface.co",
+       "chat.example.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 446,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 446,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 1,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-22T13:36:16.000Z"
+   },
+   {
+    "date": "2026-10-23",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 174,
+      "start": "2026-10-23T09:54:00+08:00",
+      "end": "2026-10-23T10:33:00+08:00",
+      "duration_minutes": 39,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "127.0.0.1"
+      ]
+     },
+     {
+      "record_id": 177,
+      "start": "2026-10-23T10:40:00+08:00",
+      "end": "2026-10-23T10:55:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "labs.example.com",
+       "build.example.com"
+      ]
+     },
+     {
+      "record_id": 180,
+      "start": "2026-10-23T10:55:00+08:00",
+      "end": "2026-10-23T11:40:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "build.example.com"
+      ]
+     },
+     {
+      "record_id": 181,
+      "start": "2026-10-23T11:41:00+08:00",
+      "end": "2026-10-23T11:55:00+08:00",
+      "duration_minutes": 14,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 186,
+      "start": "2026-10-23T12:55:00+08:00",
+      "end": "2026-10-23T13:25:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 190,
+      "start": "2026-10-23T13:25:00+08:00",
+      "end": "2026-10-23T13:56:00+08:00",
+      "duration_minutes": 31,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "editor.example.com"
+      ]
+     },
+     {
+      "record_id": 195,
+      "start": "2026-10-23T13:56:00+08:00",
+      "end": "2026-10-23T14:41:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.deepseek.com"
+      ]
+     },
+     {
+      "record_id": 200,
+      "start": "2026-10-23T14:41:00+08:00",
+      "end": "2026-10-23T15:27:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 204,
+      "start": "2026-10-23T15:27:00+08:00",
+      "end": "2026-10-23T15:57:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 206,
+      "start": "2026-10-23T15:57:00+08:00",
+      "end": "2026-10-23T16:27:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "codesandbox.io"
+      ]
+     },
+     {
+      "record_id": 208,
+      "start": "2026-10-23T16:27:00+08:00",
+      "end": "2026-10-23T16:42:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Communication",
+      "apps": [
+       "chat.example.com",
+       "feed.example.com"
+      ]
+     },
+     {
+      "record_id": 212,
+      "start": "2026-10-23T17:07:00+08:00",
+      "end": "2026-10-23T17:22:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 215,
+      "start": "2026-10-23T17:22:00+08:00",
+      "end": "2026-10-23T18:07:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 217,
+      "start": "2026-10-23T18:08:00+08:00",
+      "end": "2026-10-23T18:23:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 221,
+      "start": "2026-10-23T18:46:00+08:00",
+      "end": "2026-10-23T19:31:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 222,
+      "start": "2026-10-23T19:32:00+08:00",
+      "end": "2026-10-23T19:47:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 224,
+      "start": "2026-10-23T21:37:00+08:00",
+      "end": "2026-10-23T22:03:00+08:00",
+      "duration_minutes": 26,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 225,
+      "start": "2026-10-24T01:02:00+08:00",
+      "end": "2026-10-24T01:17:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "modelscope.cn",
+       "github.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 516,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 501,
+      "share": 0.9709302325581395,
+      "color_hex": "#6A7EFF"
+     },
+     {
+      "name": "Communication",
+      "minutes": 15,
+      "share": 0.029069767441860465,
+      "color_hex": "#FFAE8C"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-23T17:17:38.000Z"
+   },
+   {
+    "date": "2026-10-24",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 226,
+      "start": "2026-10-24T14:11:00+08:00",
+      "end": "2026-10-24T14:21:00+08:00",
+      "duration_minutes": 10,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "modelscope.cn",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 230,
+      "start": "2026-10-24T15:36:00+08:00",
+      "end": "2026-10-24T15:50:00+08:00",
+      "duration_minutes": 14,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "modelscope.cn",
+       "huggingface.co"
+      ]
+     },
+     {
+      "record_id": 231,
+      "start": "2026-10-24T15:51:00+08:00",
+      "end": "2026-10-24T16:05:00+08:00",
+      "duration_minutes": 14,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 232,
+      "start": "2026-10-24T16:07:00+08:00",
+      "end": "2026-10-24T16:18:00+08:00",
+      "duration_minutes": 11,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 234,
+      "start": "2026-10-24T18:15:00+08:00",
+      "end": "2026-10-24T18:40:00+08:00",
+      "duration_minutes": 25,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "code.example.org"
+      ]
+     },
+     {
+      "record_id": 238,
+      "start": "2026-10-24T19:23:00+08:00",
+      "end": "2026-10-24T19:29:00+08:00",
+      "duration_minutes": 6,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "shell.example.com",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 239,
+      "start": "2026-10-24T19:33:00+08:00",
+      "end": "2026-10-24T19:42:00+08:00",
+      "duration_minutes": 9,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "feed.example.com"
+      ]
+     },
+     {
+      "record_id": 240,
+      "start": "2026-10-24T19:58:00+08:00",
+      "end": "2026-10-24T20:09:00+08:00",
+      "duration_minutes": 11,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 241,
+      "start": "2026-10-25T00:50:00+08:00",
+      "end": "2026-10-25T00:56:00+08:00",
+      "duration_minutes": 6,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "code.example.org"
+      ]
+     }
+    ],
+    "tracked_minutes": 106,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 106,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-24T16:59:04.000Z"
+   },
+   {
+    "date": "2026-10-25",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 242,
+      "start": "2026-10-25T23:43:00+08:00",
+      "end": "2026-10-25T23:49:00+08:00",
+      "duration_minutes": 6,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "deepseek.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 6,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 6,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-25T16:33:07.000Z"
+   },
+   {
+    "date": "2026-10-26",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-27",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-28",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-29",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-30",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   },
+   {
+    "date": "2026-10-31",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [],
+    "tracked_minutes": 0,
+    "categories": [],
+    "pending_batches": 0,
+    "edits_enabled": false
+   }
+  ]
+ },
+ "week": {
+  "week_start": "2026-10-19",
+  "week_end": "2026-10-25",
+  "today": "2026-10-25",
+  "time_zone": "Asia/Shanghai",
+  "day_boundary_hour": 4,
+  "days": [
+   {
+    "date": "2026-10-19",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 3,
+      "start": "2026-10-19T11:52:00+08:00",
+      "end": "2026-10-19T12:15:00+08:00",
+      "duration_minutes": 23,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "subcategory": "Setup",
+      "apps": [
+       "dayflow.so"
+      ]
+     },
+     {
+      "record_id": 8,
+      "start": "2026-10-19T12:40:00+08:00",
+      "end": "2026-10-19T13:10:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "notes.example.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 15,
+      "start": "2026-10-19T13:10:00+08:00",
+      "end": "2026-10-19T13:56:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "notes.example.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 19,
+      "start": "2026-10-19T13:56:00+08:00",
+      "end": "2026-10-19T14:37:00+08:00",
+      "duration_minutes": 41,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 21,
+      "start": "2026-10-19T14:38:00+08:00",
+      "end": "2026-10-19T15:08:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 22,
+      "start": "2026-10-19T15:08:00+08:00",
+      "end": "2026-10-19T15:23:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 26,
+      "start": "2026-10-19T16:46:00+08:00",
+      "end": "2026-10-19T17:01:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Idle"
+     },
+     {
+      "record_id": 27,
+      "start": "2026-10-19T17:01:00+08:00",
+      "end": "2026-10-19T17:16:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 28,
+      "start": "2026-10-19T17:16:00+08:00",
+      "end": "2026-10-19T17:31:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 33,
+      "start": "2026-10-19T19:39:00+08:00",
+      "end": "2026-10-19T20:09:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "shell.example.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 36,
+      "start": "2026-10-19T20:10:00+08:00",
+      "end": "2026-10-19T20:55:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 37,
+      "start": "2026-10-19T20:55:00+08:00",
+      "end": "2026-10-19T21:10:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "github.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 320,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 305,
+      "share": 0.953125,
+      "color_hex": "#6A7EFF"
+     },
+     {
+      "name": "Idle",
+      "minutes": 15,
+      "share": 0.046875,
+      "color_hex": "#A0AEC0"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-19T13:11:46.000Z"
+   },
+   {
+    "date": "2026-10-20",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 40,
+      "start": "2026-10-20T10:27:00+08:00",
+      "end": "2026-10-20T11:09:00+08:00",
+      "duration_minutes": 42,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 44,
+      "start": "2026-10-20T12:36:00+08:00",
+      "end": "2026-10-20T12:46:00+08:00",
+      "duration_minutes": 10,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "127.0.0.1",
+       "doubao.com"
+      ]
+     },
+     {
+      "record_id": 51,
+      "start": "2026-10-20T12:59:00+08:00",
+      "end": "2026-10-20T13:44:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 55,
+      "start": "2026-10-20T13:44:00+08:00",
+      "end": "2026-10-20T14:24:00+08:00",
+      "duration_minutes": 40,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "papers.example.org",
+       "docs.example.com"
+      ]
+     },
+     {
+      "record_id": 60,
+      "start": "2026-10-20T14:28:00+08:00",
+      "end": "2026-10-20T15:13:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 61,
+      "start": "2026-10-20T15:13:00+08:00",
+      "end": "2026-10-20T15:36:00+08:00",
+      "duration_minutes": 23,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "chatgpt.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 205,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 205,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-20T07:36:08.000Z"
+   },
+   {
+    "date": "2026-10-21",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 67,
+      "start": "2026-10-21T10:31:00+08:00",
+      "end": "2026-10-21T11:16:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 69,
+      "start": "2026-10-21T11:16:00+08:00",
+      "end": "2026-10-21T11:46:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 70,
+      "start": "2026-10-21T11:47:00+08:00",
+      "end": "2026-10-21T12:02:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "papers.example.org",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 78,
+      "start": "2026-10-21T12:02:00+08:00",
+      "end": "2026-10-21T13:17:00+08:00",
+      "duration_minutes": 75,
+      "title": "",
+      "summary": "",
+      "category": "Idle"
+     },
+     {
+      "record_id": 82,
+      "start": "2026-10-21T13:18:00+08:00",
+      "end": "2026-10-21T13:48:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.io",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 85,
+      "start": "2026-10-21T13:48:00+08:00",
+      "end": "2026-10-21T14:03:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 88,
+      "start": "2026-10-21T14:03:00+08:00",
+      "end": "2026-10-21T14:18:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 91,
+      "start": "2026-10-21T14:18:00+08:00",
+      "end": "2026-10-21T14:33:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "aliyun.com"
+      ]
+     },
+     {
+      "record_id": 95,
+      "start": "2026-10-21T14:33:00+08:00",
+      "end": "2026-10-21T15:03:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "build.example.com"
+      ]
+     },
+     {
+      "record_id": 99,
+      "start": "2026-10-21T15:04:00+08:00",
+      "end": "2026-10-21T15:34:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "overleaf.com"
+      ]
+     },
+     {
+      "record_id": 101,
+      "start": "2026-10-21T15:34:00+08:00",
+      "end": "2026-10-21T16:04:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 102,
+      "start": "2026-10-21T16:04:00+08:00",
+      "end": "2026-10-21T16:19:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 104,
+      "start": "2026-10-21T17:13:00+08:00",
+      "end": "2026-10-21T17:28:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "mail.example.com",
+       "blog.example.com"
+      ]
+     },
+     {
+      "record_id": 107,
+      "start": "2026-10-21T17:43:00+08:00",
+      "end": "2026-10-21T18:28:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 110,
+      "start": "2026-10-21T19:49:00+08:00",
+      "end": "2026-10-21T20:33:00+08:00",
+      "duration_minutes": 44,
+      "title": "",
+      "summary": "",
+      "category": "Communication",
+      "apps": [
+       "meeting.tencent.com",
+       "chat.example.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 449,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 330,
+      "share": 0.734966592427617,
+      "color_hex": "#6A7EFF"
+     },
+     {
+      "name": "Idle",
+      "minutes": 75,
+      "share": 0.16703786191536749,
+      "color_hex": "#A0AEC0"
+     },
+     {
+      "name": "Communication",
+      "minutes": 44,
+      "share": 0.09799554565701558,
+      "color_hex": "#FFAE8C"
+     }
+    ],
+    "pending_batches": 1,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-21T12:33:41.000Z"
+   },
+   {
+    "date": "2026-10-22",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 112,
+      "start": "2026-10-22T10:40:00+08:00",
+      "end": "2026-10-22T10:55:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feed.example.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 119,
+      "start": "2026-10-22T11:11:00+08:00",
+      "end": "2026-10-22T11:41:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "codesandbox.io",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 120,
+      "start": "2026-10-22T11:41:00+08:00",
+      "end": "2026-10-22T12:18:00+08:00",
+      "duration_minutes": 37,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "news.example.com",
+       "chat.deepseek.com"
+      ]
+     },
+     {
+      "record_id": 127,
+      "start": "2026-10-22T13:39:00+08:00",
+      "end": "2026-10-22T13:54:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 128,
+      "start": "2026-10-22T13:54:00+08:00",
+      "end": "2026-10-22T14:09:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 131,
+      "start": "2026-10-22T14:09:00+08:00",
+      "end": "2026-10-22T14:24:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 134,
+      "start": "2026-10-22T14:24:00+08:00",
+      "end": "2026-10-22T14:36:00+08:00",
+      "duration_minutes": 12,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 139,
+      "start": "2026-10-22T14:43:00+08:00",
+      "end": "2026-10-22T15:29:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 144,
+      "start": "2026-10-22T15:29:00+08:00",
+      "end": "2026-10-22T16:14:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 147,
+      "start": "2026-10-22T16:14:00+08:00",
+      "end": "2026-10-22T16:21:00+08:00",
+      "duration_minutes": 7,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 152,
+      "start": "2026-10-22T16:34:00+08:00",
+      "end": "2026-10-22T17:17:00+08:00",
+      "duration_minutes": 43,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 156,
+      "start": "2026-10-22T17:22:00+08:00",
+      "end": "2026-10-22T17:52:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.example.com",
+       "feishu.cn"
+      ]
+     },
+     {
+      "record_id": 157,
+      "start": "2026-10-22T17:52:00+08:00",
+      "end": "2026-10-22T18:07:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "design.example.com",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 158,
+      "start": "2026-10-22T18:07:00+08:00",
+      "end": "2026-10-22T18:22:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 164,
+      "start": "2026-10-22T19:49:00+08:00",
+      "end": "2026-10-22T20:35:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 167,
+      "start": "2026-10-22T20:35:00+08:00",
+      "end": "2026-10-22T21:20:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 168,
+      "start": "2026-10-22T21:20:00+08:00",
+      "end": "2026-10-22T21:35:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "huggingface.co",
+       "chat.example.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 446,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 446,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 1,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-22T13:36:16.000Z"
+   },
+   {
+    "date": "2026-10-23",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 174,
+      "start": "2026-10-23T09:54:00+08:00",
+      "end": "2026-10-23T10:33:00+08:00",
+      "duration_minutes": 39,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "127.0.0.1"
+      ]
+     },
+     {
+      "record_id": 177,
+      "start": "2026-10-23T10:40:00+08:00",
+      "end": "2026-10-23T10:55:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "labs.example.com",
+       "build.example.com"
+      ]
+     },
+     {
+      "record_id": 180,
+      "start": "2026-10-23T10:55:00+08:00",
+      "end": "2026-10-23T11:40:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "build.example.com"
+      ]
+     },
+     {
+      "record_id": 181,
+      "start": "2026-10-23T11:41:00+08:00",
+      "end": "2026-10-23T11:55:00+08:00",
+      "duration_minutes": 14,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 186,
+      "start": "2026-10-23T12:55:00+08:00",
+      "end": "2026-10-23T13:25:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 190,
+      "start": "2026-10-23T13:25:00+08:00",
+      "end": "2026-10-23T13:56:00+08:00",
+      "duration_minutes": 31,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "editor.example.com"
+      ]
+     },
+     {
+      "record_id": 195,
+      "start": "2026-10-23T13:56:00+08:00",
+      "end": "2026-10-23T14:41:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chat.deepseek.com"
+      ]
+     },
+     {
+      "record_id": 200,
+      "start": "2026-10-23T14:41:00+08:00",
+      "end": "2026-10-23T15:27:00+08:00",
+      "duration_minutes": 46,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "github.com"
+      ]
+     },
+     {
+      "record_id": 204,
+      "start": "2026-10-23T15:27:00+08:00",
+      "end": "2026-10-23T15:57:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 206,
+      "start": "2026-10-23T15:57:00+08:00",
+      "end": "2026-10-23T16:27:00+08:00",
+      "duration_minutes": 30,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "codesandbox.io"
+      ]
+     },
+     {
+      "record_id": 208,
+      "start": "2026-10-23T16:27:00+08:00",
+      "end": "2026-10-23T16:42:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Communication",
+      "apps": [
+       "chat.example.com",
+       "feed.example.com"
+      ]
+     },
+     {
+      "record_id": 212,
+      "start": "2026-10-23T17:07:00+08:00",
+      "end": "2026-10-23T17:22:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 215,
+      "start": "2026-10-23T17:22:00+08:00",
+      "end": "2026-10-23T18:07:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 217,
+      "start": "2026-10-23T18:08:00+08:00",
+      "end": "2026-10-23T18:23:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 221,
+      "start": "2026-10-23T18:46:00+08:00",
+      "end": "2026-10-23T19:31:00+08:00",
+      "duration_minutes": 45,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 222,
+      "start": "2026-10-23T19:32:00+08:00",
+      "end": "2026-10-23T19:47:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 224,
+      "start": "2026-10-23T21:37:00+08:00",
+      "end": "2026-10-23T22:03:00+08:00",
+      "duration_minutes": 26,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chat.deepseek.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 225,
+      "start": "2026-10-24T01:02:00+08:00",
+      "end": "2026-10-24T01:17:00+08:00",
+      "duration_minutes": 15,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "modelscope.cn",
+       "github.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 516,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 501,
+      "share": 0.9709302325581395,
+      "color_hex": "#6A7EFF"
+     },
+     {
+      "name": "Communication",
+      "minutes": 15,
+      "share": 0.029069767441860465,
+      "color_hex": "#FFAE8C"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-23T17:17:38.000Z"
+   },
+   {
+    "date": "2026-10-24",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 226,
+      "start": "2026-10-24T14:11:00+08:00",
+      "end": "2026-10-24T14:21:00+08:00",
+      "duration_minutes": 10,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "modelscope.cn",
+       "chat.example.com"
+      ]
+     },
+     {
+      "record_id": 230,
+      "start": "2026-10-24T15:36:00+08:00",
+      "end": "2026-10-24T15:50:00+08:00",
+      "duration_minutes": 14,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "modelscope.cn",
+       "huggingface.co"
+      ]
+     },
+     {
+      "record_id": 231,
+      "start": "2026-10-24T15:51:00+08:00",
+      "end": "2026-10-24T16:05:00+08:00",
+      "duration_minutes": 14,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "chatgpt.com",
+       "arxiv.org"
+      ]
+     },
+     {
+      "record_id": 232,
+      "start": "2026-10-24T16:07:00+08:00",
+      "end": "2026-10-24T16:18:00+08:00",
+      "duration_minutes": 11,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "github.com",
+       "chatgpt.com"
+      ]
+     },
+     {
+      "record_id": 234,
+      "start": "2026-10-24T18:15:00+08:00",
+      "end": "2026-10-24T18:40:00+08:00",
+      "duration_minutes": 25,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "deepseek.com",
+       "code.example.org"
+      ]
+     },
+     {
+      "record_id": 238,
+      "start": "2026-10-24T19:23:00+08:00",
+      "end": "2026-10-24T19:29:00+08:00",
+      "duration_minutes": 6,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "shell.example.com",
+       "code.visualstudio.com"
+      ]
+     },
+     {
+      "record_id": 239,
+      "start": "2026-10-24T19:33:00+08:00",
+      "end": "2026-10-24T19:42:00+08:00",
+      "duration_minutes": 9,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "arxiv.org",
+       "feed.example.com"
+      ]
+     },
+     {
+      "record_id": 240,
+      "start": "2026-10-24T19:58:00+08:00",
+      "end": "2026-10-24T20:09:00+08:00",
+      "duration_minutes": 11,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "code.visualstudio.com",
+       "deepseek.com"
+      ]
+     },
+     {
+      "record_id": 241,
+      "start": "2026-10-25T00:50:00+08:00",
+      "end": "2026-10-25T00:56:00+08:00",
+      "duration_minutes": 6,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "code.example.org"
+      ]
+     }
+    ],
+    "tracked_minutes": 106,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 106,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-24T16:59:04.000Z"
+   },
+   {
+    "date": "2026-10-25",
+    "today": "2026-10-25",
+    "time_zone": "Asia/Shanghai",
+    "day_boundary_hour": 4,
+    "cards": [
+     {
+      "record_id": 242,
+      "start": "2026-10-25T23:43:00+08:00",
+      "end": "2026-10-25T23:49:00+08:00",
+      "duration_minutes": 6,
+      "title": "",
+      "summary": "",
+      "category": "Work",
+      "apps": [
+       "feishu.cn",
+       "deepseek.com"
+      ]
+     }
+    ],
+    "tracked_minutes": 6,
+    "categories": [
+     {
+      "name": "Work",
+      "minutes": 6,
+      "share": 1,
+      "color_hex": "#6A7EFF"
+     }
+    ],
+    "pending_batches": 0,
+    "edits_enabled": false,
+    "last_capture_at": "2026-10-25T16:33:07.000Z"
+   }
+  ]
+ },
+ "copy": {
+  "3": {
+   "en": {
+    "title": "Fixing lane packing",
+    "summary": "Aligned the swim lanes, zoom, and hover cards with the harness tokens."
+   },
+   "zh": {
+    "title": "修复分道布局",
+    "summary": "把泳道、缩放和悬停卡片统一对齐到 harness 的设计令牌。"
+   }
+  },
+  "8": {
+   "en": {
+    "title": "Tracing a slow query",
+    "summary": "Opened the database read-only, timed the range scan, and raised the busy timeout for the app checkpoints."
+   },
+   "zh": {
+    "title": "排查慢查询",
+    "summary": "以只读方式打开数据库，给区间扫描计时，并为应用的检查点调高了忙碌超时。"
+   }
+  },
+  "15": {
+   "en": {
+    "title": "Writing the panel tests",
+    "summary": "Covered the four day states, the packed lanes, and the hover card clamping near the viewport edge."
+   },
+   "zh": {
+    "title": "补写面板测试",
+    "summary": "覆盖了四种日期状态、分道打包，以及贴住视口边缘时的悬停卡片。"
+   }
+  },
+  "19": {
+   "en": {
+    "title": "Pairing on the icon cache",
+    "summary": "One favicon per domain, cached on disk, loopback names refused, and a failure costs one request."
+   },
+   "zh": {
+    "title": "结对处理图标缓存",
+    "summary": "每个域名只抓一次图标并落盘缓存，拒绝 loopback 名称，失败也只付出一次请求。"
+   }
+  },
+  "21": {
+   "en": {
+    "title": "Replaying a week of data",
+    "summary": "Drove the real components from a frozen payload to record the demo without touching a live database."
+   },
+   "zh": {
+    "title": "回放一周数据",
+    "summary": "用冻结的载荷驱动真实组件，在不碰实时数据库的前提下录出演示。"
+   }
+  },
+  "22": {
+   "en": {
+    "title": "Fixing the timezone boundary",
+    "summary": "The week stepped by 86,400,000 ms and lost a day across the change; it now steps by calendar day."
+   },
+   "zh": {
+    "title": "修正时区边界",
+    "summary": "按 86,400,000 毫秒推进会跨过夏令时丢掉一天，现在改成按日历日推进。"
+   }
+  },
+  "26": {
+   "en": {
+    "title": "Idle",
+    "summary": "You were idle during this period."
+   },
+   "zh": {
+    "title": "空闲",
+    "summary": "这段时间没有活动。"
+   }
+  },
+  "27": {
+   "en": {
+    "title": "Auditing the bundle size",
+    "summary": "Checked what the client half pulls in and kept the runtime dependency list at zero."
+   },
+   "zh": {
+    "title": "审查打包体积",
+    "summary": "检查客户端那一半引入了什么，把运行时依赖保持在零。"
+   }
+  },
+  "28": {
+   "en": {
+    "title": "Answering review comments",
+    "summary": "Walked a teammate through the diff, split one commit, and pushed the fix branch."
+   },
+   "zh": {
+    "title": "回复评审意见",
+    "summary": "和同事过了一遍改动，把一个提交拆开，然后推送了修复分支。"
+   }
+  },
+  "33": {
+   "en": {
+    "title": "Polishing the day detail",
+    "summary": "Made the filter chips toggle, kept the selected day across views, and fixed the back arrow."
+   },
+   "zh": {
+    "title": "打磨日期详情",
+    "summary": "让筛选芯片可开可关，切换视图时保留选中日期，并修好了返回箭头。"
+   }
+  },
+  "36": {
+   "en": {
+    "title": "Sweeping the style tokens",
+    "summary": "Replaced every hard-coded colour with a harness alias so the panel follows the theme."
+   },
+   "zh": {
+    "title": "清理样式令牌",
+    "summary": "把写死的颜色全部换成 harness 别名，面板因此能跟随主题。"
+   }
+  },
+  "37": {
+   "en": {
+    "title": "Reading the migration guide",
+    "summary": "Compared the release notes with the plugin surface and listed the calls that moved."
+   },
+   "zh": {
+    "title": "阅读迁移指南",
+    "summary": "对照发布说明与插件接口，把发生位移的调用逐条列了出来。"
+   }
+  },
+  "40": {
+   "en": {
+    "title": "Reading the migration guide",
+    "summary": "Compared the release notes with the plugin surface and listed the calls that moved."
+   },
+   "zh": {
+    "title": "阅读迁移指南",
+    "summary": "对照发布说明与插件接口，把发生位移的调用逐条列了出来。"
+   }
+  },
+  "44": {
+   "en": {
+    "title": "Making the axis follow the data",
+    "summary": "Started the hour axis an hour before the first card and ended it an hour after the last."
+   },
+   "zh": {
+    "title": "让时间轴跟着数据走",
+    "summary": "小时轴从第一条活动前一小时开始，到最后一条活动后一小时结束。"
+   }
+  },
+  "51": {
+   "en": {
+    "title": "Sweeping the style tokens",
+    "summary": "Replaced every hard-coded colour with a harness alias so the panel follows the theme."
+   },
+   "zh": {
+    "title": "清理样式令牌",
+    "summary": "把写死的颜色全部换成 harness 别名，面板因此能跟随主题。"
+   }
+  },
+  "55": {
+   "en": {
+    "title": "Polishing the day detail",
+    "summary": "Made the filter chips toggle, kept the selected day across views, and fixed the back arrow."
+   },
+   "zh": {
+    "title": "打磨日期详情",
+    "summary": "让筛选芯片可开可关，切换视图时保留选中日期，并修好了返回箭头。"
+   }
+  },
+  "60": {
+   "en": {
+    "title": "Auditing the bundle size",
+    "summary": "Checked what the client half pulls in and kept the runtime dependency list at zero."
+   },
+   "zh": {
+    "title": "审查打包体积",
+    "summary": "检查客户端那一半引入了什么，把运行时依赖保持在零。"
+   }
+  },
+  "61": {
+   "en": {
+    "title": "Tightening the tool schemas",
+    "summary": "Gave every failure a stable code so a caller can branch without parsing prose."
+   },
+   "zh": {
+    "title": "收紧工具模式",
+    "summary": "给每种失败一个稳定的错误码，调用方不必解析自然语言就能分支处理。"
+   }
+  },
+  "67": {
+   "en": {
+    "title": "Replaying a week of data",
+    "summary": "Drove the real components from a frozen payload to record the demo without touching a live database."
+   },
+   "zh": {
+    "title": "回放一周数据",
+    "summary": "用冻结的载荷驱动真实组件，在不碰实时数据库的前提下录出演示。"
+   }
+  },
+  "69": {
+   "en": {
+    "title": "Fixing lane packing",
+    "summary": "Aligned the swim lanes, zoom, and hover cards with the harness tokens."
+   },
+   "zh": {
+    "title": "修复分道布局",
+    "summary": "把泳道、缩放和悬停卡片统一对齐到 harness 的设计令牌。"
+   }
+  },
+  "70": {
+   "en": {
+    "title": "Reviewing the release notes",
+    "summary": "Read the changelog end to end, checked the tag gate, and rewrote the upgrade section."
+   },
+   "zh": {
+    "title": "复核发布说明",
+    "summary": "通读变更日志，核对标签校验，然后重写了升级那一节。"
+   }
+  },
+  "78": {
+   "en": {
+    "title": "Idle",
+    "summary": "You were idle during this period."
+   },
+   "zh": {
+    "title": "空闲",
+    "summary": "这段时间没有活动。"
+   }
+  },
+  "82": {
+   "en": {
+    "title": "Polishing the day detail",
+    "summary": "Made the filter chips toggle, kept the selected day across views, and fixed the back arrow."
+   },
+   "zh": {
+    "title": "打磨日期详情",
+    "summary": "让筛选芯片可开可关，切换视图时保留选中日期，并修好了返回箭头。"
+   }
+  },
+  "85": {
+   "en": {
+    "title": "Tracing a slow query",
+    "summary": "Opened the database read-only, timed the range scan, and raised the busy timeout for the app checkpoints."
+   },
+   "zh": {
+    "title": "排查慢查询",
+    "summary": "以只读方式打开数据库，给区间扫描计时，并为应用的检查点调高了忙碌超时。"
+   }
+  },
+  "88": {
+   "en": {
+    "title": "Fixing the timezone boundary",
+    "summary": "The week stepped by 86,400,000 ms and lost a day across the change; it now steps by calendar day."
+   },
+   "zh": {
+    "title": "修正时区边界",
+    "summary": "按 86,400,000 毫秒推进会跨过夏令时丢掉一天，现在改成按日历日推进。"
+   }
+  },
+  "91": {
+   "en": {
+    "title": "Wiring the hover card",
+    "summary": "Measured the card on mount, clamped it to the viewport, and flipped it above anchors near the bottom."
+   },
+   "zh": {
+    "title": "接通悬停卡片",
+    "summary": "挂载时测量卡片尺寸，贴住视口，靠近底部时自动翻到锚点上方。"
+   }
+  },
+  "95": {
+   "en": {
+    "title": "Hardening the write bridge",
+    "summary": "Kept every write behind the app’s own permission switch and turned a closed switch into a clear error."
+   },
+   "zh": {
+    "title": "加固写入桥",
+    "summary": "所有写入都受应用自身的权限开关约束，开关关闭时给出清楚的错误。"
+   }
+  },
+  "99": {
+   "en": {
+    "title": "Tightening the tool schemas",
+    "summary": "Gave every failure a stable code so a caller can branch without parsing prose."
+   },
+   "zh": {
+    "title": "收紧工具模式",
+    "summary": "给每种失败一个稳定的错误码，调用方不必解析自然语言就能分支处理。"
+   }
+  },
+  "101": {
+   "en": {
+    "title": "Making the axis follow the data",
+    "summary": "Started the hour axis an hour before the first card and ended it an hour after the last."
+   },
+   "zh": {
+    "title": "让时间轴跟着数据走",
+    "summary": "小时轴从第一条活动前一小时开始，到最后一条活动后一小时结束。"
+   }
+  },
+  "102": {
+   "en": {
+    "title": "Drafting the README",
+    "summary": "Rewrote the install steps, the compatibility table, and the troubleshooting rows from scratch."
+   },
+   "zh": {
+    "title": "起草 README",
+    "summary": "重写了安装步骤、兼容性表格和故障排查那几行。"
+   }
+  },
+  "104": {
+   "en": {
+    "title": "Writing the panel tests",
+    "summary": "Covered the four day states, the packed lanes, and the hover card clamping near the viewport edge."
+   },
+   "zh": {
+    "title": "补写面板测试",
+    "summary": "覆盖了四种日期状态、分道打包，以及贴住视口边缘时的悬停卡片。"
+   }
+  },
+  "107": {
+   "en": {
+    "title": "Auditing the bundle size",
+    "summary": "Checked what the client half pulls in and kept the runtime dependency list at zero."
+   },
+   "zh": {
+    "title": "审查打包体积",
+    "summary": "检查客户端那一半引入了什么，把运行时依赖保持在零。"
+   }
+  },
+  "110": {
+   "en": {
+    "title": "Standup and planning",
+    "summary": "Walked through the milestones and cleared the blockers sitting in the review queue."
+   },
+   "zh": {
+    "title": "站会与排期",
+    "summary": "过了一遍里程碑，清掉了评审队列里的阻塞。"
+   }
+  },
+  "112": {
+   "en": {
+    "title": "Wiring the hover card",
+    "summary": "Measured the card on mount, clamped it to the viewport, and flipped it above anchors near the bottom."
+   },
+   "zh": {
+    "title": "接通悬停卡片",
+    "summary": "挂载时测量卡片尺寸，贴住视口，靠近底部时自动翻到锚点上方。"
+   }
+  },
+  "119": {
+   "en": {
+    "title": "Sweeping the style tokens",
+    "summary": "Replaced every hard-coded colour with a harness alias so the panel follows the theme."
+   },
+   "zh": {
+    "title": "清理样式令牌",
+    "summary": "把写死的颜色全部换成 harness 别名，面板因此能跟随主题。"
+   }
+  },
+  "120": {
+   "en": {
+    "title": "Fixing lane packing",
+    "summary": "Aligned the swim lanes, zoom, and hover cards with the harness tokens."
+   },
+   "zh": {
+    "title": "修复分道布局",
+    "summary": "把泳道、缩放和悬停卡片统一对齐到 harness 的设计令牌。"
+   }
+  },
+  "127": {
+   "en": {
+    "title": "Tracing a slow query",
+    "summary": "Opened the database read-only, timed the range scan, and raised the busy timeout for the app checkpoints."
+   },
+   "zh": {
+    "title": "排查慢查询",
+    "summary": "以只读方式打开数据库，给区间扫描计时，并为应用的检查点调高了忙碌超时。"
+   }
+  },
+  "128": {
+   "en": {
+    "title": "Reading the migration guide",
+    "summary": "Compared the release notes with the plugin surface and listed the calls that moved."
+   },
+   "zh": {
+    "title": "阅读迁移指南",
+    "summary": "对照发布说明与插件接口，把发生位移的调用逐条列了出来。"
+   }
+  },
+  "131": {
+   "en": {
+    "title": "Drafting the README",
+    "summary": "Rewrote the install steps, the compatibility table, and the troubleshooting rows from scratch."
+   },
+   "zh": {
+    "title": "起草 README",
+    "summary": "重写了安装步骤、兼容性表格和故障排查那几行。"
+   }
+  },
+  "134": {
+   "en": {
+    "title": "Fixing the timezone boundary",
+    "summary": "The week stepped by 86,400,000 ms and lost a day across the change; it now steps by calendar day."
+   },
+   "zh": {
+    "title": "修正时区边界",
+    "summary": "按 86,400,000 毫秒推进会跨过夏令时丢掉一天，现在改成按日历日推进。"
+   }
+  },
+  "139": {
+   "en": {
+    "title": "Making the axis follow the data",
+    "summary": "Started the hour axis an hour before the first card and ended it an hour after the last."
+   },
+   "zh": {
+    "title": "让时间轴跟着数据走",
+    "summary": "小时轴从第一条活动前一小时开始，到最后一条活动后一小时结束。"
+   }
+  },
+  "144": {
+   "en": {
+    "title": "Sketching the ring geometry",
+    "summary": "Derived each arc length from the category share and kept a hairline gap between neighbours."
+   },
+   "zh": {
+    "title": "推演圆环几何",
+    "summary": "按分类占比算出每段弧长，并在相邻弧段之间留出细缝。"
+   }
+  },
+  "147": {
+   "en": {
+    "title": "Answering review comments",
+    "summary": "Walked a teammate through the diff, split one commit, and pushed the fix branch."
+   },
+   "zh": {
+    "title": "回复评审意见",
+    "summary": "和同事过了一遍改动，把一个提交拆开，然后推送了修复分支。"
+   }
+  },
+  "152": {
+   "en": {
+    "title": "Shipping the week view",
+    "summary": "Packed the lanes so overlapping cards no longer cover each other, and kept the axis pinned to the data."
+   },
+   "zh": {
+    "title": "发布周视图",
+    "summary": "重新打包分道逻辑，重叠卡片不再互相遮挡，时间轴也始终贴着数据走。"
+   }
+  },
+  "156": {
+   "en": {
+    "title": "Hardening the write bridge",
+    "summary": "Kept every write behind the app’s own permission switch and turned a closed switch into a clear error."
+   },
+   "zh": {
+    "title": "加固写入桥",
+    "summary": "所有写入都受应用自身的权限开关约束，开关关闭时给出清楚的错误。"
+   }
+  },
+  "157": {
+   "en": {
+    "title": "Pairing on the icon cache",
+    "summary": "One favicon per domain, cached on disk, loopback names refused, and a failure costs one request."
+   },
+   "zh": {
+    "title": "结对处理图标缓存",
+    "summary": "每个域名只抓一次图标并落盘缓存，拒绝 loopback 名称，失败也只付出一次请求。"
+   }
+  },
+  "158": {
+   "en": {
+    "title": "Checking an empty day",
+    "summary": "A captured day with nothing to show must not read as zero activity; drew the plain track instead."
+   },
+   "zh": {
+    "title": "检查空白日",
+    "summary": "有录屏却没有活动的日期不能画成零活动，于是改成一条浅色轨道。"
+   }
+  },
+  "164": {
+   "en": {
+    "title": "Replaying a week of data",
+    "summary": "Drove the real components from a frozen payload to record the demo without touching a live database."
+   },
+   "zh": {
+    "title": "回放一周数据",
+    "summary": "用冻结的载荷驱动真实组件，在不碰实时数据库的前提下录出演示。"
+   }
+  },
+  "167": {
+   "en": {
+    "title": "Reviewing the release notes",
+    "summary": "Read the changelog end to end, checked the tag gate, and rewrote the upgrade section."
+   },
+   "zh": {
+    "title": "复核发布说明",
+    "summary": "通读变更日志，核对标签校验，然后重写了升级那一节。"
+   }
+  },
+  "168": {
+   "en": {
+    "title": "Writing the panel tests",
+    "summary": "Covered the four day states, the packed lanes, and the hover card clamping near the viewport edge."
+   },
+   "zh": {
+    "title": "补写面板测试",
+    "summary": "覆盖了四种日期状态、分道打包，以及贴住视口边缘时的悬停卡片。"
+   }
+  },
+  "174": {
+   "en": {
+    "title": "Shipping the week view",
+    "summary": "Packed the lanes so overlapping cards no longer cover each other, and kept the axis pinned to the data."
+   },
+   "zh": {
+    "title": "发布周视图",
+    "summary": "重新打包分道逻辑，重叠卡片不再互相遮挡，时间轴也始终贴着数据走。"
+   }
+  },
+  "177": {
+   "en": {
+    "title": "Polishing the day detail",
+    "summary": "Made the filter chips toggle, kept the selected day across views, and fixed the back arrow."
+   },
+   "zh": {
+    "title": "打磨日期详情",
+    "summary": "让筛选芯片可开可关，切换视图时保留选中日期，并修好了返回箭头。"
+   }
+  },
+  "180": {
+   "en": {
+    "title": "Drafting the README",
+    "summary": "Rewrote the install steps, the compatibility table, and the troubleshooting rows from scratch."
+   },
+   "zh": {
+    "title": "起草 README",
+    "summary": "重写了安装步骤、兼容性表格和故障排查那几行。"
+   }
+  },
+  "181": {
+   "en": {
+    "title": "Making the axis follow the data",
+    "summary": "Started the hour axis an hour before the first card and ended it an hour after the last."
+   },
+   "zh": {
+    "title": "让时间轴跟着数据走",
+    "summary": "小时轴从第一条活动前一小时开始，到最后一条活动后一小时结束。"
+   }
+  },
+  "186": {
+   "en": {
+    "title": "Reviewing the release notes",
+    "summary": "Read the changelog end to end, checked the tag gate, and rewrote the upgrade section."
+   },
+   "zh": {
+    "title": "复核发布说明",
+    "summary": "通读变更日志，核对标签校验，然后重写了升级那一节。"
+   }
+  },
+  "190": {
+   "en": {
+    "title": "Hardening the write bridge",
+    "summary": "Kept every write behind the app’s own permission switch and turned a closed switch into a clear error."
+   },
+   "zh": {
+    "title": "加固写入桥",
+    "summary": "所有写入都受应用自身的权限开关约束，开关关闭时给出清楚的错误。"
+   }
+  },
+  "195": {
+   "en": {
+    "title": "Writing the panel tests",
+    "summary": "Covered the four day states, the packed lanes, and the hover card clamping near the viewport edge."
+   },
+   "zh": {
+    "title": "补写面板测试",
+    "summary": "覆盖了四种日期状态、分道打包，以及贴住视口边缘时的悬停卡片。"
+   }
+  },
+  "200": {
+   "en": {
+    "title": "Checking an empty day",
+    "summary": "A captured day with nothing to show must not read as zero activity; drew the plain track instead."
+   },
+   "zh": {
+    "title": "检查空白日",
+    "summary": "有录屏却没有活动的日期不能画成零活动，于是改成一条浅色轨道。"
+   }
+  },
+  "204": {
+   "en": {
+    "title": "Tracing a slow query",
+    "summary": "Opened the database read-only, timed the range scan, and raised the busy timeout for the app checkpoints."
+   },
+   "zh": {
+    "title": "排查慢查询",
+    "summary": "以只读方式打开数据库，给区间扫描计时，并为应用的检查点调高了忙碌超时。"
+   }
+  },
+  "206": {
+   "en": {
+    "title": "Auditing the bundle size",
+    "summary": "Checked what the client half pulls in and kept the runtime dependency list at zero."
+   },
+   "zh": {
+    "title": "审查打包体积",
+    "summary": "检查客户端那一半引入了什么，把运行时依赖保持在零。"
+   }
+  },
+  "208": {
+   "en": {
+    "title": "Standup and planning",
+    "summary": "Walked through the milestones and cleared the blockers sitting in the review queue."
+   },
+   "zh": {
+    "title": "站会与排期",
+    "summary": "过了一遍里程碑，清掉了评审队列里的阻塞。"
+   }
+  },
+  "212": {
+   "en": {
+    "title": "Pairing on the icon cache",
+    "summary": "One favicon per domain, cached on disk, loopback names refused, and a failure costs one request."
+   },
+   "zh": {
+    "title": "结对处理图标缓存",
+    "summary": "每个域名只抓一次图标并落盘缓存，拒绝 loopback 名称，失败也只付出一次请求。"
+   }
+  },
+  "215": {
+   "en": {
+    "title": "Replaying a week of data",
+    "summary": "Drove the real components from a frozen payload to record the demo without touching a live database."
+   },
+   "zh": {
+    "title": "回放一周数据",
+    "summary": "用冻结的载荷驱动真实组件，在不碰实时数据库的前提下录出演示。"
+   }
+  },
+  "217": {
+   "en": {
+    "title": "Sweeping the style tokens",
+    "summary": "Replaced every hard-coded colour with a harness alias so the panel follows the theme."
+   },
+   "zh": {
+    "title": "清理样式令牌",
+    "summary": "把写死的颜色全部换成 harness 别名，面板因此能跟随主题。"
+   }
+  },
+  "221": {
+   "en": {
+    "title": "Reading the migration guide",
+    "summary": "Compared the release notes with the plugin surface and listed the calls that moved."
+   },
+   "zh": {
+    "title": "阅读迁移指南",
+    "summary": "对照发布说明与插件接口，把发生位移的调用逐条列了出来。"
+   }
+  },
+  "222": {
+   "en": {
+    "title": "Answering review comments",
+    "summary": "Walked a teammate through the diff, split one commit, and pushed the fix branch."
+   },
+   "zh": {
+    "title": "回复评审意见",
+    "summary": "和同事过了一遍改动，把一个提交拆开，然后推送了修复分支。"
+   }
+  },
+  "224": {
+   "en": {
+    "title": "Fixing lane packing",
+    "summary": "Aligned the swim lanes, zoom, and hover cards with the harness tokens."
+   },
+   "zh": {
+    "title": "修复分道布局",
+    "summary": "把泳道、缩放和悬停卡片统一对齐到 harness 的设计令牌。"
+   }
+  },
+  "225": {
+   "en": {
+    "title": "Wiring the hover card",
+    "summary": "Measured the card on mount, clamped it to the viewport, and flipped it above anchors near the bottom."
+   },
+   "zh": {
+    "title": "接通悬停卡片",
+    "summary": "挂载时测量卡片尺寸，贴住视口，靠近底部时自动翻到锚点上方。"
+   }
+  },
+  "226": {
+   "en": {
+    "title": "Pairing on the icon cache",
+    "summary": "One favicon per domain, cached on disk, loopback names refused, and a failure costs one request."
+   },
+   "zh": {
+    "title": "结对处理图标缓存",
+    "summary": "每个域名只抓一次图标并落盘缓存，拒绝 loopback 名称，失败也只付出一次请求。"
+   }
+  },
+  "230": {
+   "en": {
+    "title": "Hardening the write bridge",
+    "summary": "Kept every write behind the app’s own permission switch and turned a closed switch into a clear error."
+   },
+   "zh": {
+    "title": "加固写入桥",
+    "summary": "所有写入都受应用自身的权限开关约束，开关关闭时给出清楚的错误。"
+   }
+  },
+  "231": {
+   "en": {
+    "title": "Reviewing the release notes",
+    "summary": "Read the changelog end to end, checked the tag gate, and rewrote the upgrade section."
+   },
+   "zh": {
+    "title": "复核发布说明",
+    "summary": "通读变更日志，核对标签校验，然后重写了升级那一节。"
+   }
+  },
+  "232": {
+   "en": {
+    "title": "Reading the migration guide",
+    "summary": "Compared the release notes with the plugin surface and listed the calls that moved."
+   },
+   "zh": {
+    "title": "阅读迁移指南",
+    "summary": "对照发布说明与插件接口，把发生位移的调用逐条列了出来。"
+   }
+  },
+  "234": {
+   "en": {
+    "title": "Making the axis follow the data",
+    "summary": "Started the hour axis an hour before the first card and ended it an hour after the last."
+   },
+   "zh": {
+    "title": "让时间轴跟着数据走",
+    "summary": "小时轴从第一条活动前一小时开始，到最后一条活动后一小时结束。"
+   }
+  },
+  "238": {
+   "en": {
+    "title": "Checking an empty day",
+    "summary": "A captured day with nothing to show must not read as zero activity; drew the plain track instead."
+   },
+   "zh": {
+    "title": "检查空白日",
+    "summary": "有录屏却没有活动的日期不能画成零活动，于是改成一条浅色轨道。"
+   }
+  },
+  "239": {
+   "en": {
+    "title": "Drafting the README",
+    "summary": "Rewrote the install steps, the compatibility table, and the troubleshooting rows from scratch."
+   },
+   "zh": {
+    "title": "起草 README",
+    "summary": "重写了安装步骤、兼容性表格和故障排查那几行。"
+   }
+  },
+  "240": {
+   "en": {
+    "title": "Answering review comments",
+    "summary": "Walked a teammate through the diff, split one commit, and pushed the fix branch."
+   },
+   "zh": {
+    "title": "回复评审意见",
+    "summary": "和同事过了一遍改动，把一个提交拆开，然后推送了修复分支。"
+   }
+  },
+  "241": {
+   "en": {
+    "title": "Fixing the timezone boundary",
+    "summary": "The week stepped by 86,400,000 ms and lost a day across the change; it now steps by calendar day."
+   },
+   "zh": {
+    "title": "修正时区边界",
+    "summary": "按 86,400,000 毫秒推进会跨过夏令时丢掉一天，现在改成按日历日推进。"
+   }
+  },
+  "242": {
+   "en": {
+    "title": "Tracing a slow query",
+    "summary": "Opened the database read-only, timed the range scan, and raised the busy timeout for the app checkpoints."
+   },
+   "zh": {
+    "title": "排查慢查询",
+    "summary": "以只读方式打开数据库，给区间扫描计时，并为应用的检查点调高了忙碌超时。"
+   }
+  }
+ }
+}

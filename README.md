@@ -13,6 +13,8 @@ what you actually worked on.
 
 > "What did I work on today?" · "Where did the week go?" · "Write my standup."
 
+![The Dayflow panel in the dsh Web GUI: a month calendar of segmented rings, the week's swim lanes with a hover card, and one day in full](docs/demo.en.gif)
+
 The plugin reads Dayflow's local SQLite database directly, so it works while
 the Dayflow app is closed and nothing leaves the Mac. Edits are optional and go
 through Dayflow's own permission switch and write socket.
@@ -127,7 +129,7 @@ A **Month / Week** switch in the header swaps the calendar for Dayflow's own
 weekly timeline: seven day columns over one hour axis, each activity drawn as a
 card placed at its time and tinted with its category colour.
 
-![The Dayflow week swim lanes](docs/week.en.png)
+![The Dayflow week swim lanes](docs/demo.en.png)
 
 - The axis follows the data: it starts an hour before the week's first activity
   and ends an hour after its last, so a workday fills the pane instead of a
@@ -162,6 +164,20 @@ card placed at its time and tinted with its category colour.
   marked when you move to the week and back.
 
 Set `panel: false` to remove both the header button and the tab type.
+
+The recordings and stills above all come from one real week of this project's own
+Dayflow data: the timings, durations, categories, and capture times are what the
+app recorded. Every activity title and summary is fictional, because that text
+names documents, colleagues, and projects; project-specific sites are mapped to
+neutral hosts for the same reason. `scripts/demo/` holds the whole pipeline:
+`fixture-text.mjs` is the fictional copy pool, `capture.mjs` freezes a week with
+that copy applied, and `record.mjs` drives the real client half through the
+`tour.mjs` script and encodes the GIF. Regenerate with:
+
+```sh
+npm run demo          # both languages: build, capture stills, encode GIFs
+npm run demo -- zh    # or just one
+```
 
 ### Setting Dayflow up
 

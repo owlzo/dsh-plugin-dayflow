@@ -4,6 +4,29 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Both READMEs open with an 8-second recording of the panel — month calendar,
+  week swim lanes with a hover card, and one day in full — captured from this
+  project's own week of Dayflow data.
+- `scripts/demo/`: the pipeline that produces that recording. It bundles the real
+  client half with a replay data source and the three harness primitives it
+  imports, drives it through a scripted tour in headless Chromium, and encodes a
+  GIF from settled stills. `npm run demo` regenerates both languages; see
+  CONTRIBUTING for the steps.
+- The demo's fixture is committed already sanitized: `capture.mjs` replaces every
+  title and summary with fictional copy while keeping the recorded timings,
+  durations, categories, and apps, so the repository never holds a real activity
+  title.
+
+### Changed
+
+- `docs/panel.*.png`, `docs/day.*.png`, and `docs/week.*.png` were re-captured
+  from the same fixture, so the README's stills and its GIF show one consistent
+  week instead of three unrelated ones.
+
 ## [0.5.1] - 2026-10-26
 
 ### Fixed

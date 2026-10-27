@@ -5,8 +5,11 @@ lib/
 .DS_Store
 *.log
 
-# Experiment and demo artifacts, never part of the plugin
+# Experiment artifacts, never part of the plugin
 out/
-scripts/demo/
-docs/demo.*.gif
-docs/demo.*.png
+
+# The demo *outputs* are generated, but the two README recordings and their
+# poster frames are committed: a README cannot show a GIF that only exists on
+# the author's Mac. Everything the recorder builds on the way stays out.
+scripts/demo/out/
+scripts/demo/.cache/

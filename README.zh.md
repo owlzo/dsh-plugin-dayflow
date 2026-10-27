@@ -12,6 +12,8 @@
 
 > “我今天做了什么？” · “这周时间都去哪了？” · “帮我写今天的 standup。”
 
+![dsh Web GUI 中的 Dayflow 面板：月历圆环、带悬停卡片的周泳道，以及展开的一天](docs/demo.zh.gif)
+
 插件直接读取 Dayflow 的本地 SQLite 数据库，所以 Dayflow 关着也能用，数据不会离开这台 Mac。
 编辑功能是可选的，走 Dayflow 自己的权限开关和写入 socket。
 
@@ -112,7 +114,7 @@ ln -sfn "$PWD" ~/.dsh/profiles/web/node_modules/dsh-plugin-dayflow
 头部的 **月 / 周** 开关把月历换成 Dayflow 自己的周时间线：7 个日期列共用一条小时轴，
 每条活动按时间落位，并用分类颜色着色。
 
-![Dayflow 周泳道](docs/week.zh.png)
+![Dayflow 周泳道](docs/demo.zh.png)
 
 - 时间轴跟着数据走：从本周第一条活动前一个小时开始，到最后一条活动后一个小时结束，
   所以一个工作日会铺满面板，而不是一条从凌晨 4 点到午夜的空白带。`−`/`+` 缩放时间轴。
@@ -135,6 +137,17 @@ ln -sfn "$PWD" ~/.dsh/profiles/web/node_modules/dsh-plugin-dayflow
 - 切换视图会保留选中的日期：在月历里点过的某天，切到周视图再切回来仍然是选中态。
 
 设置 `panel: false` 可以把按钮和标签页类型一起移除。
+
+上面这些录制和截图，全部来自本项目自己一周的真实 Dayflow 数据：时间点、时长、分类和
+采集时间都是 Dayflow 实际记录的。所有活动标题和摘要都是虚构的，因为那些文字里会出现文档名、
+同事名和项目名；指向具体项目或论文的站点也会映射成中性域名。`scripts/demo/` 就是完整流程：
+`fixture-text.mjs` 是虚构文案池，`capture.mjs` 把一周数据应用这套文案后冻结成 fixture，
+`record.mjs` 按 `tour.mjs` 的脚本驱动真实的客户端代码并编码成 GIF。重新生成：
+
+```sh
+npm run demo          # 中英两版：构建、截图、编码 GIF
+npm run demo -- zh    # 或者只做一版
+```
 
 ### 安装 Dayflow
 
